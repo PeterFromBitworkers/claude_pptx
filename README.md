@@ -1,8 +1,9 @@
 # Brain-Bridges PowerPoint Design System
 
-> 📋 **Dokumentation für zukünftige Bearbeitungen und KI-Sessions**  
+> 📋 **Human-readable design documentation**  
+> 🤖 **For AI/Claude Code:** See [CLAUDE.md](CLAUDE.md)  
 > Version: xii  
-> Zuletzt aktualisiert: 2025-11-16
+> Last updated: 2025-11-17
 
 ---
 
