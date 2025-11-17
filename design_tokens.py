@@ -36,6 +36,10 @@ COLOR_BORDER = RGBColor(64, 64, 64)               # #404040
 # TYPOGRAPHY
 # =============================================================================
 
+# Font Families
+FONT_FAMILY_PRIMARY = "Inter"          # Primary font (modern sans-serif)
+FONT_FAMILY_FALLBACK = "Calibri"       # Fallback for PowerPoint
+
 # Logo "BRAIN BRIDGES"
 FONT_SIZE_LOGO = Pt(21)
 FONT_BOLD_LOGO = True
@@ -163,16 +167,78 @@ CONTENT_MAX_WIDTH = Inches(14)
 PROBLEM_GRID_X_POSITIONS = [1, 4.5, 8, 11.5]  # In inches
 PROBLEM_GRID_Y_START = 3                      # In inches
 PROBLEM_GRID_BOX_WIDTH = 3.2                  # In inches
+PROBLEM_GRID_BOX_HEIGHT = 3.2                 # In inches
+
+# Problem Grid Card Styling
+PROBLEM_CARD_FILL_COLOR = COLOR_BACKGROUND_LIGHT
+PROBLEM_CARD_BORDER_COLOR = RGBColor(80, 80, 80)  # Subtle gray (#505050)
+PROBLEM_CARD_BORDER_WIDTH = Pt(0.75)               # Thinner for subtle look
+PROBLEM_CARD_CORNER_RADIUS = Inches(0.15)          # Rounded corners (12px equivalent)
+
+# Problem Grid Icon
+PROBLEM_ICON_Y_OFFSET = 0.4                   # From y_start
+PROBLEM_ICON_HEIGHT = 0.6
+PROBLEM_ICON_WIDTH = Inches(0.6)              # Icon display size
+PROBLEM_ICON_X_OFFSET = 1.3                   # Center offset for icons
 
 # Problem Grid Item Layout
-PROBLEM_TITLE_Y_OFFSET = 0                    # From y_start
+PROBLEM_TITLE_Y_OFFSET = 1.1                  # From y_start (moved down for icon)
 PROBLEM_TITLE_HEIGHT = 0.5
 
-PROBLEM_DESC_Y_OFFSET = 0.7                   # From y_start
-PROBLEM_DESC_HEIGHT = 1.5
+PROBLEM_DESC_Y_OFFSET = 1.7                   # From y_start
+PROBLEM_DESC_HEIGHT = 1.0
 
 PROBLEM_VIOLATION_Y_OFFSET = 2.5              # From y_start
-PROBLEM_VIOLATION_HEIGHT = 0.6
+PROBLEM_VIOLATION_HEIGHT = 0.4
+
+# Problem Grid Icon Paths (PNG files, converted from SVG)
+PROBLEM_ICONS = {
+    "legal": "assets/icons/legal.png",
+    "medical": "assets/icons/medical.png",
+    "financial": "assets/icons/financial.png",
+    "engineering": "assets/icons/engineering.png"
+}
+
+# =============================================================================
+# LAYOUT - MARKET STATS (Slide 3)
+# =============================================================================
+
+# Large Stat Display ($1.7T)
+LARGE_STAT_X = Inches(1)
+LARGE_STAT_Y = Inches(2.6)
+LARGE_STAT_WIDTH = Inches(14)
+LARGE_STAT_HEIGHT = Inches(1.8)
+LARGE_STAT_LABEL_Y = Inches(3.9)                  # Separate Y for label (below number)
+FONT_SIZE_LARGE_STAT_NUMBER = Pt(96)
+FONT_SIZE_LARGE_STAT_LABEL = Pt(16)
+
+# Stat Cards (4 cards in a row, centered)
+# Calculation: 4 cards * 2.9" = 11.6", 3 gaps * 0.3" = 0.9", total = 12.5"
+# Center: (16 - 12.5) / 2 = 1.75" from left
+STAT_CARD_Y_START = 5.0                           # In inches
+STAT_CARD_X_POSITIONS = [1.75, 4.95, 8.15, 11.35] # In inches (centered)
+STAT_CARD_WIDTH = 2.9                             # In inches
+STAT_CARD_HEIGHT = 2.5                            # In inches
+
+# Stat Card Styling
+STAT_CARD_FILL_COLOR = COLOR_BACKGROUND_LIGHT
+STAT_CARD_BORDER_COLOR = RGBColor(80, 80, 80)     # Subtle gray
+STAT_CARD_BORDER_WIDTH = Pt(0.75)
+STAT_CARD_CORNER_RADIUS = Inches(0.15)            # Rounded corners
+
+# Stat Card Text Layout
+STAT_NUMBER_Y_OFFSET = 0.4                        # From card top
+STAT_NUMBER_HEIGHT = 0.8
+FONT_SIZE_STAT_NUMBER = Pt(64)
+
+STAT_LABEL_Y_OFFSET = 1.3                         # From card top
+STAT_LABEL_HEIGHT = 0.6
+FONT_SIZE_STAT_LABEL = Pt(14)
+
+STAT_SOURCE_Y_OFFSET = 2.0                        # From card top
+STAT_SOURCE_HEIGHT = 0.4
+FONT_SIZE_STAT_SOURCE = Pt(9)
+FONT_COLOR_STAT_SOURCE = COLOR_TEXT_GRAY_DARK
 
 # =============================================================================
 # LAYOUT - PLACEHOLDER SLIDES

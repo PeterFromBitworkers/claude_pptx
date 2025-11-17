@@ -1,6 +1,12 @@
 # Output directory (generated PowerPoint files)
 output/
 
+# Large background images (not needed for generation)
+assets/black.png
+assets/blue.png
+assets/green.png
+assets/white.png
+
 # Python
 __pycache__/
 *.py[cod]
