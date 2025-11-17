@@ -1,0 +1,4 @@
+/* Slide 3: Content slide positioning */
+.slide-3 {
+    justify-content: flex-start;
+}

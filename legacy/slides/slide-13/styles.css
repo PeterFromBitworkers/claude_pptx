@@ -1,0 +1,273 @@
+/* Encryption Flow Slide (Slide 13) */
+.encryption-flow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 2000px;
+    margin-top: 190px;
+}
+
+.encryption-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.top-row {
+    display: flex;
+    justify-content: center;
+}
+
+.bottom-row {
+    display: flex;
+    justify-content: center;
+    gap: 500px;
+}
+
+.flow-stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 30px 15px 30px;
+    border-radius: 12px;
+    background: rgba(31, 41, 55, 0.4);
+    width: 320px;
+    height: 240px;
+    transition: all 0.3s ease;
+    justify-content: space-between;
+}
+
+.encrypted-stage {
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.decrypted-stage {
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.inference-stage {
+    border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.flow-stage:hover {
+    background: rgba(31, 41, 55, 0.6);
+    transform: translateY(-5px);
+}
+
+.encrypted-stage:hover {
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+}
+
+.decrypted-stage:hover {
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+}
+
+.inference-stage:hover {
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+}
+
+.stage-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.stage-title {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--text-color-white);
+    margin: 0;
+}
+
+.encrypted-stage .stage-title {
+    color: #10b981;
+}
+
+.decrypted-stage .stage-title {
+    color: #ef4444;
+}
+
+.inference-stage .stage-title {
+    color: #3b82f6;
+}
+
+.lock-icon, .unlock-icon, .cloud-icon {
+    font-size: 1.5rem;
+}
+
+.data-representation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.data-block {
+    padding: 5px 6px;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 0.8rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    word-break: break-word;
+    overflow: hidden;
+}
+
+.encrypted-data .data-block {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.decrypted-data .data-block {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.processing-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    grid-column: 1 / -1;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(59, 130, 246, 0.2);
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.process-text {
+    font-size: 1rem;
+    color: #3b82f6;
+    font-weight: 300;
+}
+
+.stage-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.stage-description {
+    font-size: 0.95rem;
+    color: var(--text-color-gray);
+    font-weight: 300;
+    line-height: 1.4;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+/* Step Number Circles */
+.step-number {
+    position: absolute;
+    top: -16px;
+    left: -50px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+    z-index: 5;
+}
+
+.step-1 {
+    background: #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.step-2 {
+    background: #ef4444;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.step-3 {
+    background: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .bottom-row {
+        gap: 50px;
+    }
+
+    .encryption-layout {
+        gap: 30px;
+    }
+
+    .flow-stage {
+        width: 220px;
+        height: 260px;
+    }
+}
+
+@media (max-width: 768px) {
+    .encryption-title {
+        font-size: 1.8rem;
+    }
+
+    .encryption-subtitle {
+        font-size: 1rem;
+    }
+
+    .encryption-header {
+        margin-bottom: 60px;
+    }
+
+    .stage-title {
+        font-size: 1.2rem;
+    }
+
+    .bottom-row {
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .encryption-layout {
+        gap: 30px;
+    }
+
+    .flow-stage {
+        width: 240px;
+        height: 240px;
+        padding: 20px 15px;
+    }
+
+    .step-number {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        top: -12px;
+        left: -40px;
+    }
+}

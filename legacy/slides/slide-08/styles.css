@@ -1,0 +1,104 @@
+/* Vector Lookup Slide (Slide 8) */
+.vector-lookup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 60px;
+}
+
+.tokens-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.token-row {
+    display: grid;
+    grid-template-columns: 280px 60px 1fr;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    animation: row-appear 0.5s ease-out forwards;
+}
+
+.token-row:nth-child(1) { animation-delay: 0.1s; }
+.token-row:nth-child(2) { animation-delay: 0.2s; }
+.token-row:nth-child(3) { animation-delay: 0.3s; }
+.token-row:nth-child(4) { animation-delay: 0.4s; }
+.token-row:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes row-appear {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.token-vertical {
+    background: rgba(31, 41, 55, 0.8);
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 18px 24px;
+    font-size: 1.6rem;
+    font-weight: 200;
+    color: var(--text-color-white);
+    text-align: center;
+    font-family: var(--font-family);
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.token-vertical:hover {
+    border-color: #06b6d4;
+    background: rgba(31, 41, 55, 1);
+    transform: scale(1.05);
+}
+
+.vector-arrow {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    font-weight: 200;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.vector-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid rgba(77, 171, 247, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.vector-cell {
+    background: rgba(31, 41, 55, 0.9);
+    border: 1px solid rgba(77, 171, 247, 0.2);
+    border-radius: 4px;
+    padding: 8px 4px;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-color-light-gray);
+    text-align: center;
+    font-family: var(--font-family-mono);
+    transition: all 0.2s ease;
+}
+
+.vector-cell:hover {
+    border-color: var(--accent-color);
+    color: var(--text-color-white);
+    background: rgba(77, 171, 247, 0.1);
+}
+
+.vector-cell:last-child {
+    color: var(--accent-color);
+    font-weight: 400;
+}

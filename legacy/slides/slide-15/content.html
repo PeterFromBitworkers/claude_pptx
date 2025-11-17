@@ -1,0 +1,104 @@
+<div class="slide slide-15"
+     data-slide-id="rag-demo"
+     data-has-steps="true"
+     data-step-handler="triggerNextRagAnimation"
+     data-max-steps-var="maxRagSteps"
+     data-current-step-var="ragAnimationStep">
+        <div class="logo">BRAIN BRIDGES</div>
+        <div class="slide-number"></div>
+
+        <div class="fixed-page-header">
+            <h1 class="main-title gradient-title">RAG</h1>
+            <div class="subtitle">Retrieval-Augmented Generation</div>
+        </div>
+
+        <div class="progressive-demo-container">
+            <div class="dialog-simulation">
+                <div class="message-flow">
+                    <!-- System Message (appears after user, with retrieved context) -->
+                    <div class="role-message system-message" id="demo-step-1" style="opacity: 0;">
+                        <div class="message-metadata">
+                            <div class="role-badge system-badge">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M9 9h6v6H9z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                SYSTEM
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">You are the AI legal assistant for Weber Stevens & Partners. You have access to all firm documents including client advisories, due diligence reports, contracts, and case files. Provide accurate, cited responses to help attorneys quickly find critical information, deadlines, and legal risks. Be precise and honest - if you don't know something, say so.</div>
+                            <div class="rag-retrieved-content" id="rag-content-1" style="opacity: 0; height: 0; overflow: hidden;">
+                                <div class="retrieved-separator">
+                                    <div class="separator-line"></div>
+                                    <span class="separator-text">Retrieved Context</span>
+                                    <div class="separator-line"></div>
+                                </div>
+                                <div class="retrieved-chunks">
+                                    <div class="chunk-item">
+                                        <div class="chunk-header">TechFlow_Cybersecurity_Advisory_2024.pdf</div>
+                                        <div class="chunk-content-bars">
+                                            <div class="content-bar long"></div>
+                                            <div class="content-bar medium"></div>
+                                            <div class="content-bar short"></div>
+                                            <div class="content-bar long"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chunk-item">
+                                        <div class="chunk-header">TechFlow_Risk_Assessment_Q1_2024.docx</div>
+                                        <div class="chunk-content-bars">
+                                            <div class="content-bar medium"></div>
+                                            <div class="content-bar long"></div>
+                                            <div class="content-bar medium"></div>
+                                            <div class="content-bar short"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chunk-item">
+                                        <div class="chunk-header">TechFlow_Legal_Opinions_2024.pdf</div>
+                                        <div class="chunk-content-bars">
+                                            <div class="content-bar short"></div>
+                                            <div class="content-bar long"></div>
+                                            <div class="content-bar medium"></div>
+                                            <div class="content-bar long"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Message -->
+                    <div class="role-message user-message" id="demo-step-2" style="opacity: 0;">
+                        <div class="message-metadata">
+                            <div class="role-badge user-badge">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="8" r="5" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M20 21a8 8 0 0 0-16 0" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                USER
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">What are the urgent deadlines in our cybersecurity advisory, and what happens if TechFlow misses them?</div>
+                        </div>
+                    </div>
+
+                    <!-- Assistant Message -->
+                    <div class="role-message assistant-message" id="demo-step-4" style="opacity: 0;">
+                        <div class="message-metadata">
+                            <div class="role-badge assistant-badge">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M9 9h6v6H9z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                ASSISTANT
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">Based on the client advisory documents, TechFlow faces a critical SEC cybersecurity compliance deadline on December 15, 2024. This deadline cannot be extended and requires immediate attention.<br><br>Additionally, TechFlow must implement a 4-business-day incident reporting system for any material cybersecurity incidents. This reporting requirement becomes effective immediately upon the December deadline.<br><br>If TechFlow misses these deadlines, they face significant potential penalties including SEC enforcement actions, which could result in substantial fines, and shareholder litigation exposure that could be costly and damage their reputation.<br><br><div class="citations-section"><div class="citations-title">References</div><div class="citation-list"><div class="citation-item"><span class="citation-number">[1]</span><span class="citation-title">Client_Advisory_SEC_Cybersecurity_Regulations_Nov2024.pdf</span></div><div class="citation-item"><span class="citation-number">[2]</span><span class="citation-title">TechFlow_Risk_Assessment_Q1_2024.docx</span></div><div class="citation-item"><span class="citation-number">[3]</span><span class="citation-title">TechFlow_Legal_Opinions_2024.pdf</span></div></div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

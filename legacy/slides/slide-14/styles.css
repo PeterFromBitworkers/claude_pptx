@@ -1,0 +1,158 @@
+/* Chat API Roles Slide (Slide 13) */
+.chat-roles-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+.chat-title {
+    font-size: 3.5rem;
+    font-weight: 200;
+    color: var(--text-color-white);
+    text-align: center;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, var(--accent-color), #06b6d4, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+}
+
+.dialog-simulation {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.message-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.role-message {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 25px;
+    border-radius: 16px;
+    border-left: 4px solid;
+    opacity: 0;
+    animation: message-appear 0.8s ease-out forwards;
+    position: relative;
+}
+
+.message-metadata {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 320px;
+    flex-shrink: 0;
+    padding-right: 30px;
+}
+
+.message-metadata .role-badge {
+    align-self: flex-start;
+}
+
+.message-metadata .message-note {
+    align-self: flex-start;
+    text-align: left;
+}
+
+.message-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    min-height: 80px;
+}
+
+.system-message {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: #10b981;
+    animation-delay: 0.2s;
+}
+
+.user-message {
+    background: rgba(77, 171, 247, 0.1);
+    border-left-color: var(--accent-color);
+    animation-delay: 0.6s;
+}
+
+.assistant-message {
+    background: rgba(6, 182, 212, 0.1);
+    border-left-color: #06b6d4;
+    animation-delay: 1.0s;
+}
+
+.role-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-family-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.system-badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid #10b981;
+}
+
+.user-badge {
+    background: rgba(77, 171, 247, 0.2);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.assistant-badge {
+    background: rgba(6, 182, 212, 0.2);
+    color: #06b6d4;
+    border: 1px solid #06b6d4;
+}
+
+.role-badge svg {
+    width: 16px;
+    height: 16px;
+}
+
+.message-text {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    text-align: left;
+    width: 100%;
+    font-weight: 300;
+}
+
+.message-note {
+    font-size: 0.95rem;
+    color: var(--text-color-light-gray);
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+@keyframes message-appear {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

@@ -1,0 +1,65 @@
+<div class="slide slide-14" data-slide-id="chat-api-roles">
+        <div class="logo">BRAIN BRIDGES</div>
+        <div class="slide-number"></div>
+        
+        <div class="fixed-page-header">
+            <h1 class="main-title gradient-title">Chat API Architecture</h1>
+        </div>
+
+        <div class="chat-roles-container">
+            <div class="dialog-simulation">
+                <div class="message-flow">
+                    <!-- System Message -->
+                    <div class="role-message system-message">
+                        <div class="message-metadata">
+                            <div class="role-badge system-badge">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M9 9h6v6H9z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                SYSTEM
+                            </div>
+                            <div class="message-note">Hidden instructions that guide AI behavior</div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">Sie sind ein spezialisierter KI-Assistent für Dr. Weber & Partner Rechtsanwälte. Beachten Sie stets das Mandantengeheimnis und deutsche Rechtsstandards.</div>
+                        </div>
+                    </div>
+
+                    <!-- User Message -->
+                    <div class="role-message user-message">
+                        <div class="message-metadata">
+                            <div class="role-badge user-badge">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="8" r="5" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M20 21a8 8 0 0 0-16 0" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                USER
+                            </div>
+                            <div class="message-note">Actual request from the user</div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">Erstelle einen Geschäftsführervertrag für ein Maschinenbauunternehmen in Bayern mit 150 Mitarbeitern</div>
+                        </div>
+                    </div>
+
+                    <!-- Assistant Message -->
+                    <div class="role-message assistant-message">
+                        <div class="message-metadata">
+                            <div class="role-badge assistant-badge">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M9 9h6v6H9z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                ASSISTANT
+                            </div>
+                            <div class="message-note">AI response following system instructions</div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">Ich erstelle einen maßgeschneiderten Geschäftsführervertrag basierend auf aktueller deutscher Rechtsprechung und Ihren Kanzlei-Standards...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,127 @@
+/* Attention Mechanism Slide (Slide 9) */
+.slide-9 .main-title {
+    margin-bottom: 40px;
+}
+
+.attention-matrix {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, auto);
+    gap: 10px;
+    background: var(--background-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 50px;
+    animation: matrix-appear 1.2s ease-out;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@keyframes matrix-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.matrix-cell {
+    background: rgba(31, 41, 55, 0.8);
+    border: 1px solid rgba(77, 171, 247, 0.2);
+    border-radius: 8px;
+    padding: 12px 6px;
+    text-align: center;
+    font-family: var(--font-family);
+    transition: all 0.3s ease;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.header-empty {
+    background: transparent;
+    border: none;
+}
+
+.token-header {
+    background: rgba(77, 171, 247, 0.15);
+    border-color: var(--accent-color);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-color-white);
+    letter-spacing: 0.3px;
+}
+
+.attention-score {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-family-mono);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Heatmap colors for attention scores */
+.attention-score[data-score*="0.8"]:not([data-score*="0.08"]),
+.attention-score[data-score*="0.9"] {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: 2px solid #10b981;
+    font-weight: 700;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+.attention-score[data-score*="0.05"],
+.attention-score[data-score*="0.06"],
+.attention-score[data-score*="0.07"],
+.attention-score[data-score*="0.08"] {
+    background: rgba(77, 171, 247, 0.25);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    font-weight: 600;
+}
+
+.attention-score[data-score*="0.02"],
+.attention-score[data-score*="0.03"],
+.attention-score[data-score*="0.04"] {
+    background: rgba(77, 171, 247, 0.15);
+    color: rgba(77, 171, 247, 0.8);
+    border: 1px solid rgba(77, 171, 247, 0.4);
+    font-weight: 500;
+}
+
+.attention-score[data-score="0.01"] {
+    background: rgba(156, 163, 175, 0.1);
+    color: rgba(156, 163, 175, 0.7);
+    border: 1px solid rgba(156, 163, 175, 0.3);
+    font-weight: 400;
+}
+
+.attention-score:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 15px rgba(77, 171, 247, 0.4);
+    z-index: 10;
+    position: relative;
+}
+
+.attention-score[data-score*="0.8"]:hover,
+.attention-score[data-score*="0.9"]:hover {
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+}
+
+.attention-footnote {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: rgba(209, 213, 219, 0.6);
+    text-align: right;
+    margin-top: 15px;
+    grid-column: 1 / -1;
+    margin-right: 0;
+    margin-left: 0;
+    font-family: var(--font-family);
+}

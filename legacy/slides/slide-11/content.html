@@ -1,0 +1,78 @@
+<div class="slide slide-11"
+     data-slide-id="autoregression"
+     data-has-steps="true"
+     data-step-handler="nextAutoregressStep"
+     data-max-steps-var="maxAutoregressSteps"
+     data-current-step-var="autoregressStep">
+        <div class="logo">BRAIN BRIDGES</div>
+        <div class="slide-number"></div>
+        
+        <div class="autoregression-container" onclick="nextAutoregressStep()">
+            <!-- Fade overlay for top -->
+            <div class="scroll-fade-top"></div>
+            
+            <div class="steps-scroll-container" id="stepsContainer">
+                <div class="cycle-step" id="step1">
+                    <div class="step-label">Step 1: Original Input</div>
+                    <div class="input-sequence">
+                        <div class="seq-token">Witnesses</div>
+                        <div class="seq-token">must</div>
+                        <div class="seq-token">tell</div>
+                        <div class="seq-token">nothing</div>
+                    </div>
+                    <div class="step-arrow">→ LLM →</div>
+                    <div class="predicted-token" id="prediction1" style="opacity: 0;">but</div>
+                </div>
+                
+                <div class="cycle-arrow" id="arrow1" style="opacity: 0;">↓</div>
+                
+                <div class="cycle-step" id="step2" style="opacity: 0;">
+                    <div class="step-label">Step 2: Extended Input</div>
+                    <div class="input-sequence">
+                        <div class="seq-token">Witnesses</div>
+                        <div class="seq-token">must</div>
+                        <div class="seq-token">tell</div>
+                        <div class="seq-token">nothing</div>
+                        <div class="seq-token new-token">but</div>
+                    </div>
+                    <div class="step-arrow">→ LLM →</div>
+                    <div class="predicted-token" id="prediction2" style="opacity: 0;">the</div>
+                </div>
+                
+                <div class="cycle-arrow" id="arrow2" style="opacity: 0;">↓</div>
+                
+                <div class="cycle-step" id="step3" style="opacity: 0;">
+                    <div class="step-label">Step 3: Extended Again</div>
+                    <div class="input-sequence">
+                        <div class="seq-token">Witnesses</div>
+                        <div class="seq-token">must</div>
+                        <div class="seq-token">tell</div>
+                        <div class="seq-token">nothing</div>
+                        <div class="seq-token">but</div>
+                        <div class="seq-token new-token">the</div>
+                    </div>
+                    <div class="step-arrow">→ LLM →</div>
+                    <div class="predicted-token" id="prediction3" style="opacity: 0;">truth</div>
+                </div>
+                
+                <div class="cycle-arrow" id="arrow3" style="opacity: 0;">↓</div>
+                
+                <div class="cycle-step final-step" id="step4" style="opacity: 0;">
+                    <div class="step-label">Final: Complete Sentence</div>
+                    <div class="input-sequence final-sequence">
+                        <div class="seq-token">Witnesses</div>
+                        <div class="seq-token">must</div>
+                        <div class="seq-token">tell</div>
+                        <div class="seq-token">nothing</div>
+                        <div class="seq-token">but</div>
+                        <div class="seq-token">the</div>
+                        <div class="seq-token final-token">truth</div>
+                    </div>
+                    <div class="completion-message">Complete sentence generated through autoregression!</div>
+                </div>
+            </div>
+            
+            <!-- Fade overlay for bottom -->
+            <div class="scroll-fade-bottom"></div>
+        </div>
+    </div>

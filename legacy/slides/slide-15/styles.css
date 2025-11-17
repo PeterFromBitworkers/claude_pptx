@@ -1,0 +1,656 @@
+/* Slide 15: Progressive RAG Demo Styles */
+
+/* Override base slide layout for slide-15 to allow scrolling and top alignment */
+.slide-15 {
+  justify-content: flex-start !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  align-items: center !important;
+}
+
+/* Ensure navigation buttons are always clickable */
+.slide-15 .navigation {
+  z-index: 999999 !important;
+  pointer-events: all !important;
+}
+
+.slide-15 .nav-btn {
+  pointer-events: all !important;
+  z-index: 999999 !important;
+}
+
+/* Progressive demo container */
+.progressive-demo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 60px 40px 180px 40px;
+  margin-top: 280px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Allow clicks on messages but not container background */
+.progressive-demo-container .role-message {
+  pointer-events: auto;
+}
+
+.progressive-demo-container .dialog-simulation {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.progressive-demo-container .message-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.progressive-demo-container .role-message {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 25px;
+    border-radius: 16px;
+    border-left: 4px solid;
+    position: relative;
+    transition: all 0.5s ease;
+    transform: translateY(20px);
+}
+
+.progressive-demo-container .role-message.show {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+.progressive-demo-container .role-message::after {
+    content: '';
+    position: absolute;
+    left: 280px;
+    top: 20px;
+    bottom: 20px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progressive-demo-container .message-metadata {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 240px;
+    padding-right: 30px;
+}
+
+.progressive-demo-container .message-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+/* Enhanced message content for longer text */
+.progressive-demo-container .message-text {
+    font-size: 1.1rem;
+    color: var(--text-color-white);
+    line-height: 1.5;
+    text-align: left;
+    width: 100%;
+    font-weight: 400;
+}
+
+/* Make role badges consistent */
+.progressive-demo-container .role-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-family-mono);
+    font-weight: 600;
+    font-size: 0.85rem;
+    min-width: 110px;
+    justify-content: center;
+}
+
+.progressive-demo-container .role-badge svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Enhanced slide-15 styles based on slide-14 layout */
+.slide-15 .progressive-demo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+.slide-15 .dialog-simulation {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.slide-15 .message-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.slide-15 .role-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 25px;
+    border-radius: 16px;
+    border-left: 4px solid;
+    background: rgba(17, 24, 39, 0.9);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+    animation: none;
+}
+
+.slide-15 .role-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-15 .message-metadata {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 160px;
+    flex-shrink: 0;
+    padding-right: 30px;
+}
+
+.slide-15 .message-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 30px;
+    min-height: 60px;
+    border-left: none !important;
+}
+
+.slide-15 .message-text {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    text-align: left;
+    width: 100%;
+    font-weight: 300;
+}
+
+.slide-15 .role-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-family-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.slide-15 .role-badge svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Role-specific styling */
+.slide-15 .system-message {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: #10b981;
+}
+
+.slide-15 .system-badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid #10b981;
+}
+
+.slide-15 .user-message {
+    background: rgba(77, 171, 247, 0.1);
+    border-left-color: var(--accent-color);
+}
+
+.slide-15 .user-badge {
+    background: rgba(77, 171, 247, 0.2);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.slide-15 .assistant-message {
+    background: rgba(6, 182, 212, 0.1);
+    border-left-color: #06b6d4;
+}
+
+.slide-15 .assistant-badge {
+    background: rgba(6, 182, 212, 0.2);
+    color: #06b6d4;
+    border: 1px solid #06b6d4;
+}
+
+/* Paper-style citations for slide-15 */
+.slide-15 .citations-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.slide-15 .citations-title {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: var(--font-family);
+    letter-spacing: 0.3px;
+}
+
+.slide-15 .citation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.slide-15 .citation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+.slide-15 .citation-number {
+    color: rgba(77, 171, 247, 0.8);
+    font-weight: 500;
+    font-family: var(--font-family-mono);
+    min-width: 24px;
+    flex-shrink: 0;
+}
+
+.slide-15 .citation-title {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    font-family: var(--font-family);
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    hyphens: auto !important;
+}
+
+/* Content bars for retrieved context visualization */
+.slide-15 .chunk-content-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 4px;
+}
+
+.slide-15 .content-bar {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 1px;
+    opacity: 0.6;
+}
+
+.slide-15 .content-bar.short {
+    width: 35%;
+}
+
+.slide-15 .content-bar.medium {
+    width: 60%;
+}
+
+.slide-15 .content-bar.long {
+    width: 85%;
+}
+
+/* Ensure proper styling for chunk headers in slide-15 */
+.slide-15 .chunk-header {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    font-family: inherit;
+}
+
+.slide-15 .chunk-item {
+    margin-bottom: 12px;
+}
+
+/* RAG Retrieved Content Styling */
+.rag-retrieved-content {
+    margin-top: 20px;
+    transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    width: 100%;
+}
+
+.rag-retrieved-content.show {
+    opacity: 1 !important;
+    height: auto !important;
+}
+
+/* Individual chunk animations */
+.chunk-item {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s ease-out;
+}
+
+.chunk-item.pulse {
+    opacity: 1;
+    transform: scale(1);
+    animation: document-pulse 0.6s ease-out;
+}
+
+@keyframes document-pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Ensure the message-text and rag-content stack vertically */
+.slide-15 .message-text {
+    display: block !important;
+    width: 100% !important;
+}
+
+.slide-15 .message-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+
+.slide-15 .role-message {
+    align-items: flex-start !important;
+    transition: height 2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Smooth scrolling and fade effects for slide-15 */
+.slide-15 {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-15::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(13, 13, 13, 0.9), transparent);
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.slide-15::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, rgba(13, 13, 13, 0.9), transparent);
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.slide-15.scrolled::before,
+.slide-15.scrolled::after {
+    opacity: 1;
+}
+
+.slide-15 .system-message {
+    transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+}
+
+.retrieved-separator {
+    display: flex;
+    align-items: center;
+    margin: 20px 0 15px 0;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.separator-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.separator-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-family-mono);
+}
+
+.retrieved-chunks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.chunk-text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.4;
+    font-weight: 400;
+    font-family: inherit;
+    margin-bottom: 8px;
+}
+
+/* Citations separator styling */
+.citations-separator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    margin: 10px 0;
+}
+
+.citation-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.citation-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-family-mono);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    /* Progressive Demo mobile optimization for slide 15 */
+    .progressive-demo-container {
+        padding: 60px 15px 120px 15px !important;
+        height: calc(100vh - 60px) !important;
+        max-width: calc(100vw - 30px) !important;
+    }
+
+    .progressive-demo-container .role-message {
+        flex-direction: column !important;
+        gap: 8px !important;
+        padding: 12px !important;
+        margin: 0 10px !important;
+        text-align: left !important;
+        max-width: calc(100vw - 40px) !important;
+        box-sizing: border-box !important;
+    }
+
+    .progressive-demo-container .message-metadata {
+        min-width: auto !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding-right: 0 !important;
+        gap: 4px !important;
+        flex-direction: column !important;
+    }
+
+    .progressive-demo-container .message-content {
+        padding-left: 0 !important;
+        border-left: none !important;
+        border-top: 2px solid rgba(77, 171, 247, 0.3) !important;
+        padding-top: 8px !important;
+    }
+
+    .progressive-demo-container .message-text {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+        text-align: left !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+        hyphens: auto !important;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+    }
+
+    .progressive-demo-container .role-badge {
+        font-size: 0.7rem !important;
+        padding: 4px 8px !important;
+        min-width: 80px !important;
+    }
+
+    .progressive-demo-container .role-badge svg {
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+    .progressive-demo-container .message-note {
+        font-size: 0.7rem !important;
+        text-align: center !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Ensure slide-15 is scrollable and properly positioned */
+    .slide-15 {
+        justify-content: flex-start !important;
+        overflow-y: auto !important;
+        height: 100vh !important;
+    }
+
+    /* Fix any RAG content or other elements on slide 15 */
+    .rag-content, .slide-15 .message-content > * {
+        max-width: 100% !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Specific fixes for ASSISTANT message with citations */
+    .progressive-demo-container .assistant-message .message-text {
+        font-size: 0.7rem !important;
+        line-height: 1.25 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-all !important;
+        white-space: normal !important;
+        hyphens: auto !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .progressive-demo-container .assistant-message {
+        margin: 0 10px !important;
+        max-width: calc(100vw - 40px) !important;
+    }
+
+    .progressive-demo-container .citations-section {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-top: 8px !important;
+        font-size: 0.7rem !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .progressive-demo-container .citations-title {
+        font-size: 0.7rem !important;
+        margin-bottom: 4px !important;
+        word-wrap: break-word !important;
+    }
+
+    .progressive-demo-container .citation-list {
+        max-width: 100% !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .progressive-demo-container .citation-item {
+        max-width: 100% !important;
+        width: 100% !important;
+        font-size: 0.65rem !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .progressive-demo-container .citation-title {
+        word-wrap: break-word !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-all !important;
+        hyphens: auto !important;
+        max-width: calc(100% - 30px) !important;
+        width: calc(100% - 30px) !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .progressive-demo-container .citation-number {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
+}
