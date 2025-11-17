@@ -21,8 +21,9 @@
 claude_pptx/
 ├── CLAUDE.md                    # ← YOU ARE HERE (AI instructions)
 ├── README.md                    # Human-readable design system
+├── design_tokens.py            # ⭐ SINGLE SOURCE OF TRUTH (colors, fonts, layouts)
 ├── CHANGELOG.md                 # Version history
-├── generate_pptx.py            # Main generator script
+├── generate_pptx.py            # Main generator script (imports design_tokens)
 ├── slides_content.json         # Slide content data
 ├── requirements.txt            # Python dependencies
 └── output/
@@ -36,16 +37,18 @@ claude_pptx/
 ### 1. Understand the Project
 ```bash
 # Read these files in this order:
-cat CLAUDE.md          # This file
-cat README.md          # Design system & colors
+cat CLAUDE.md           # This file
+cat design_tokens.py    # ⭐ All design values (CRITICAL!)
+cat README.md           # Human-readable documentation
+cat generate_pptx.py    # Generator code
 cat slides_content.json # Current slide content
-cat generate_pptx.py   # Generator code
 ```
 
 ### 2. Make Changes
 ```python
-# Edit generate_pptx.py or slides_content.json
-# Follow the design tokens in README.md
+# To change colors/fonts/layouts: Edit design_tokens.py
+# To change slide content: Edit generate_pptx.py or slides_content.json
+# ALL design values come from design_tokens.py
 ```
 
 ### 3. Generate PowerPoint
@@ -63,57 +66,35 @@ git push
 
 ---
 
-## 📋 Design Constraints (CRITICAL)
+## 📋 Design System (CRITICAL)
 
-### Colors (ALWAYS use these exact RGB values)
+### ⚠️ Single Source of Truth: `design_tokens.py`
+
+**ALL design values are defined in `design_tokens.py`:**
+- Colors (backgrounds, text, accents)
+- Typography (font sizes, weights, letter-spacing)
+- Layout (positions, dimensions, spacing)
+- Themes (keyword color combinations)
+
+**To change any design value:**
+1. Open `design_tokens.py`
+2. Modify the constant (e.g., `COLOR_ACCENT_BLUE`)
+3. Save the file
+4. Run `python3 generate_pptx.py`
+
+**Example constants:**
 ```python
-BACKGROUND_DARK = RGBColor(17, 24, 39)     # Main background
-BACKGROUND_LIGHT = RGBColor(31, 41, 55)    # Cards/boxes
-TEXT_WHITE = RGBColor(255, 255, 255)       # Primary text
-TEXT_GRAY = RGBColor(209, 213, 219)        # Secondary text
-TEXT_GRAY_DARK = RGBColor(167, 171, 175)   # Slide numbers
+# Import in your code
+from design_tokens import *
 
-# Accent colors
-ACCENT_BLUE = RGBColor(77, 171, 247)       # #4dabf7
-ACCENT_CYAN = RGBColor(6, 182, 212)        # #06b6d4
-ACCENT_GREEN = RGBColor(16, 185, 129)      # #10b981
-ACCENT_RED = RGBColor(239, 68, 68)         # #ef4444
-ACCENT_PURPLE = RGBColor(139, 92, 246)     # #8b5cf6
+# Use constants instead of hardcoded values
+COLOR_BACKGROUND_DARK       # Instead of RGBColor(17, 24, 39)
+FONT_SIZE_KEYWORD           # Instead of Pt(72)
+KEYWORD_Y_START             # Instead of 2.3
+KEYWORD_THEME_PROBLEM       # Color array for keyword slides
 ```
 
-### Typography
-```python
-# Logo "BRAIN BRIDGES" (top-left, every slide)
-logo_font_size = Pt(21)
-logo_font_weight = "Bold"
-logo_color = RGBColor(255, 255, 255)
-logo_position = (Inches(0.28), Inches(0.28))
-
-# Slide number "##/17" (top-right, every slide)
-slidenum_font_size = Pt(21)
-slidenum_font_weight = "Normal"
-slidenum_color = RGBColor(167, 171, 175)
-slidenum_position = (Inches(15.1), Inches(0.28))
-
-# Keywords (THE, AI, PARADOX style slides)
-keyword_font_size = Pt(72)
-keyword_font_weight = "Light" or "Thin"  # As thin as possible!
-keyword_letter_spacing = Pt(2)
-keyword_uppercase = True
-keyword_vertical_gap = Inches(1.4)
-```
-
-### Layout Rules
-```python
-# Slide dimensions
-slide_width = Inches(16)
-slide_height = Inches(9)
-
-# Safe zones
-margin_top = Inches(1)      # Below logo/slidenum
-margin_sides = Inches(1)    # Left/right margins
-content_max_width = Inches(14)
-```
+**Full documentation:** See `design_tokens.py` for all available constants
 
 ---
 
@@ -152,12 +133,13 @@ create_slide_N(prs)
 }
 ```
 
-### Task 3: Change Colors/Fonts
+### Task 3: Change Colors/Fonts/Layouts
 ```python
-# 1. Check if change is allowed per design system (README.md)
-# 2. Update the color constant at top of generate_pptx.py
-# 3. Apply throughout
-# 4. Update CHANGELOG.md with breaking change note
+# 1. Open design_tokens.py
+# 2. Modify the constant (e.g., COLOR_ACCENT_BLUE, FONT_SIZE_KEYWORD)
+# 3. Save the file - changes apply automatically!
+# 4. Test: python3 generate_pptx.py
+# 5. Update CHANGELOG.md if it's a breaking change
 ```
 
 ---
@@ -165,28 +147,27 @@ create_slide_N(prs)
 ## 🎨 Slide Types & Templates
 
 ### Type 1: Keyword Slide
-**Used for:** Slides 1, 4, 6  
+**Used for:** Slides 1, 4, 6
 **Example:** "THE AI PARADOX"
 ```python
+# Uses: KEYWORD_* constants from design_tokens.py
 # Three separate textboxes, vertically centered
-# Each keyword: 72pt, light weight, letter-spacing 2pt
-# Colors rotate per theme (see README.md)
+# Colors: KEYWORD_THEME_PROBLEM, KEYWORD_THEME_SOLUTION, KEYWORD_THEME_TECH
 ```
 
 ### Type 2: Content Slide
-**Used for:** Slides 2, 3, 7-16  
+**Used for:** Slides 2, 3, 7-16
 **Example:** "Organisations want AI"
 ```python
-# Fixed header at top: 1" from top, centered
-# Title: 48pt, Light, Blue
-# Subtitle: 20pt, Bold, Red or Gray
-# Content area: starts at 3" from top
+# Uses: CONTENT_* and FONT_SIZE_CONTENT_* constants
+# Fixed header at top with title and subtitle
+# Content area below for flexible layouts
 ```
 
 ### Type 3: Blank with Master
 **Used for:** Custom layouts
 ```python
-# Only logo and slide number
+# Only logo and slide number (from apply_master_elements)
 # Completely custom content area
 ```
 
@@ -200,24 +181,19 @@ def apply_master_elements(slide, slide_num, total_slides=17):
     """
     Applies consistent master elements to a slide.
     Call this FIRST when creating any slide.
-    
+
+    Uses design_tokens.py for all values:
+    - Background: COLOR_BACKGROUND_DARK
+    - Logo: LOGO_* constants (position, size, font)
+    - Slide number: SLIDE_NUMBER_* constants
+
     Args:
         slide: The slide object
         slide_num: Current slide number (1-17)
         total_slides: Total slides (default 17)
     """
-    # 1. Background
-    slide.background.fill.solid()
-    slide.background.fill.fore_color.rgb = RGBColor(17, 24, 39)
-    
-    # 2. Logo "BRAIN BRIDGES" (top-left)
-    # Position: 0.28" from top, 0.28" from left
-    # Font: 21pt, Bold, White
-    
-    # 3. Slide number "##/17" (top-right)
-    # Position: 15.1" from left, 0.28" from top
-    # Font: 21pt, Normal, Gray
-    # Format: "{slide_num:02d}/{total_slides:02d}"
+    # Applies: background color, logo, slide number
+    # All values from design_tokens.py
 ```
 
 ---
@@ -225,18 +201,17 @@ def apply_master_elements(slide, slide_num, total_slides=17):
 ## 🚫 Common Mistakes to Avoid
 
 ### ❌ DON'T
-- Use Hex colors (#4dabf7) → Use RGBColor(77, 171, 247)
+- Hardcode colors/fonts/positions → Use design_tokens.py constants
+- Modify values in generate_pptx.py → Change them in design_tokens.py
 - Put "(v: xii)" in logo → Only "BRAIN BRIDGES"
-- Use gradients in background → Only solid fills
-- Make font weights too heavy → Use lightest available
-- Forget letter-spacing on keywords → Always 2pt
+- Use gradients in background → Only solid fills (currently)
 - Single textbox for keywords → Separate box per word
 - Edit the .pptx directly → Always regenerate from script
 
 ### ✅ DO
-- Use exact RGB values from constants
+- Import and use constants from design_tokens.py
 - Call apply_master_elements() on every slide
-- Keep fonts as light/thin as possible
+- Change design values in ONE place (design_tokens.py)
 - Use separate textboxes for each keyword
 - Update CHANGELOG.md for any changes
 - Test generation after changes: `python3 generate_pptx.py`
@@ -291,25 +266,28 @@ chore: Update dependencies
 
 ## 🐛 Debugging Tips
 
-### Issue: Colors look wrong
+### Issue: Colors/fonts look wrong
 ```python
-# Check: Are you using RGBColor() not hex?
-# Correct: RGBColor(77, 171, 247)
-# Wrong: "#4dabf7"
+# Check: Are you importing from design_tokens?
+from design_tokens import *
+
+# Correct: COLOR_ACCENT_BLUE
+# Wrong: RGBColor(77, 171, 247) hardcoded
 ```
 
-### Issue: Fonts too heavy
+### Issue: Changes not appearing
 ```python
-# python-pptx doesn't support font-weight numbers directly
-# Use: paragraph.font.bold = False
-# And: Use font names like "Segoe UI Light" if available
+# 1. Check you're modifying design_tokens.py (not generate_pptx.py)
+# 2. Save the file
+# 3. Regenerate: python3 generate_pptx.py
+# 4. Check output/Brain-Bridges_LATEST.pptx
 ```
 
-### Issue: Letter-spacing not working
+### Issue: Import errors
 ```python
-# Use character_spacing on runs, not paragraphs:
-for run in paragraph.runs:
-    run.font.character_spacing = Pt(2)
+# Make sure design_tokens.py is in the same directory
+# Check the import statement at top of generate_pptx.py:
+from design_tokens import *
 ```
 
 ### Issue: Slide numbers wrong
@@ -360,20 +338,32 @@ apply_master_elements(slide, wrong_number)
 
 ## 📚 Key Files Reference
 
+### design_tokens.py ⭐
+- **Single source of truth** for all design values
+- Colors, fonts, positions, layouts, themes
+- Change design values HERE ONLY
+- Imported by generate_pptx.py
+
 ### generate_pptx.py
 - Main generator script
 - Contains all slide creation functions
+- Imports design_tokens.py for all styling
 - Imports from slides_content.json (future)
+
+### README.md
+- Human-readable documentation
+- Design system reference (points to design_tokens.py)
+- Setup and deployment instructions
+
+### CLAUDE.md
+- AI assistant instructions (this file)
+- Workflow and best practices
+- References design_tokens.py for design values
 
 ### slides_content.json (to be created)
 - Stores slide content as data
 - Easier to edit than Python code
 - Loaded by generate_pptx.py
-
-### README.md
-- Human-readable documentation
-- Design system and color reference
-- Setup instructions
 
 ### CHANGELOG.md
 - Version history

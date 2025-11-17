@@ -1,58 +1,64 @@
 #!/usr/bin/env python3
 """
 Brain-Bridges PowerPoint Generator V3
-Mit korrekt konfigurierten Slide Masters für einfache Wartbarkeit
+With correctly configured Slide Masters for easy maintenance
 """
 
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN, MSO_AUTO_SIZE
 from pptx.dml.color import RGBColor
+from datetime import datetime
+import os
+import shutil
+
+# Import all design tokens (colors, fonts, layouts)
+from design_tokens import *
 
 def apply_master_elements(slide, slide_num, total_slides=17):
     """
-    Wendet Master-Elemente auf eine Folie an:
-    - Hintergrundfarbe
-    - Logo "BRAIN BRIDGES" oben links
-    - Seitenzähler oben rechts
-    
-    Diese Funktion simuliert einen Slide Master, da python-pptx
-    keine direkte Master-Bearbeitung erlaubt.
+    Applies master elements to a slide:
+    - Background color
+    - Logo "BRAIN BRIDGES" top left
+    - Slide counter top right
+
+    This function simulates a Slide Master, since python-pptx
+    does not allow direct master editing.
     """
-    
-    # Hintergrundfarbe setzen
+
+    # Set background color
     background = slide.background
     fill = background.fill
     fill.solid()
-    fill.fore_color.rgb = RGBColor(17, 24, 39)
-    
-    # Logo "BRAIN BRIDGES" oben links (ohne "v: xii")
+    fill.fore_color.rgb = COLOR_BACKGROUND_DARK
+
+    # Logo "BRAIN BRIDGES" top left (without "v: xii")
     logo_box = slide.shapes.add_textbox(
-        Inches(0.28), Inches(0.28),
-        Inches(3), Inches(0.4)
+        LOGO_X, LOGO_Y,
+        LOGO_WIDTH, LOGO_HEIGHT
     )
     logo_frame = logo_box.text_frame
-    logo_frame.text = "BRAIN BRIDGES"
+    logo_frame.text = LOGO_TEXT
     logo_p = logo_frame.paragraphs[0]
-    logo_p.font.size = Pt(21)
-    logo_p.font.bold = True
-    logo_p.font.color.rgb = RGBColor(255, 255, 255)
+    logo_p.font.size = FONT_SIZE_LOGO
+    logo_p.font.bold = FONT_BOLD_LOGO
+    logo_p.font.color.rgb = FONT_COLOR_LOGO
     # Letter-spacing
     for run in logo_p.runs:
-        run.font.character_spacing = Pt(-0.5)
-    
-    # Seitenzähler oben rechts
+        run.font.character_spacing = FONT_LETTER_SPACING_LOGO
+
+    # Slide counter top right
     num_box = slide.shapes.add_textbox(
-        Inches(15.1), Inches(0.28),
-        Inches(0.7), Inches(0.4)
+        SLIDE_NUMBER_X, SLIDE_NUMBER_Y,
+        SLIDE_NUMBER_WIDTH, SLIDE_NUMBER_HEIGHT
     )
     num_frame = num_box.text_frame
     num_frame.text = f"{slide_num:02d}/{total_slides:02d}"
     num_p = num_frame.paragraphs[0]
     num_p.alignment = PP_ALIGN.RIGHT
-    num_p.font.size = Pt(21)
-    num_p.font.bold = False
-    num_p.font.color.rgb = RGBColor(167, 171, 175)
+    num_p.font.size = FONT_SIZE_SLIDE_NUMBER
+    num_p.font.bold = FONT_BOLD_SLIDE_NUMBER
+    num_p.font.color.rgb = FONT_COLOR_SLIDE_NUMBER
     
     return slide
 
@@ -60,61 +66,64 @@ def create_slide_1(prs):
     """Slide 1: THE AI PARADOX"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     apply_master_elements(slide, 1)
-    
-    # Die drei Keywords
+
+    # The three keywords - using KEYWORD_THEME_PROBLEM
     keywords = [
-        {"text": "THE", "color": RGBColor(239, 68, 68)},
-        {"text": "AI", "color": RGBColor(77, 171, 247)},
-        {"text": "PARADOX", "color": RGBColor(16, 185, 129)}
+        {"text": "THE", "color": KEYWORD_THEME_PROBLEM[0]},
+        {"text": "AI", "color": KEYWORD_THEME_PROBLEM[1]},
+        {"text": "PARADOX", "color": KEYWORD_THEME_PROBLEM[2]}
     ]
-    
-    y_start = 2.3
-    y_gap = 1.4
-    
+
     for i, keyword in enumerate(keywords):
-        y_pos = y_start + (i * y_gap)
-        
+        y_pos = KEYWORD_Y_START + (i * KEYWORD_Y_GAP)
+
         keyword_box = slide.shapes.add_textbox(
-            Inches(2), Inches(y_pos),
-            Inches(12), Inches(1.2)
+            KEYWORD_BOX_X, Inches(y_pos),
+            KEYWORD_BOX_WIDTH, KEYWORD_BOX_HEIGHT
         )
         tf = keyword_box.text_frame
         tf.text = keyword["text"]
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.size = Pt(72)
-        p.font.bold = False
+        p.font.size = FONT_SIZE_KEYWORD
+        p.font.bold = FONT_BOLD_KEYWORD
         p.font.color.rgb = keyword["color"]
-        
+
         for run in p.runs:
-            run.font.character_spacing = Pt(2)
-    
+            run.font.character_spacing = FONT_LETTER_SPACING_KEYWORD
+
     return prs
 
 def create_slide_2(prs):
     """Slide 2: Organisations want AI"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     apply_master_elements(slide, 2)
-    
+
     # Fixed header
-    title_box = slide.shapes.add_textbox(Inches(1), Inches(1), Inches(14), Inches(0.8))
+    title_box = slide.shapes.add_textbox(
+        CONTENT_HEADER_X, CONTENT_HEADER_Y,
+        CONTENT_HEADER_WIDTH, CONTENT_HEADER_HEIGHT
+    )
     tf = title_box.text_frame
     tf.text = "Organisations want AI"
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
-    p.font.size = Pt(48)
-    p.font.bold = False
-    p.font.color.rgb = RGBColor(77, 171, 247)
-    
+    p.font.size = FONT_SIZE_CONTENT_TITLE
+    p.font.bold = FONT_BOLD_CONTENT_TITLE
+    p.font.color.rgb = FONT_COLOR_CONTENT_TITLE
+
     # Subtitle
-    subtitle_box = slide.shapes.add_textbox(Inches(1), Inches(1.8), Inches(14), Inches(0.4))
+    subtitle_box = slide.shapes.add_textbox(
+        CONTENT_SUBTITLE_X, CONTENT_SUBTITLE_Y,
+        CONTENT_SUBTITLE_WIDTH, CONTENT_SUBTITLE_HEIGHT
+    )
     tf = subtitle_box.text_frame
     tf.text = "but can't have it ¯\\_(ツ)_/¯"
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = RGBColor(239, 68, 68)
+    p.font.size = FONT_SIZE_CONTENT_SUBTITLE
+    p.font.bold = FONT_BOLD_CONTENT_SUBTITLE
+    p.font.color.rgb = FONT_COLOR_CONTENT_SUBTITLE_ALERT
     
     # Problem items grid
     problems = [
@@ -140,104 +149,118 @@ def create_slide_2(prs):
         }
     ]
     
-    x_positions = [1, 4.5, 8, 11.5]
-    y_start = 3
-    box_width = 3.2
-    
     for i, problem in enumerate(problems):
-        x = x_positions[i]
-        
+        x = Inches(PROBLEM_GRID_X_POSITIONS[i])
+        y_start = Inches(PROBLEM_GRID_Y_START)
+        box_width = Inches(PROBLEM_GRID_BOX_WIDTH)
+
         # Title
         title_box = slide.shapes.add_textbox(
-            Inches(x), Inches(y_start),
-            Inches(box_width), Inches(0.5)
+            x, y_start + Inches(PROBLEM_TITLE_Y_OFFSET),
+            box_width, Inches(PROBLEM_TITLE_HEIGHT)
         )
         tf = title_box.text_frame
         tf.text = problem["title"]
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.size = Pt(16)
-        p.font.bold = True
-        p.font.color.rgb = RGBColor(255, 255, 255)
-        
+        p.font.size = FONT_SIZE_PROBLEM_TITLE
+        p.font.bold = FONT_BOLD_PROBLEM_TITLE
+        p.font.color.rgb = FONT_COLOR_PROBLEM_TITLE
+
         # Description
         desc_box = slide.shapes.add_textbox(
-            Inches(x), Inches(y_start + 0.7),
-            Inches(box_width), Inches(1.5)
+            x, y_start + Inches(PROBLEM_DESC_Y_OFFSET),
+            box_width, Inches(PROBLEM_DESC_HEIGHT)
         )
         tf = desc_box.text_frame
         tf.text = problem["desc"]
         tf.word_wrap = True
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.size = Pt(12)
-        p.font.color.rgb = RGBColor(209, 213, 219)
-        
+        p.font.size = FONT_SIZE_PROBLEM_DESC
+        p.font.color.rgb = FONT_COLOR_PROBLEM_DESC
+
         # Violation
         viol_box = slide.shapes.add_textbox(
-            Inches(x), Inches(y_start + 2.5),
-            Inches(box_width), Inches(0.6)
+            x, y_start + Inches(PROBLEM_VIOLATION_Y_OFFSET),
+            box_width, Inches(PROBLEM_VIOLATION_HEIGHT)
         )
         tf = viol_box.text_frame
         tf.text = problem["violation"]
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.size = Pt(9)
-        p.font.bold = True
-        p.font.color.rgb = RGBColor(239, 68, 68)
+        p.font.size = FONT_SIZE_PROBLEM_VIOLATION
+        p.font.bold = FONT_BOLD_PROBLEM_VIOLATION
+        p.font.color.rgb = FONT_COLOR_PROBLEM_VIOLATION
     
     return prs
 
 def create_placeholder_slide(prs, slide_num):
-    """Erstellt eine Platzhalter-Folie für spätere Bearbeitung"""
+    """Creates a placeholder slide for later editing"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     apply_master_elements(slide, slide_num)
-    
+
     # Placeholder title
-    title_box = slide.shapes.add_textbox(Inches(2), Inches(3.5), Inches(12), Inches(2))
+    title_box = slide.shapes.add_textbox(
+        PLACEHOLDER_X, PLACEHOLDER_Y,
+        PLACEHOLDER_WIDTH, PLACEHOLDER_HEIGHT
+    )
     tf = title_box.text_frame
     tf.text = f"Slide {slide_num}\n(To be designed)"
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
-    p.font.size = Pt(48)
-    p.font.color.rgb = RGBColor(77, 171, 247)
-    
+    p.font.size = FONT_SIZE_PLACEHOLDER
+    p.font.color.rgb = FONT_COLOR_PLACEHOLDER
+
     return prs
 
 def create_presentation():
-    """Erstellt die komplette Präsentation mit konsistenten Master-Elementen"""
+    """Creates the complete presentation with consistent master elements"""
     prs = Presentation()
-    prs.slide_width = Inches(16)
-    prs.slide_height = Inches(9)
+    prs.slide_width = SLIDE_WIDTH
+    prs.slide_height = SLIDE_HEIGHT
     
     # Slide 1: THE AI PARADOX
     create_slide_1(prs)
     
     # Slide 2: Organisations want AI
     create_slide_2(prs)
-    
-    # Weitere Slides als Platzhalter
+
+    # Additional slides as placeholders
     for i in range(3, 18):
         create_placeholder_slide(prs, i)
-    
+
     return prs
 
 if __name__ == "__main__":
-    print("🎨 Generiere Brain-Bridges PowerPoint V3 mit konsistenten Master-Elementen...")
+    print("🎨 Generating Brain-Bridges PowerPoint V3 with consistent master elements...")
     prs = create_presentation()
-    output_path = "output/Brain-Bridges.pptx"
-    prs.save(output_path)
-    print(f"✅ Präsentation erfolgreich erstellt: {output_path}")
+
+    # Create output directory if it doesn't exist
+    os.makedirs("output", exist_ok=True)
+
+    # Generate timestamp in format: YYYY_MM_DD___HH_MM_SS
+    timestamp = datetime.now().strftime("%Y_%m_%d___%H_%M_%S")
+
+    # Save timestamped version
+    timestamped_path = f"output/{timestamp}__Brain-Bridges.pptx"
+    prs.save(timestamped_path)
+    print(f"✅ Timestamped version created: {timestamped_path}")
+
+    # Save LATEST version (copy of timestamped file)
+    latest_path = "output/Brain-Bridges_LATEST.pptx"
+    shutil.copy2(timestamped_path, latest_path)
+    print(f"✅ Latest version updated: {latest_path}")
     print("")
-    print("📋 Slide Master Konfiguration:")
-    print("   ✓ Hintergrundfarbe: rgb(17, 24, 39)")
-    print("   ✓ Logo 'BRAIN BRIDGES' oben links (ohne v: xii)")
-    print("   ✓ Seitenzähler oben rechts")
+    print("📋 Slide Master Configuration:")
+    print("   ✓ Background color: rgb(17, 24, 39)")
+    print("   ✓ Logo 'BRAIN BRIDGES' top left (without v: xii)")
+    print("   ✓ Slide counter top right")
     print("")
-    print("🎯 Vorteile:")
-    print("   • Neue Folien übernehmen automatisch das Design")
-    print("   • Logo & Seitenzahl sind immer konsistent")
-    print("   • Master kann zentral angepasst werden")
+    print("🎯 Benefits:")
+    print("   • New slides automatically inherit the design")
+    print("   • Logo & slide numbers are always consistent")
+    print("   • Master can be centrally adjusted")
     print("")
-    print("💡 Tipp: In PowerPoint unter 'Ansicht' → 'Folienmaster'")
-    print("   kannst du den Master bearbeiten!")
+    print("💡 Tip: In PowerPoint under 'View' → 'Slide Master'")
+    print("   you can edit the master!")

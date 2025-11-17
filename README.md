@@ -1,27 +1,110 @@
 # Brain-Bridges PowerPoint Design System
 
-> 📋 **Human-readable design documentation**  
-> 🤖 **For AI/Claude Code:** See [CLAUDE.md](CLAUDE.md)  
-> Version: xii  
-> Last updated: 2025-11-17
+> 📋 **Human-readable design documentation** 🤖 **For AI/Claude Code:** See
+> [CLAUDE.md](CLAUDE.md) Version: xii Last updated: 2025-11-17
 
 ---
 
-## 🎨 Design-Tokens
+## 📖 Introduction
 
-### Farben (RGB)
+This project generates a complete PowerPoint presentation for "Brain-Bridges"
+using **python-pptx**, a Python library for creating and manipulating PowerPoint
+(.pptx) files programmatically. Unlike working directly in PowerPoint where you
+can define a master slide template and all slides inherit from it automatically,
+python-pptx has a significant limitation: **we cannot programmatically edit the
+master slide structure**.
+
+This means we need to apply consistent styling elements—like the logo, slide
+numbers, background colors, and fonts—to each individual slide through code. To
+maintain consistency, we've created the `apply_master_elements()` function that
+applies our "master" design to every slide we generate. This ensures that
+despite the programmatic limitation, our presentation maintains a cohesive,
+professional look across all 17 slides.
+
+The design system documented below serves as the single source of truth for
+colors, typography, layouts, and spacing. By following these tokens strictly, we
+ensure visual consistency whether slides are generated from scratch or modified
+later.
+
+---
+
+## 🚀 Getting Started & Deployment
+
+### Prerequisites
+
+- Python 3.x installed
+- python-pptx library (see requirements.txt)
+
+### Installation
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Running the Generator
+
+```bash
+# Generate a new PowerPoint presentation
+python3 generate_pptx.py
+```
+
+### Output & Versioning
+
+Each time you run the generator, a **new timestamped version** is created in the
+`output/` directory:
+
+```
+output/
+├── 2025_11_17___14_30_45__Brain-Bridges.pptx
+├── 2025_11_17___15_26_22__Brain-Bridges.pptx
+├── 2025_11_17___16_42_10__Brain-Bridges.pptx
+└── Brain-Bridges_LATEST.pptx  (copy of most recent)
+```
+
+**Timestamp Format:** `YYYY_MM_DD___HH_MM_SS`
+
+- Example: `2025_11_17___15_26_22__Brain-Bridges.pptx`
+- Generated: November 17, 2025 at 15:26:22
+
+**Why versioning?**
+
+- Every generation creates a new version
+- Never overwrites previous versions
+- Easy to track changes over time
+- `Brain-Bridges_LATEST.pptx` always points to the most recent version for
+  convenience
+
+### Workflow
+
+1. Edit `generate_pptx.py` or `slides_content.json` (future)
+2. Run: `python3 generate_pptx.py`
+3. Check: `output/Brain-Bridges_LATEST.pptx`
+4. If satisfied, commit changes to git
+
+---
+
+## 🎨 Design Tokens
+
+> **⚠️ Single Source of Truth:** All design values are defined in
+> [`design_tokens.py`](design_tokens.py)
+>
+> The values below are for **reference only**. To change colors, fonts, or
+> layouts, edit `design_tokens.py` directly.
+
+### Colors (RGB)
 
 ```css
-Hintergrund:
-  --background-dark: rgb(17, 24, 39)      /* Haupt-Hintergrund */
-  --background-light: rgb(31, 41, 55)     /* Karten/Boxen */
+Background:
+  --background-dark: rgb(17, 24, 39)      /* Main background */
+  --background-light: rgb(31, 41, 55)     /* Cards/boxes */
 
 Text:
-  --text-white: rgb(255, 255, 255)        /* Haupttext */
-  --text-gray: rgb(209, 213, 219)         /* Sekundärtext */
-  --text-gray-dark: rgb(167, 171, 175)    /* Seitenzahl (mit opacity) */
+  --text-white: rgb(255, 255, 255)        /* Primary text */
+  --text-gray: rgb(209, 213, 219)         /* Secondary text */
+  --text-gray-dark: rgb(167, 171, 175)    /* Slide numbers (with opacity) */
 
-Akzentfarben:
+Accent Colors:
   --accent-blue: rgb(77, 171, 247)        /* #4dabf7 */
   --accent-cyan: rgb(6, 182, 212)         /* #06b6d4 */
   --accent-green: rgb(16, 185, 129)       /* #10b981 */
@@ -32,136 +115,142 @@ Borders:
   --border-color: rgb(64, 64, 64)         /* #404040 */
 ```
 
-### Schriftarten
+### Typography
 
 ```
 Primary Font: System-UI / Segoe UI / Roboto / Helvetica Neue
-  - Verwendet für: Alle Texte außer Code
+  - Used for: All text except code
 
 Mono Font: SFMono-Regular / Consolas / Monaco
-  - Verwendet für: Code, technische Details
+  - Used for: Code, technical details
 ```
 
-### Schriftgrößen & Weights
+### Font Sizes & Weights
 
 ```
 Logo "BRAIN BRIDGES":
   - Size: 21pt
   - Weight: Bold (800)
-  - Color: Weiß
+  - Color: White
   - Letter-spacing: -0.5pt (tight)
-  - Position: 40px von oben, 40px von links
+  - Position: 40px from top, 40px from left
 
-Seitenzahl "##/17":
+Slide Number "##/17":
   - Size: 21pt
   - Weight: Normal (400)
   - Color: rgb(167, 171, 175)
-  - Position: 40px von oben, 40px von rechts
-  - Alignment: Rechtsbündig
+  - Position: 40px from top, 40px from right
+  - Alignment: Right-aligned
 
 Keywords (THE, AI, PARADOX):
   - Size: 72pt
-  - Weight: Light (200) - so dünn wie möglich!
+  - Weight: Light (200) - as thin as possible!
   - Letter-spacing: 2pt
   - Text-transform: UPPERCASE
-  - Vertical gap: ca. 100-120pt zwischen Wörtern
+  - Vertical gap: approx. 100-120pt between words
 ```
 
 ---
 
-## 📐 Master Slide Struktur
+## 📐 Master Slide Structure
 
-### Haupt-Master (alle Folien)
+> **📌 Note:** Layout values (positions, dimensions) are defined in
+> `design_tokens.py`
+
+### Main Master (all slides)
 
 ```
-Elemente die auf JEDER Folie erscheinen:
+Elements that appear on EVERY slide:
 
-1. Hintergrund:
-   - Farbe: rgb(17, 24, 39)
-   - Keine Verlaufe, solid fill
+1. Background:
+   - Color: rgb(17, 24, 39)
+   - Solid fill (currently no gradients used)
 
-2. Logo (oben links):
+2. Logo (top left):
    - Text: "BRAIN BRIDGES"
-   - Position: 0.28" von oben, 0.28" von links
-   - Größe: 21pt, Bold, Weiß
-   - WICHTIG: "(v: xii)" NICHT im Logo!
+   - Position: 0.28" from top, 0.28" from left
+   - Size: 21pt, Bold, White
+   - IMPORTANT: NO "(v: xii)" in the logo!
 
-3. Seitenzahl (oben rechts):
-   - Format: "01/17" (zweistellig mit führender Null)
-   - Position: 15.1" von links, 0.28" von oben
-   - Größe: 21pt, Normal, Grau
-   - Rechtsbündig
+3. Slide Number (top right):
+   - Format: "01/17" (two digits with leading zero)
+   - Position: 15.1" from left, 0.28" from top
+   - Size: 21pt, Normal, Gray
+   - Right-aligned
 ```
 
 ### Layout 1: "Keyword Slide"
 
 ```
-Verwendet für: Slides 1, 4, 6
-Beispiel: "THE AI PARADOX"
+Used for: Slides 1, 4, 6
+Example: "THE AI PARADOX"
 
-Content-Bereich:
-  - 3 separate Textboxen, vertikal zentriert
-  - Jede Box: 12" breit, zentriert horizontal
-  - Vertikaler Start: ca. 2.3" von oben
-  - Gap zwischen Boxen: ca. 1.4"
-  
-Keyword-Farben (rotieren):
-  Theme 1 (Problem): Rot → Blau → Grün
-  Theme 2 (Solution): Blau → Cyan → Grün  
-  Theme 3 (Tech): Lila → Blau → Cyan
+Content Area:
+  - 3 separate textboxes, vertically centered
+  - Each box: 12" wide, horizontally centered
+  - Vertical start: approx. 2.3" from top
+  - Gap between boxes: approx. 1.4"
+
+Keyword Colors (rotating):
+  Theme 1 (Problem): Red → Blue → Green
+  Theme 2 (Solution): Blue → Cyan → Green
+  Theme 3 (Tech): Purple → Blue → Cyan
 ```
 
 ### Layout 2: "Content Slide"
 
 ```
-Verwendet für: Slides 2, 3, 7-16
-Beispiel: "Organisations want AI"
+Used for: Slides 2, 3, 7-16
+Example: "Organisations want AI"
 
-Struktur:
-  - Fixed Header (top: 1", zentriert)
-    • Haupttitel: 48pt, Light, Blau
-    • Subtitle: 20pt, Bold, Rot oder Grau
-  
-  - Content-Bereich (beginnt bei ca. 3")
-    • Flexible Layouts (Grid, Liste, etc.)
-    • Max-Width: ca. 1400px = 14"
+Structure:
+  - Fixed Header (top: 1", centered)
+    • Main title: 48pt, Light, Blue
+    • Subtitle: 20pt, Bold, Red or Gray
+
+  - Content Area (starts at approx. 3")
+    • Flexible layouts (grid, list, etc.)
+    • Max-Width: approx. 1400px = 14"
 ```
 
 ### Layout 3: "Blank with Master"
 
 ```
-Leere Folie mit nur Logo und Seitenzahl
-Für custom Layouts oder Bilder
+Empty slide with only logo and slide number
+For custom layouts or images
 ```
 
 ---
 
-## 🎯 Keyword-Slide Farb-Themes
+## 🎯 Keyword-Slide Color Themes
 
 ### Theme 1: "Problem" (Slide 1)
+
 ```css
-Keyword 1: rgb(239, 68, 68)    /* Rot - THE */
-Keyword 2: rgb(77, 171, 247)   /* Blau - AI */
-Keyword 3: rgb(16, 185, 129)   /* Grün - PARADOX */
+Keyword 1: rgb(239, 68, 68)    /* Red - THE */
+Keyword 2: rgb(77, 171, 247)   /* Blue - AI */
+Keyword 3: rgb(16, 185, 129)   /* Green - PARADOX */
 ```
 
 ### Theme 2: "Solution" (Slide 4)
+
 ```css
-Keyword 1: rgb(77, 171, 247)   /* Blau - SOVEREIGN */
+Keyword 1: rgb(77, 171, 247)   /* Blue - SOVEREIGN */
 Keyword 2: rgb(6, 182, 212)    /* Cyan - AI */
-Keyword 3: rgb(16, 185, 129)   /* Grün - SOLUTION */
+Keyword 3: rgb(16, 185, 129)   /* Green - SOLUTION */
 ```
 
 ### Theme 3: "Tech" (Slide 6)
+
 ```css
-Keyword 1: rgb(139, 92, 246)   /* Lila - TECHNICAL */
-Keyword 2: rgb(77, 171, 247)   /* Blau - DEEP */
+Keyword 1: rgb(139, 92, 246)   /* Purple - TECHNICAL */
+Keyword 2: rgb(77, 171, 247)   /* Blue - DEEP */
 Keyword 3: rgb(6, 182, 212)    /* Cyan - DIVE */
 ```
 
 ---
 
-## 📦 Slide-Übersicht
+## 📦 Slide Overview
 
 ```
 01. THE AI PARADOX (Keyword Slide - Theme 1)
@@ -175,109 +264,3 @@ Keyword 3: rgb(6, 182, 212)    /* Cyan - DIVE */
 ```
 
 ---
-
-## 🔧 Arbeiten mit dem Master
-
-### Master bearbeiten in PowerPoint:
-
-1. **Master öffnen:**
-   ```
-   Ansicht → Folienmaster
-   (oder View → Slide Master)
-   ```
-
-2. **Haupt-Master auswählen:**
-   - Oberste/größte Folie in der linken Leiste
-   - Änderungen hier betreffen ALLE Folien
-
-3. **Layout-Master auswählen:**
-   - Unterhalb des Haupt-Masters
-   - Änderungen nur für diesen Typ
-
-4. **Master schließen:**
-   ```
-   Folienmaster → Masteransicht schließen
-   ```
-
-### Neue Folie mit Master erstellen:
-
-1. **Folie einfügen:**
-   ```
-   Start → Neue Folie → Layout auswählen
-   ```
-
-2. **Seitenzahl aktualisieren:**
-   - Automatisch wenn im Master konfiguriert
-   - Oder manuell die Zahl anpassen
-
----
-
-## 💡 Wichtige Hinweise
-
-### DO's ✅
-- Immer die exakten RGB-Werte verwenden
-- Konsistente Abstände einhalten
-- Schrift so dünn wie möglich (Light/200)
-- Letter-spacing für Keywords beachten
-- Seitenzahlen zweistellig mit führender Null
-
-### DON'Ts ❌
-- Keine "(v: xii)" im Logo auf normalen Folien
-- Keine Verlaufe im Hintergrund (nur solid)
-- Keine zusätzlichen Rahmen oder Schatten
-- Keywords nicht mit nur einem Textfeld machen
-- Font-Weight nicht zu schwer (max. Bold für Titel)
-
----
-
-## 📝 Checkliste für neue Folien
-
-```
-□ Hintergrundfarbe: rgb(17, 24, 39)
-□ Logo "BRAIN BRIDGES" oben links (21pt, Bold, Weiß)
-□ Seitenzahl "##/17" oben rechts (21pt, Normal, Grau)
-□ Richtige Farben aus Design-Tokens verwendet
-□ Schriftgrößen und -gewichte konsistent
-□ Abstände wie im Master definiert
-□ Keine zusätzlichen Effekte/Schatten
-```
-
----
-
-## 🔄 Für KI-Sessions
-
-Wenn du diese Präsentation mit Claude oder einem anderen KI-Tool bearbeitest:
-
-1. **Diese README hochladen!**
-2. Die aktuelle .pptx Datei hochladen
-3. Dem KI-Tool sagen: "Lies die README und halte dich an das Design-System"
-
-**Wichtige Info für KI:**
-- python-pptx kann Master-Slides NICHT direkt bearbeiten
-- Stattdessen: Master-Elemente auf jede Folie anwenden
-- Die Funktion `apply_master_elements(slide, slide_num)` verwenden
-- Alle Farben als RGB(r, g, b) angeben, nicht Hex
-
----
-
-## 📞 Quick Reference
-
-```python
-# Standard Master-Elemente anwenden (Python)
-def apply_master_elements(slide, slide_num, total=17):
-    # Hintergrund
-    slide.background.fill.solid()
-    slide.background.fill.fore_color.rgb = RGBColor(17, 24, 39)
-    
-    # Logo (0.28", 0.28", 21pt, Bold, Weiß)
-    # Seitenzahl (15.1", 0.28", 21pt, Normal, Grau)
-```
-
-```vba
-' VBA Referenz (falls benötigt)
-ActivePresentation.SlideMaster.Background.Fill.ForeColor.RGB = RGB(17, 24, 39)
-```
-
----
-
-**Ende der README** • Bei Fragen: Diese Datei aktualisieren und versionieren! 🚀
