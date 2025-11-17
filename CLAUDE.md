@@ -26,8 +26,19 @@ claude_pptx/
 ├── generate_pptx.py            # Main generator script (imports design_tokens)
 ├── slides_content.json         # Slide content data
 ├── requirements.txt            # Python dependencies
-└── output/
-    └── Brain-Bridges.pptx      # Generated file (gitignored)
+├── output/
+│   └── Brain-Bridges.pptx      # Generated file (gitignored)
+└── legacy/                      # ⚠️ DEPRECATED HTML version (see below)
+    ├── dist/
+    │   ├── index.html          # Complete HTML presentation (1242 lines)
+    │   ├── style.css           # CSS styles
+    │   ├── script.js           # JS logic
+    │   └── assets/             # Images, fonts, etc.
+    └── slides/
+        ├── slide-01/           # Individual slide components
+        │   ├── content.html    # Slide HTML
+        │   └── styles.css      # Slide-specific CSS
+        └── ... (slide-02 to slide-17)
 ```
 
 ---
@@ -369,6 +380,62 @@ apply_master_elements(slide, wrong_number)
 - Version history
 - Breaking changes
 - Migration guides
+
+---
+
+## 📦 Legacy HTML Version (Reference Only)
+
+> ⚠️ **DEPRECATED:** The `legacy/` folder contains the **abandoned HTML version** of this presentation.
+> **DO NOT use or modify these files!** They exist only for reference.
+
+### Why HTML was abandoned:
+- Initial approach: Build presentation using HTML/CSS/JS
+- Worked well initially: Design looked great, animations smooth
+- Problem: Small changes became cumbersome (editing HTML, rebuilding, etc.)
+- Solution: Back to PowerPoint via python-pptx for easier editing
+
+### Legacy folder structure:
+```bash
+legacy/
+├── dist/
+│   ├── index.html          # Complete presentation (1242 lines)
+│   ├── style.css           # All styles (76KB)
+│   ├── script.js           # Navigation logic (27KB)
+│   └── assets/             # Images, fonts, etc.
+└── slides/
+    ├── slide-01/           # Individual slide components
+    │   ├── content.html    # Slide HTML
+    │   └── styles.css      # Slide-specific styles
+    └── ... (slide-02 to slide-17, all 17 slides)
+```
+
+### What you can extract from legacy/:
+- ✅ **Content**: Text, titles, bullet points
+- ✅ **Layout ideas**: How elements were positioned
+- ✅ **Design intent**: Color choices, typography
+- ✅ **Complete slide list**: All 17 slides are there
+
+### How to use legacy files:
+```bash
+# View the complete HTML presentation
+open legacy/dist/index.html
+
+# Read individual slide content
+cat legacy/slides/slide-01/content.html
+
+# Extract content for recreation in PowerPoint
+# Example: Copy text from HTML and paste into generate_pptx.py
+```
+
+### ⚠️ Important notes:
+- **DO NOT** modify files in `legacy/`
+- **DO NOT** try to sync HTML with PowerPoint
+- **DO** use it as reference for content and design
+- **DO** extract text/structure when building new slides
+- The HTML version is frozen in time - it represents what was achieved before switching to PowerPoint
+
+### For detailed history:
+See README.md "Project History" section for full context.
 
 ---
 

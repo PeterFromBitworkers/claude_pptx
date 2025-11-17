@@ -28,6 +28,101 @@ later.
 
 ---
 
+## 📜 Project History & Evolution
+
+### From HTML to PowerPoint: Why We Switched
+
+This project has an interesting history. **The presentation was initially built using HTML, CSS, and JavaScript** as a modern, web-based slideshow. You can still find this complete HTML version in the `legacy/` folder.
+
+#### The HTML Approach (Phase 1: Abandoned)
+
+**What we built:**
+- Complete 17-slide presentation using HTML/CSS/JS
+- Modern design with smooth animations and transitions
+- Modular architecture: Each slide as a separate component
+- Built with web technologies for maximum flexibility
+
+**Structure of the HTML version:**
+```
+legacy/
+├── dist/
+│   ├── index.html          # Complete presentation (1242 lines)
+│   ├── style.css           # All CSS (76KB)
+│   ├── script.js           # Navigation & logic (27KB)
+│   └── assets/             # Images, fonts, icons
+└── slides/
+    ├── slide-01/
+    │   ├── content.html    # Individual slide HTML
+    │   └── styles.css      # Slide-specific styles
+    ├── slide-02/
+    └── ... (all 17 slides)
+```
+
+**What worked well:**
+- ✅ Beautiful design that matched our vision perfectly
+- ✅ Smooth animations and transitions
+- ✅ Responsive and modern
+- ✅ Easy to preview in any browser
+- ✅ Version control friendly (plain text files)
+
+**What didn't work:**
+- ❌ **Small changes became tedious**: Edit HTML → Rebuild → Test → Repeat
+- ❌ **Not a "real" PowerPoint**: Stakeholders wanted .pptx files
+- ❌ **Limited tooling**: No WYSIWYG editor for quick tweaks
+- ❌ **Collaboration friction**: Non-technical users couldn't easily contribute
+- ❌ **Presentation logistics**: Needed special setup to present (browser, local server, etc.)
+
+#### The PowerPoint Approach (Phase 2: Current)
+
+**The realization:**
+> *"The HTML version looks amazing, but we need the practicality of PowerPoint for easy editing and sharing."*
+
+**Why we switched back to PowerPoint:**
+1. **Easier iteration**: Small text/color changes don't require rebuilding
+2. **Universal format**: .pptx files work everywhere, no setup needed
+3. **Stakeholder compatibility**: Everyone knows PowerPoint
+4. **Best of both worlds**: Use python-pptx to generate PowerPoint programmatically
+
+**What we kept from the HTML version:**
+- ✅ The complete design system (colors, typography, layouts)
+- ✅ All content (text, structure, messaging)
+- ✅ The visual identity and branding
+- ✅ Layout principles and spacing rules
+
+**What changed:**
+- ✨ Output format: HTML → PowerPoint (.pptx)
+- ✨ Technology: Web stack → python-pptx
+- ✨ Editing: HTML/CSS → Python + Design tokens
+- ✨ Distribution: Browser → PowerPoint file
+
+### Using the Legacy HTML Version
+
+The `legacy/` folder is **kept for reference only**. You can use it to:
+
+1. **Extract content**: View the HTML slides to see complete text and structure
+2. **Reference designs**: See how layouts were implemented in HTML
+3. **Compare approaches**: Understand design decisions from the first iteration
+4. **Preserve history**: Document what was built before the switch
+
+**How to view the legacy HTML presentation:**
+```bash
+# Open in your browser
+open legacy/dist/index.html
+
+# Or use a local server
+cd legacy/dist
+python3 -m http.server 8000
+# Visit: http://localhost:8000
+```
+
+**Important:**
+- ⚠️ **DO NOT modify** files in `legacy/` - they are frozen in time
+- ⚠️ **DO NOT try to sync** HTML with PowerPoint - they are separate
+- ✅ **DO use as reference** when building new slides in PowerPoint
+- ✅ **DO extract content** when you need the exact text or layout details
+
+---
+
 ## 🚀 Getting Started & Deployment
 
 ### Prerequisites
