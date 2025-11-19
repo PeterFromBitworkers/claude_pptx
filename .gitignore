@@ -43,3 +43,10 @@ wheels/
 # Temporary files
 *.tmp
 .cache/
+
+# Font files (too large for git)
+fonts/
+# PowerPoint files (generated)
+*.pptx
+# Temporary generated files
+temp/

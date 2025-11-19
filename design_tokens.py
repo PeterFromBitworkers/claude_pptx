@@ -36,9 +36,25 @@ COLOR_BORDER = RGBColor(64, 64, 64)               # #404040
 # TYPOGRAPHY
 # =============================================================================
 
-# Font Families
-FONT_FAMILY_PRIMARY = "Inter"          # Primary font (modern sans-serif)
-FONT_FAMILY_FALLBACK = "Calibri"       # Fallback for PowerPoint
+# Font Families (Inter PostScript Names)
+# Using PostScript names (with hyphens) that PowerPoint recognizes
+FONT_FAMILY_INTER_THIN = "Inter-Thin"           # font-weight: 100
+FONT_FAMILY_INTER_EXTRALIGHT = "Inter-ExtraLight"  # font-weight: 200
+FONT_FAMILY_INTER_LIGHT = "Inter-Light"         # font-weight: 300
+FONT_FAMILY_INTER_REGULAR = "Inter-Regular"     # font-weight: 400
+FONT_FAMILY_INTER_MEDIUM = "Inter-Medium"       # font-weight: 500
+FONT_FAMILY_INTER_SEMIBOLD = "Inter-SemiBold"   # font-weight: 600
+FONT_FAMILY_INTER_BOLD = "Inter-Bold"           # font-weight: 700
+FONT_FAMILY_INTER_EXTRABOLD = "Inter-ExtraBold" # font-weight: 800
+FONT_FAMILY_INTER_BLACK = "Inter-Black"         # font-weight: 900
+
+# System Fonts
+FONT_FAMILY_MONOSPACE = "Menlo"                 # Monospace for subtitle
+FONT_FAMILY_FALLBACK = "Calibri"                # Fallback for PowerPoint
+
+# Default fonts for different content types
+FONT_FAMILY_PRIMARY = FONT_FAMILY_INTER_REGULAR  # Default body text
+FONT_FAMILY_KEYWORD = FONT_FAMILY_INTER_EXTRALIGHT  # Keyword slides (font-weight: 200)
 
 # Logo "BRAIN BRIDGES"
 FONT_SIZE_LOGO = Pt(21)
@@ -239,6 +255,92 @@ STAT_SOURCE_Y_OFFSET = 2.0                        # From card top
 STAT_SOURCE_HEIGHT = 0.4
 FONT_SIZE_STAT_SOURCE = Pt(9)
 FONT_COLOR_STAT_SOURCE = COLOR_TEXT_GRAY_DARK
+
+# =============================================================================
+# LAYOUT - HERO SLIDE (Slide 5)
+# =============================================================================
+
+# Hero Grid Layout (Left/Right Split using Golden Ratio)
+HERO_LEFT_X = Inches(1)
+HERO_LEFT_Y = Inches(1.8)
+HERO_LEFT_WIDTH = Inches(7.5)  # ~47% of slide (golden ratio-ish)
+HERO_RIGHT_X = Inches(9)
+HERO_RIGHT_Y = Inches(1.4)  # Higher to align with title top
+HERO_RIGHT_WIDTH = Inches(6.5)
+
+# Hero Title & Subtitle
+HERO_TITLE_X = HERO_LEFT_X
+HERO_TITLE_Y = HERO_LEFT_Y
+HERO_TITLE_WIDTH = HERO_LEFT_WIDTH
+HERO_TITLE_HEIGHT = Inches(1.2)
+FONT_SIZE_HERO_TITLE = Pt(64)
+FONT_FAMILY_HERO_TITLE = FONT_FAMILY_INTER_EXTRABOLD  # font-weight: 800 in HTML
+FONT_BOLD_HERO_TITLE = False  # Don't use PowerPoint bold, font weight is in the font itself
+FONT_LETTER_SPACING_HERO_TITLE = Pt(-0.5)  # Negative spacing like HTML (-0.025em)
+
+HERO_SUBTITLE_X = HERO_LEFT_X
+HERO_SUBTITLE_Y = Inches(3.1)
+HERO_SUBTITLE_WIDTH = HERO_LEFT_WIDTH
+HERO_SUBTITLE_HEIGHT = Inches(0.4)
+FONT_SIZE_HERO_SUBTITLE = Pt(18)
+FONT_FAMILY_HERO_SUBTITLE = FONT_FAMILY_MONOSPACE  # Monospace font (Menlo) like HTML
+FONT_BOLD_HERO_SUBTITLE = True
+FONT_COLOR_HERO_SUBTITLE = COLOR_ACCENT_BLUE
+
+# Hero Features List
+HERO_FEATURES_X = HERO_LEFT_X
+HERO_FEATURES_Y_START = 3.8  # In inches (float for calculation)
+HERO_FEATURES_WIDTH = HERO_LEFT_WIDTH
+HERO_FEATURE_HEIGHT = 0.45   # Height per feature item
+HERO_FEATURE_GAP = 0.48      # Gap between features
+FONT_SIZE_HERO_FEATURE = Pt(15)
+FONT_FAMILY_HERO_FEATURE = FONT_FAMILY_INTER_LIGHT  # font-weight: 300 in HTML
+FONT_COLOR_HERO_FEATURE = COLOR_TEXT_WHITE
+
+# Feature checkmark icon (PNG image)
+HERO_FEATURE_CHECKMARK_ICON = "assets/icons/checkmark.png"
+HERO_FEATURE_ICON_SIZE = Inches(0.32)  # Icon size
+
+# Hero Product Image
+HERO_IMAGE_X = HERO_RIGHT_X
+HERO_IMAGE_Y = HERO_RIGHT_Y  # Align with title top
+HERO_IMAGE_WIDTH = HERO_RIGHT_WIDTH
+HERO_IMAGE_HEIGHT = Inches(5.5)
+HERO_IMAGE_PATH = "assets/blue.png"  # Default hardware image
+HERO_IMAGE_BORDER_COLOR = COLOR_ACCENT_BLUE
+HERO_IMAGE_BORDER_COLOR_RGB = (77, 171, 247)  # RGB tuple for PIL (same as COLOR_ACCENT_BLUE)
+HERO_IMAGE_BORDER_WIDTH = Pt(2.5)
+HERO_IMAGE_CORNER_RADIUS_PX = 30  # Corner radius in pixels for PIL image processing
+
+# Status Badge (top right INSIDE image with margin)
+HERO_STATUS_MARGIN = Inches(0.2)  # Margin from image edge
+HERO_STATUS_WIDTH = Inches(1.1)
+HERO_STATUS_HEIGHT = Inches(0.35)
+FONT_SIZE_HERO_STATUS = Pt(11)
+FONT_FAMILY_HERO_STATUS = FONT_FAMILY_INTER_MEDIUM  # font-weight: 500 in HTML
+FONT_COLOR_HERO_STATUS = COLOR_ACCENT_CYAN
+HERO_STATUS_TEXT = "Ready"
+HERO_STATUS_ICON = "assets/icons/plug.png"  # Plug icon
+HERO_STATUS_ICON_SIZE = Inches(0.24)  # Larger icon
+
+# Tech Specs (bottom INSIDE image with margins)
+HERO_SPECS_MARGIN = Inches(0.2)  # Margin from image edge
+HERO_SPECS_HEIGHT = Inches(0.85)
+HERO_SPECS_GAP = Inches(0.12)  # Gap between cards
+FONT_SIZE_HERO_SPEC_LABEL = Pt(14)  # Increased from 8
+FONT_FAMILY_HERO_SPEC_LABEL = FONT_FAMILY_INTER_SEMIBOLD  # font-weight: 600 in HTML
+FONT_SIZE_HERO_SPEC_VALUE = Pt(18)  # Increased from 11
+FONT_FAMILY_HERO_SPEC_VALUE = FONT_FAMILY_INTER_BOLD  # font-weight: 700 in HTML
+FONT_COLOR_HERO_SPEC_LABEL = COLOR_TEXT_GRAY
+FONT_COLOR_HERO_SPEC_VALUE = COLOR_ACCENT_BLUE
+FONT_BOLD_HERO_SPEC_VALUE = False  # Don't use PowerPoint bold, font weight is in the font itself
+
+# Tech Specs Data (Configuration 1: Blue)
+HERO_SPECS_CONFIG = {
+    "processor": "M4 Pro 20-core",
+    "memory": "64 GB memory",
+    "users": "~20 Users"
+}
 
 # =============================================================================
 # LAYOUT - PLACEHOLDER SLIDES
