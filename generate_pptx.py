@@ -134,12 +134,13 @@ def create_slide_1(prs):
         tf.text = keyword["text"]
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.name = FONT_FAMILY_KEYWORD  # Inter-ExtraLight (font-weight: 200)
         p.font.size = FONT_SIZE_KEYWORD
         p.font.bold = FONT_BOLD_KEYWORD
         p.font.color.rgb = keyword["color"]
 
+        # CRITICAL: Font name must be set at RUN level!
         for run in p.runs:
+            run.font.name = FONT_FAMILY_KEYWORD  # Inter ExtraLight (font-weight: 200)
             run.font.character_spacing = FONT_LETTER_SPACING_KEYWORD
 
     return prs
@@ -161,7 +162,10 @@ def create_slide_2(prs):
     p.font.size = FONT_SIZE_CONTENT_TITLE
     p.font.bold = FONT_BOLD_CONTENT_TITLE
     p.font.color.rgb = FONT_COLOR_CONTENT_TITLE
-    p.font.name = FONT_FAMILY_PRIMARY
+
+    # CRITICAL: Font name must be set at RUN level!
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_TITLE  # Inter ExtraLight (font-weight: 200)
 
     # Subtitle
     subtitle_box = slide.shapes.add_textbox(
@@ -175,7 +179,10 @@ def create_slide_2(prs):
     p.font.size = FONT_SIZE_CONTENT_SUBTITLE
     p.font.bold = FONT_BOLD_CONTENT_SUBTITLE
     p.font.color.rgb = FONT_COLOR_CONTENT_SUBTITLE_ALERT
-    p.font.name = FONT_FAMILY_PRIMARY
+
+    # CRITICAL: Font name must be set at RUN level!
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_SUBTITLE  # Menlo (monospace)
 
     # Problem items grid with PNG icons
     problems = [
@@ -206,8 +213,12 @@ def create_slide_2(prs):
     ]
 
     for i, problem in enumerate(problems):
-        x = Inches(PROBLEM_GRID_X_POSITIONS[i])
-        y_start = Inches(PROBLEM_GRID_Y_START)
+        # 2x2 Grid Layout: Calculate row and column
+        row = i // 2  # 0 or 1 (top row or bottom row)
+        col = i % 2   # 0 or 1 (left column or right column)
+
+        x = Inches(PROBLEM_GRID_X_POSITIONS[col])
+        y_start = Inches(PROBLEM_GRID_Y_POSITIONS[row])
         box_width = Inches(PROBLEM_GRID_BOX_WIDTH)
         box_height = Inches(PROBLEM_GRID_BOX_HEIGHT)
 
@@ -249,7 +260,10 @@ def create_slide_2(prs):
         p.font.size = FONT_SIZE_PROBLEM_TITLE
         p.font.bold = FONT_BOLD_PROBLEM_TITLE
         p.font.color.rgb = FONT_COLOR_PROBLEM_TITLE
-        p.font.name = FONT_FAMILY_PRIMARY
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_TITLE  # Inter ExtraLight (font-weight: 200)
 
         # Description
         desc_box = slide.shapes.add_textbox(
@@ -262,8 +276,12 @@ def create_slide_2(prs):
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
         p.font.size = FONT_SIZE_PROBLEM_DESC
+        p.font.bold = FONT_BOLD_PROBLEM_DESC
         p.font.color.rgb = FONT_COLOR_PROBLEM_DESC
-        p.font.name = FONT_FAMILY_PRIMARY
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_TITLE  # Same as title (Inter ExtraLight)
 
         # Violation
         viol_box = slide.shapes.add_textbox(
@@ -277,8 +295,11 @@ def create_slide_2(prs):
         p.font.size = FONT_SIZE_PROBLEM_VIOLATION
         p.font.bold = FONT_BOLD_PROBLEM_VIOLATION
         p.font.color.rgb = FONT_COLOR_PROBLEM_VIOLATION
-        p.font.name = FONT_FAMILY_PRIMARY
-    
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_VIOLATION  # Menlo (monospace)
+
     return prs
 
 def create_slide_3(prs):
@@ -298,7 +319,10 @@ def create_slide_3(prs):
     p.font.size = FONT_SIZE_CONTENT_TITLE
     p.font.bold = FONT_BOLD_CONTENT_TITLE
     p.font.color.rgb = FONT_COLOR_CONTENT_TITLE
-    p.font.name = FONT_FAMILY_PRIMARY
+
+    # CRITICAL: Font name must be set at RUN level!
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_TITLE  # Inter ExtraLight (font-weight: 200)
 
     # Subtitle
     subtitle_box = slide.shapes.add_textbox(
@@ -311,8 +335,11 @@ def create_slide_3(prs):
     p.alignment = PP_ALIGN.CENTER
     p.font.size = FONT_SIZE_CONTENT_SUBTITLE
     p.font.bold = FONT_BOLD_CONTENT_SUBTITLE
-    p.font.color.rgb = FONT_COLOR_CONTENT_SUBTITLE_NORMAL
-    p.font.name = FONT_FAMILY_PRIMARY
+    p.font.color.rgb = FONT_COLOR_CONTENT_SUBTITLE_ALERT  # Red like Slide 2
+
+    # CRITICAL: Font name must be set at RUN level!
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_SUBTITLE  # Menlo monospace like Slide 2
 
     # Large stat: $1.7T
     large_stat_box = slide.shapes.add_textbox(
@@ -326,7 +353,10 @@ def create_slide_3(prs):
     p.font.size = FONT_SIZE_LARGE_STAT_NUMBER
     p.font.bold = False
     p.font.color.rgb = COLOR_ACCENT_CYAN
-    p.font.name = FONT_FAMILY_PRIMARY
+
+    # CRITICAL: Font name must be set at RUN level!
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_STAT_NUMBER  # Inter ExtraLight (font-weight: 200)
 
     # Large stat label
     large_stat_label_box = slide.shapes.add_textbox(
@@ -340,7 +370,10 @@ def create_slide_3(prs):
     p.font.size = FONT_SIZE_LARGE_STAT_LABEL
     p.font.bold = False
     p.font.color.rgb = COLOR_TEXT_WHITE
-    p.font.name = FONT_FAMILY_PRIMARY
+
+    # CRITICAL: Font name must be set at RUN level!
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_STAT_LABEL  # Inter Light (font-weight: 300)
 
     # Stat cards (4 cards in a row)
     stats = [
@@ -396,7 +429,10 @@ def create_slide_3(prs):
         p.font.size = FONT_SIZE_STAT_NUMBER
         p.font.bold = False
         p.font.color.rgb = COLOR_ACCENT_CYAN
-        p.font.name = FONT_FAMILY_PRIMARY
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_STAT_NUMBER  # Inter ExtraLight (font-weight: 200)
 
         # Stat label
         label_box = slide.shapes.add_textbox(
@@ -411,7 +447,10 @@ def create_slide_3(prs):
         p.font.size = FONT_SIZE_STAT_LABEL
         p.font.bold = False
         p.font.color.rgb = COLOR_TEXT_WHITE
-        p.font.name = FONT_FAMILY_PRIMARY
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_STAT_LABEL  # Inter Light (font-weight: 300)
 
         # Stat source
         source_box = slide.shapes.add_textbox(
@@ -426,7 +465,10 @@ def create_slide_3(prs):
         p.font.size = FONT_SIZE_STAT_SOURCE
         p.font.bold = False
         p.font.color.rgb = FONT_COLOR_STAT_SOURCE
-        p.font.name = FONT_FAMILY_PRIMARY
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_PRIMARY  # Inter Regular (small body text)
 
     return prs
 
@@ -453,12 +495,13 @@ def create_slide_4(prs):
         tf.text = keyword["text"]
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.name = FONT_FAMILY_KEYWORD  # Inter-ExtraLight (font-weight: 200)
         p.font.size = FONT_SIZE_KEYWORD
         p.font.bold = FONT_BOLD_KEYWORD
         p.font.color.rgb = keyword["color"]
 
+        # CRITICAL: Font name must be set at RUN level!
         for run in p.runs:
+            run.font.name = FONT_FAMILY_KEYWORD  # Inter ExtraLight (font-weight: 200)
             run.font.character_spacing = FONT_LETTER_SPACING_KEYWORD
 
     return prs
@@ -717,32 +760,38 @@ def create_slide_5(prs):
 
         # Label (top)
         label_box = slide.shapes.add_textbox(
-            x_pos, specs_y + Inches(0.15),
+            x_pos, specs_y + Inches(0.18),
             single_card_width, Inches(0.25)
         )
         tf = label_box.text_frame
         tf.text = label
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.name = FONT_FAMILY_HERO_SPEC_LABEL  # Inter-SemiBold (font-weight: 600)
         p.font.size = FONT_SIZE_HERO_SPEC_LABEL
         p.font.color.rgb = FONT_COLOR_HERO_SPEC_LABEL
         p.font.bold = True
 
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_HERO_SPEC_LABEL  # Inter-SemiBold (font-weight: 600)
+
         # Value (bottom)
         value_box = slide.shapes.add_textbox(
-            x_pos, specs_y + Inches(0.45),
-            single_card_width, Inches(0.35)
+            x_pos, specs_y + Inches(0.48),
+            single_card_width, Inches(0.4)
         )
         tf = value_box.text_frame
         tf.text = value
         tf.word_wrap = True
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.font.name = FONT_FAMILY_HERO_SPEC_VALUE  # Inter-Bold (font-weight: 700)
         p.font.size = FONT_SIZE_HERO_SPEC_VALUE
         p.font.color.rgb = FONT_COLOR_HERO_SPEC_VALUE
         p.font.bold = FONT_BOLD_HERO_SPEC_VALUE
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_HERO_SPEC_VALUE  # Inter-Bold (font-weight: 700)
 
     return prs
 

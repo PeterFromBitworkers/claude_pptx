@@ -53,8 +53,13 @@ FONT_FAMILY_MONOSPACE = "Menlo"                 # Monospace for subtitle
 FONT_FAMILY_FALLBACK = "Calibri"                # Fallback for PowerPoint
 
 # Default fonts for different content types
-FONT_FAMILY_PRIMARY = FONT_FAMILY_INTER_REGULAR  # Default body text
-FONT_FAMILY_KEYWORD = FONT_FAMILY_INTER_EXTRALIGHT  # Keyword slides (font-weight: 200)
+FONT_FAMILY_PRIMARY = FONT_FAMILY_INTER_REGULAR      # Default body text (font-weight: 400)
+FONT_FAMILY_KEYWORD = FONT_FAMILY_INTER_EXTRALIGHT   # Keyword slides (font-weight: 200)
+FONT_FAMILY_TITLE = FONT_FAMILY_INTER_EXTRALIGHT     # Content slide titles (font-weight: 200)
+FONT_FAMILY_SUBTITLE = FONT_FAMILY_MONOSPACE         # Subtitles (Menlo monospace)
+FONT_FAMILY_VIOLATION = FONT_FAMILY_MONOSPACE        # Violation text (Menlo monospace)
+FONT_FAMILY_STAT_NUMBER = FONT_FAMILY_INTER_EXTRALIGHT  # Large stat numbers (font-weight: 200)
+FONT_FAMILY_STAT_LABEL = FONT_FAMILY_INTER_LIGHT        # Stat labels (font-weight: 300)
 
 # Logo "BRAIN BRIDGES"
 FONT_SIZE_LOGO = Pt(21)
@@ -73,28 +78,28 @@ FONT_BOLD_KEYWORD = False
 FONT_LETTER_SPACING_KEYWORD = Pt(2)
 
 # Content Slide - Title
-FONT_SIZE_CONTENT_TITLE = Pt(48)
+FONT_SIZE_CONTENT_TITLE = Pt(44)          # Reduced from 48 for more spacing
 FONT_BOLD_CONTENT_TITLE = False
 FONT_COLOR_CONTENT_TITLE = COLOR_ACCENT_BLUE
 
 # Content Slide - Subtitle
-FONT_SIZE_CONTENT_SUBTITLE = Pt(20)
+FONT_SIZE_CONTENT_SUBTITLE = Pt(18)       # Reduced from 20 for more spacing
 FONT_BOLD_CONTENT_SUBTITLE = True
 FONT_COLOR_CONTENT_SUBTITLE_ALERT = COLOR_ACCENT_RED
 FONT_COLOR_CONTENT_SUBTITLE_NORMAL = COLOR_TEXT_GRAY
 
 # Problem Grid - Title
-FONT_SIZE_PROBLEM_TITLE = Pt(16)
+FONT_SIZE_PROBLEM_TITLE = Pt(15)          # Reduced from 16 for more spacing
 FONT_BOLD_PROBLEM_TITLE = True
 FONT_COLOR_PROBLEM_TITLE = COLOR_TEXT_WHITE
 
-# Problem Grid - Description
-FONT_SIZE_PROBLEM_DESC = Pt(12)
-FONT_BOLD_PROBLEM_DESC = False
-FONT_COLOR_PROBLEM_DESC = COLOR_TEXT_GRAY
+# Problem Grid - Description (same formatting as title)
+FONT_SIZE_PROBLEM_DESC = Pt(15)           # Same as title
+FONT_BOLD_PROBLEM_DESC = True             # Same as title
+FONT_COLOR_PROBLEM_DESC = COLOR_TEXT_WHITE  # Same as title (white instead of gray)
 
 # Problem Grid - Violation
-FONT_SIZE_PROBLEM_VIOLATION = Pt(9)
+FONT_SIZE_PROBLEM_VIOLATION = Pt(11)      # Increased for better visibility
 FONT_BOLD_PROBLEM_VIOLATION = True
 FONT_COLOR_PROBLEM_VIOLATION = COLOR_ACCENT_RED
 
@@ -134,8 +139,8 @@ SLIDE_NUMBER_HEIGHT = Inches(0.4)
 KEYWORD_BOX_X = Inches(2)
 KEYWORD_BOX_WIDTH = Inches(12)
 KEYWORD_BOX_HEIGHT = Inches(1.2)
-KEYWORD_Y_START = 2.3  # Inches (float for calculation)
-KEYWORD_Y_GAP = 1.4    # Inches (float for calculation)
+KEYWORD_Y_START = 2.1  # Inches (float for calculation) - moved up slightly
+KEYWORD_Y_GAP = 1.9    # Inches (float for calculation) - increased spacing between words
 
 # Keyword Color Themes
 KEYWORD_THEME_PROBLEM = [
@@ -180,10 +185,16 @@ CONTENT_MAX_WIDTH = Inches(14)
 # LAYOUT - PROBLEM GRID (Slide 2)
 # =============================================================================
 
-PROBLEM_GRID_X_POSITIONS = [1, 4.5, 8, 11.5]  # In inches
-PROBLEM_GRID_Y_START = 3                      # In inches
-PROBLEM_GRID_BOX_WIDTH = 3.2                  # In inches
-PROBLEM_GRID_BOX_HEIGHT = 3.2                 # In inches
+# 2x2 Grid Layout (like Legacy HTML)
+# Slide is 16" wide x 9" tall
+# Perfect symmetry: horizontal gap = vertical gap, top margin = bottom margin
+PROBLEM_GRID_X_POSITIONS = [2.45, 8.35]       # In inches (2 columns: left, right) - symmetric
+PROBLEM_GRID_Y_POSITIONS = [2.65, 5.85]       # In inches (2 rows: top, bottom) - symmetric
+PROBLEM_GRID_BOX_WIDTH = 5.2                  # In inches
+PROBLEM_GRID_BOX_HEIGHT = 2.5                 # In inches
+# Gap between cards: 0.7" (horizontal and vertical)
+# Top margin (subtitle to cards): 0.65"
+# Bottom margin (cards to slide end): 0.65"
 
 # Problem Grid Card Styling
 PROBLEM_CARD_FILL_COLOR = COLOR_BACKGROUND_LIGHT
@@ -191,21 +202,21 @@ PROBLEM_CARD_BORDER_COLOR = RGBColor(80, 80, 80)  # Subtle gray (#505050)
 PROBLEM_CARD_BORDER_WIDTH = Pt(0.75)               # Thinner for subtle look
 PROBLEM_CARD_CORNER_RADIUS = Inches(0.15)          # Rounded corners (12px equivalent)
 
-# Problem Grid Icon
-PROBLEM_ICON_Y_OFFSET = 0.4                   # From y_start
-PROBLEM_ICON_HEIGHT = 0.6
-PROBLEM_ICON_WIDTH = Inches(0.6)              # Icon display size
-PROBLEM_ICON_X_OFFSET = 1.3                   # Center offset for icons
+# Problem Grid Icon (centered in smaller card)
+PROBLEM_ICON_Y_OFFSET = 0.25                  # From y_start
+PROBLEM_ICON_HEIGHT = 0.55
+PROBLEM_ICON_WIDTH = Inches(0.55)             # Icon display size (slightly smaller)
+PROBLEM_ICON_X_OFFSET = 2.325                 # Center offset for 5.2" wide card: (5.2 - 0.55) / 2
 
-# Problem Grid Item Layout
-PROBLEM_TITLE_Y_OFFSET = 1.1                  # From y_start (moved down for icon)
-PROBLEM_TITLE_HEIGHT = 0.5
+# Problem Grid Item Layout (adjusted for 2.5" card height)
+PROBLEM_TITLE_Y_OFFSET = 0.9                  # From y_start (moved down for icon)
+PROBLEM_TITLE_HEIGHT = 0.35
 
-PROBLEM_DESC_Y_OFFSET = 1.7                   # From y_start
-PROBLEM_DESC_HEIGHT = 1.0
+PROBLEM_DESC_Y_OFFSET = 1.3                   # From y_start
+PROBLEM_DESC_HEIGHT = 0.65
 
-PROBLEM_VIOLATION_Y_OFFSET = 2.5              # From y_start
-PROBLEM_VIOLATION_HEIGHT = 0.4
+PROBLEM_VIOLATION_Y_OFFSET = 2.0              # From y_start
+PROBLEM_VIOLATION_HEIGHT = 0.28
 
 # Problem Grid Icon Paths (PNG files, converted from SVG)
 PROBLEM_ICONS = {
@@ -221,20 +232,20 @@ PROBLEM_ICONS = {
 
 # Large Stat Display ($1.7T)
 LARGE_STAT_X = Inches(1)
-LARGE_STAT_Y = Inches(2.6)
+LARGE_STAT_Y = Inches(2.8)                        # More space after subtitle
 LARGE_STAT_WIDTH = Inches(14)
-LARGE_STAT_HEIGHT = Inches(1.8)
-LARGE_STAT_LABEL_Y = Inches(3.9)                  # Separate Y for label (below number)
-FONT_SIZE_LARGE_STAT_NUMBER = Pt(96)
-FONT_SIZE_LARGE_STAT_LABEL = Pt(16)
+LARGE_STAT_HEIGHT = Inches(1.6)                   # Slightly smaller
+LARGE_STAT_LABEL_Y = Inches(4.3)                  # More space between $1.7T and label
+FONT_SIZE_LARGE_STAT_NUMBER = Pt(88)              # Reduced from 96 for better spacing
+FONT_SIZE_LARGE_STAT_LABEL = Pt(15)               # Reduced from 16
 
 # Stat Cards (4 cards in a row, centered)
 # Calculation: 4 cards * 2.9" = 11.6", 3 gaps * 0.3" = 0.9", total = 12.5"
 # Center: (16 - 12.5) / 2 = 1.75" from left
-STAT_CARD_Y_START = 5.0                           # In inches
+STAT_CARD_Y_START = 5.2                           # In inches - more space from large stat
 STAT_CARD_X_POSITIONS = [1.75, 4.95, 8.15, 11.35] # In inches (centered)
 STAT_CARD_WIDTH = 2.9                             # In inches
-STAT_CARD_HEIGHT = 2.5                            # In inches
+STAT_CARD_HEIGHT = 2.3                            # In inches - slightly smaller for better spacing
 
 # Stat Card Styling
 STAT_CARD_FILL_COLOR = COLOR_BACKGROUND_LIGHT
@@ -242,19 +253,19 @@ STAT_CARD_BORDER_COLOR = RGBColor(80, 80, 80)     # Subtle gray
 STAT_CARD_BORDER_WIDTH = Pt(0.75)
 STAT_CARD_CORNER_RADIUS = Inches(0.15)            # Rounded corners
 
-# Stat Card Text Layout
-STAT_NUMBER_Y_OFFSET = 0.4                        # From card top
-STAT_NUMBER_HEIGHT = 0.8
-FONT_SIZE_STAT_NUMBER = Pt(64)
+# Stat Card Text Layout (adjusted for 2.3" card height)
+STAT_NUMBER_Y_OFFSET = 0.3                        # From card top - more space at top
+STAT_NUMBER_HEIGHT = 0.7
+FONT_SIZE_STAT_NUMBER = Pt(58)                    # Reduced from 64 for better spacing
 
-STAT_LABEL_Y_OFFSET = 1.3                         # From card top
+STAT_LABEL_Y_OFFSET = 1.2                         # More space between number and label
 STAT_LABEL_HEIGHT = 0.6
-FONT_SIZE_STAT_LABEL = Pt(14)
+FONT_SIZE_STAT_LABEL = Pt(13)                     # Reduced from 14 for better spacing
 
-STAT_SOURCE_Y_OFFSET = 2.0                        # From card top
+STAT_SOURCE_Y_OFFSET = 1.85                       # Adjusted for increased label offset
 STAT_SOURCE_HEIGHT = 0.4
-FONT_SIZE_STAT_SOURCE = Pt(9)
-FONT_COLOR_STAT_SOURCE = COLOR_TEXT_GRAY_DARK
+FONT_SIZE_STAT_SOURCE = Pt(9)                     # Keep same size for readability
+FONT_COLOR_STAT_SOURCE = COLOR_TEXT_GRAY_DARK     # Gray for subtle appearance
 
 # =============================================================================
 # LAYOUT - HERO SLIDE (Slide 5)
@@ -325,11 +336,11 @@ HERO_STATUS_ICON_SIZE = Inches(0.24)  # Larger icon
 
 # Tech Specs (bottom INSIDE image with margins)
 HERO_SPECS_MARGIN = Inches(0.2)  # Margin from image edge
-HERO_SPECS_HEIGHT = Inches(0.85)
+HERO_SPECS_HEIGHT = Inches(0.95)  # Increased from 0.85 for better text fit
 HERO_SPECS_GAP = Inches(0.12)  # Gap between cards
-FONT_SIZE_HERO_SPEC_LABEL = Pt(14)  # Increased from 8
+FONT_SIZE_HERO_SPEC_LABEL = Pt(10)  # Reduced from 14 to fit better in cards
 FONT_FAMILY_HERO_SPEC_LABEL = FONT_FAMILY_INTER_SEMIBOLD  # font-weight: 600 in HTML
-FONT_SIZE_HERO_SPEC_VALUE = Pt(18)  # Increased from 11
+FONT_SIZE_HERO_SPEC_VALUE = Pt(14)  # Reduced from 18 to fit better in cards
 FONT_FAMILY_HERO_SPEC_VALUE = FONT_FAMILY_INTER_BOLD  # font-weight: 700 in HTML
 FONT_COLOR_HERO_SPEC_LABEL = COLOR_TEXT_GRAY
 FONT_COLOR_HERO_SPEC_VALUE = COLOR_ACCENT_BLUE
