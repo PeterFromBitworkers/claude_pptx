@@ -354,6 +354,107 @@ HERO_SPECS_CONFIG = {
 }
 
 # =============================================================================
+# LAYOUT - TOKENIZATION INTRO SLIDE (Slide 8)
+# =============================================================================
+
+# "A Sample from legal domain:" title at top
+TOKENIZATION_TITLE_X = Inches(1)
+TOKENIZATION_TITLE_Y = Inches(2.5)
+TOKENIZATION_TITLE_WIDTH = Inches(14)
+TOKENIZATION_TITLE_HEIGHT = Inches(1)
+FONT_SIZE_TOKENIZATION_TITLE = Pt(56)             # 3.5rem equivalent
+FONT_FAMILY_TOKENIZATION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT  # font-weight: 200
+FONT_COLOR_TOKENIZATION_TITLE = COLOR_TEXT_WHITE
+
+# Arrow down
+TOKENIZATION_ARROW_X = Inches(7.5)
+TOKENIZATION_ARROW_Y = Inches(3.8)
+TOKENIZATION_ARROW_WIDTH = Inches(1)
+TOKENIZATION_ARROW_HEIGHT = Inches(0.8)
+TOKENIZATION_ARROW_TEXT = "↓"
+FONT_SIZE_TOKENIZATION_ARROW = Pt(64)             # 4rem equivalent
+FONT_COLOR_TOKENIZATION_ARROW = COLOR_ACCENT_BLUE
+
+# Token boxes in horizontal row (5 tokens)
+TOKENIZATION_TOKENS_Y = Inches(5.2)
+TOKENIZATION_TOKEN_HEIGHT = Inches(0.9)
+TOKENIZATION_TOKEN_GAP = Inches(0.35)             # Gap between tokens
+# Calculate x positions for 5 tokens centered
+# Each token width varies, but we'll use consistent width
+TOKENIZATION_TOKEN_WIDTH = Inches(2.3)
+# Total width needed: 5 * 2.3 + 4 * 0.35 = 11.5 + 1.4 = 12.9
+# Center: (16 - 12.9) / 2 = 1.55
+TOKENIZATION_TOKEN_X_START = Inches(1.55)         # In inches (converted to Inches object)
+
+# Token box styling
+TOKENIZATION_TOKEN_FILL_COLOR = RGBColor(31, 41, 55)
+TOKENIZATION_TOKEN_BORDER_COLOR = COLOR_ACCENT_BLUE
+TOKENIZATION_TOKEN_BORDER_WIDTH = Pt(2)
+TOKENIZATION_TOKEN_CORNER_RADIUS = Inches(0.1)    # 12px equivalent
+FONT_SIZE_TOKENIZATION_TOKEN = Pt(29)             # 1.8rem equivalent
+FONT_FAMILY_TOKENIZATION_TOKEN = FONT_FAMILY_INTER_EXTRALIGHT  # font-weight: 200
+FONT_COLOR_TOKENIZATION_TOKEN = COLOR_TEXT_WHITE
+
+# Token data for slide 8
+TOKENIZATION_TOKENS = ["Wit", "nesses", "must", "tell", "nothing"]
+
+# =============================================================================
+# LAYOUT - VECTOR EMBEDDINGS SLIDE (Slide 9)
+# =============================================================================
+
+# Tokenization Row Layout (5 rows: Wit, nesses, must, tell, nothing)
+# Each row has: [Token Box] → [Vector Grid with 6 cells]
+TOKEN_ROW_Y_START = 2.3                           # In inches - start position
+TOKEN_ROW_GAP = 1.1                               # In inches - gap between rows
+TOKEN_ROW_HEIGHT = 0.75                           # In inches - height per row
+
+# Token Box (left side)
+TOKEN_BOX_X = Inches(2.2)
+TOKEN_BOX_WIDTH = Inches(2.5)
+TOKEN_BOX_HEIGHT = Inches(0.75)
+TOKEN_BOX_FILL_COLOR = RGBColor(31, 41, 55)       # rgba(31, 41, 55, 0.8) from CSS
+TOKEN_BOX_BORDER_COLOR = COLOR_ACCENT_BLUE        # var(--accent-color)
+TOKEN_BOX_BORDER_WIDTH = Pt(2)
+TOKEN_BOX_CORNER_RADIUS = Inches(0.1)             # 12px equivalent
+FONT_SIZE_TOKEN = Pt(22)
+FONT_FAMILY_TOKEN = FONT_FAMILY_INTER_EXTRALIGHT  # font-weight: 200
+FONT_COLOR_TOKEN = COLOR_TEXT_WHITE
+
+# Arrow (center)
+ARROW_X = Inches(5.0)
+ARROW_WIDTH = Inches(0.6)
+ARROW_TEXT = "→"
+FONT_SIZE_ARROW = Pt(36)
+FONT_COLOR_ARROW = COLOR_ACCENT_BLUE
+
+# Vector Grid (right side, 6 cells per row)
+VECTOR_GRID_X = Inches(5.9)
+VECTOR_GRID_WIDTH = Inches(8.1)                   # Total width for 6 cells
+VECTOR_GRID_FILL_COLOR = RGBColor(17, 24, 39)    # Background color (darker)
+VECTOR_GRID_BORDER_COLOR = RGBColor(77, 171, 247)  # Accent blue border
+VECTOR_GRID_BORDER_WIDTH = Pt(1)
+
+# Vector Cell (individual number boxes)
+VECTOR_CELL_WIDTH = Inches(1.2)                   # Width per cell
+VECTOR_CELL_GAP = Inches(0.15)                    # Gap between cells
+VECTOR_CELL_FILL_COLOR = RGBColor(31, 41, 55)    # Light background
+VECTOR_CELL_BORDER_COLOR = RGBColor(60, 80, 100)  # Subtle border (darker than accent)
+VECTOR_CELL_BORDER_WIDTH = Pt(1)
+VECTOR_CELL_CORNER_RADIUS = Inches(0.03)          # 4px equivalent
+FONT_SIZE_VECTOR = Pt(13)
+FONT_FAMILY_VECTOR = FONT_FAMILY_MONOSPACE        # Monospace for numbers
+FONT_COLOR_VECTOR = COLOR_TEXT_GRAY
+
+# Token data for slide 8
+TOKEN_DATA = [
+    {"token": "Wit", "vectors": ["0.23", "-0.15", "0.87", "-0.42", "0.66", "..."]},
+    {"token": "nesses", "vectors": ["0.45", "-0.67", "0.12", "0.89", "-0.34", "..."]},
+    {"token": "must", "vectors": ["-0.56", "0.78", "-0.23", "0.41", "0.92", "..."]},
+    {"token": "tell", "vectors": ["0.18", "-0.45", "0.73", "-0.28", "0.54", "..."]},
+    {"token": "nothing", "vectors": ["0.67", "-0.12", "0.39", "0.85", "-0.71", "..."]}
+]
+
+# =============================================================================
 # LAYOUT - PLACEHOLDER SLIDES
 # =============================================================================
 

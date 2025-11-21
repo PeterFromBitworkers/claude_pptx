@@ -507,9 +507,152 @@ def create_slide_4(prs):
     return prs
 
 def create_slide_5(prs):
-    """Slide 5: BRAIN-BRIDGES Hero Slide"""
+    """Slide 5: BRAIN-BRIDGES Introduction (like Slide 6 but with text instead of features)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     apply_master_elements(slide, 5)
+
+    # =========================================================================
+    # LEFT SIDE: Title, Subtitle, Description Text
+    # =========================================================================
+
+    # Hero Title: "BRAIN-BRIDGES"
+    title_box = slide.shapes.add_textbox(
+        HERO_TITLE_X, HERO_TITLE_Y,
+        HERO_TITLE_WIDTH, HERO_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = "BRAIN-BRIDGES"
+    tf.word_wrap = True
+    p = tf.paragraphs[0]
+    p.font.name = FONT_FAMILY_HERO_TITLE
+    p.font.size = FONT_SIZE_HERO_TITLE
+    p.font.bold = FONT_BOLD_HERO_TITLE
+    p.font.color.rgb = COLOR_ACCENT_BLUE
+
+    for run in p.runs:
+        run.font.character_spacing = FONT_LETTER_SPACING_HERO_TITLE
+
+    # Hero Subtitle: "SOVEREIGN AI FOR ORGANISATIONS"
+    subtitle_box = slide.shapes.add_textbox(
+        HERO_SUBTITLE_X, HERO_SUBTITLE_Y,
+        HERO_SUBTITLE_WIDTH, HERO_SUBTITLE_HEIGHT
+    )
+    tf = subtitle_box.text_frame
+    tf.text = "SOVEREIGN AI FOR ORGANISATIONS"
+    p = tf.paragraphs[0]
+    p.font.name = FONT_FAMILY_HERO_SUBTITLE
+    p.font.size = FONT_SIZE_HERO_SUBTITLE
+    p.font.bold = FONT_BOLD_HERO_SUBTITLE
+    p.font.color.rgb = FONT_COLOR_HERO_SUBTITLE
+
+    # Description text (3 paragraphs) - positioned below subtitle
+    text_box = slide.shapes.add_textbox(
+        HERO_FEATURES_X, Inches(3.5),
+        HERO_FEATURES_WIDTH, Inches(4.0)
+    )
+    tf = text_box.text_frame
+    tf.word_wrap = True
+
+    # Paragraph 1
+    p1 = tf.paragraphs[0]
+    p1.text = "We offer an AI Bot that enables users to have chat-like conversations about their organization. The bot has access to the organization's documents repository."
+    p1.font.size = Pt(14)
+    p1.font.color.rgb = COLOR_TEXT_WHITE
+    p1.space_after = Pt(16)
+    for run in p1.runs:
+        run.font.name = FONT_FAMILY_PRIMARY
+
+    # Paragraph 2 (with bold words)
+    p2 = tf.add_paragraph()
+    p2.text = "To guarantee absolute data sovereignty, privacy, and security, we design the entire system – including AI model, database and documents – for full on-premises deployment."
+    p2.font.size = Pt(14)
+    p2.font.color.rgb = COLOR_TEXT_WHITE
+    p2.space_after = Pt(16)
+
+    # Make specific words bold
+    text2 = p2.text
+    p2.clear()
+
+    parts = [
+        ("To guarantee absolute ", False),
+        ("data sovereignty", True),
+        (", ", False),
+        ("privacy", True),
+        (", and ", False),
+        ("security", True),
+        (", we design the entire system – including AI model, database and documents – for full on-premises deployment.", False)
+    ]
+
+    for text, is_bold in parts:
+        run = p2.add_run()
+        run.text = text
+        run.font.name = FONT_FAMILY_PRIMARY
+        run.font.size = Pt(14)
+        run.font.bold = is_bold
+        run.font.color.rgb = COLOR_TEXT_WHITE
+
+    # Paragraph 3
+    p3 = tf.add_paragraph()
+    p3.text = "Everything is delivered as a compact, ready-to-use system – just plug in and start."
+    p3.font.size = Pt(14)
+    p3.font.color.rgb = COLOR_TEXT_WHITE
+    for run in p3.runs:
+        run.font.name = FONT_FAMILY_PRIMARY
+
+    # =========================================================================
+    # RIGHT SIDE: Product Image with Status Badge (NO TECH SPECS)
+    # =========================================================================
+
+    # Get actual image dimensions for aspect ratio
+    img_actual_height = HERO_IMAGE_HEIGHT
+
+    try:
+        pil_img = Image.open(HERO_IMAGE_PATH)
+        img_width_px, img_height_px = pil_img.size
+        aspect_ratio = img_height_px / img_width_px
+        img_actual_height = HERO_IMAGE_WIDTH * aspect_ratio
+    except Exception as e:
+        print(f"⚠️  Warning: Could not get image dimensions: {e}")
+
+    # Process image: add rounded corners and border
+    try:
+        os.makedirs("temp", exist_ok=True)
+        border_width_px = int(HERO_IMAGE_BORDER_WIDTH.pt * 1.33)
+        rounded_image_path = "temp/hero_image_rounded.png"
+        add_rounded_corners_to_image(
+            HERO_IMAGE_PATH,
+            HERO_IMAGE_CORNER_RADIUS_PX,
+            HERO_IMAGE_BORDER_COLOR_RGB,
+            border_width_px,
+            rounded_image_path
+        )
+
+        product_img = slide.shapes.add_picture(
+            rounded_image_path,
+            HERO_IMAGE_X, HERO_IMAGE_Y,
+            width=HERO_IMAGE_WIDTH
+        )
+        img_actual_height = product_img.height
+    except Exception as e:
+        print(f"⚠️  Warning: Could not load/process hero image: {e}")
+        try:
+            product_img = slide.shapes.add_picture(
+                HERO_IMAGE_PATH,
+                HERO_IMAGE_X, HERO_IMAGE_Y,
+                width=HERO_IMAGE_WIDTH
+            )
+            img_actual_height = product_img.height
+        except:
+            pass
+
+    # NO Status Badge on Slide 5 (only image)
+
+    return prs
+
+def create_slide_6(prs):
+    """Slide 6: BRAIN-BRIDGES Hero Slide"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 6)
 
     # =========================================================================
     # LEFT SIDE: Title, Subtitle, Features
@@ -795,6 +938,178 @@ def create_slide_5(prs):
 
     return prs
 
+def create_slide_7(prs):
+    """Slide 7: TECHNICAL DEEP DIVE"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 7)
+
+    # The three keywords - using KEYWORD_THEME_TECH
+    keywords = [
+        {"text": "TECHNICAL", "color": KEYWORD_THEME_TECH[0]},
+        {"text": "DEEP", "color": KEYWORD_THEME_TECH[1]},
+        {"text": "DIVE", "color": KEYWORD_THEME_TECH[2]}
+    ]
+
+    for i, keyword in enumerate(keywords):
+        y_pos = KEYWORD_Y_START + (i * KEYWORD_Y_GAP)
+
+        keyword_box = slide.shapes.add_textbox(
+            KEYWORD_BOX_X, Inches(y_pos),
+            KEYWORD_BOX_WIDTH, KEYWORD_BOX_HEIGHT
+        )
+        tf = keyword_box.text_frame
+        tf.text = keyword["text"]
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_KEYWORD
+        p.font.bold = FONT_BOLD_KEYWORD
+        p.font.color.rgb = keyword["color"]
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_KEYWORD  # Inter ExtraLight (font-weight: 200)
+            run.font.character_spacing = FONT_LETTER_SPACING_KEYWORD
+
+    return prs
+
+def create_slide_8(prs):
+    """Slide 8: Tokenization Intro - A Sample from legal domain"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 8)
+
+    # Title: "A Sample from legal domain:"
+    title_box = slide.shapes.add_textbox(
+        TOKENIZATION_TITLE_X, TOKENIZATION_TITLE_Y,
+        TOKENIZATION_TITLE_WIDTH, TOKENIZATION_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = "A Sample from legal domain:"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_TOKENIZATION_TITLE
+    p.font.color.rgb = FONT_COLOR_TOKENIZATION_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_TOKENIZATION_TITLE
+
+    # Arrow down
+    arrow_box = slide.shapes.add_textbox(
+        TOKENIZATION_ARROW_X, TOKENIZATION_ARROW_Y,
+        TOKENIZATION_ARROW_WIDTH, TOKENIZATION_ARROW_HEIGHT
+    )
+    tf = arrow_box.text_frame
+    tf.text = TOKENIZATION_ARROW_TEXT
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_TOKENIZATION_ARROW
+    p.font.color.rgb = FONT_COLOR_TOKENIZATION_ARROW
+
+    # Token boxes in horizontal row
+    for i, token_text in enumerate(TOKENIZATION_TOKENS):
+        x_pos = TOKENIZATION_TOKEN_X_START + (i * (TOKENIZATION_TOKEN_WIDTH + TOKENIZATION_TOKEN_GAP))
+
+        # Create token box
+        token_box = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            x_pos, TOKENIZATION_TOKENS_Y,
+            TOKENIZATION_TOKEN_WIDTH, TOKENIZATION_TOKEN_HEIGHT
+        )
+        token_box.fill.solid()
+        token_box.fill.fore_color.rgb = TOKENIZATION_TOKEN_FILL_COLOR
+        token_box.line.color.rgb = TOKENIZATION_TOKEN_BORDER_COLOR
+        token_box.line.width = TOKENIZATION_TOKEN_BORDER_WIDTH
+
+        # Token text
+        tf = token_box.text_frame
+        tf.text = token_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_TOKENIZATION_TOKEN
+        p.font.color.rgb = FONT_COLOR_TOKENIZATION_TOKEN
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_TOKENIZATION_TOKEN
+
+    return prs
+
+def create_slide_9(prs):
+    """Slide 9: Vector Embeddings (Token → Vector Lookup)"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 9)
+
+    # Create each token row (Wit, nesses, must, tell, nothing)
+    for i, token_info in enumerate(TOKEN_DATA):
+        y_pos = TOKEN_ROW_Y_START + (i * TOKEN_ROW_GAP)
+
+        # Token box (left side)
+        token_box = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            TOKEN_BOX_X, Inches(y_pos),
+            TOKEN_BOX_WIDTH, TOKEN_BOX_HEIGHT
+        )
+        token_box.fill.solid()
+        token_box.fill.fore_color.rgb = TOKEN_BOX_FILL_COLOR
+        token_box.line.color.rgb = TOKEN_BOX_BORDER_COLOR
+        token_box.line.width = TOKEN_BOX_BORDER_WIDTH
+
+        # Token text
+        tf = token_box.text_frame
+        tf.text = token_info["token"]
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_TOKEN
+        p.font.color.rgb = FONT_COLOR_TOKEN
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_TOKEN
+
+        # Arrow (center)
+        arrow_box = slide.shapes.add_textbox(
+            ARROW_X, Inches(y_pos),
+            ARROW_WIDTH, TOKEN_BOX_HEIGHT
+        )
+        tf = arrow_box.text_frame
+        tf.text = ARROW_TEXT
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_ARROW
+        p.font.color.rgb = FONT_COLOR_ARROW
+
+        # Vector cells (right side, 6 cells)
+        for j, vector_value in enumerate(token_info["vectors"]):
+            cell_x = VECTOR_GRID_X + (j * (VECTOR_CELL_WIDTH + VECTOR_CELL_GAP))
+
+            # Create vector cell box
+            vector_cell = slide.shapes.add_shape(
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                cell_x, Inches(y_pos),
+                VECTOR_CELL_WIDTH, TOKEN_BOX_HEIGHT
+            )
+            vector_cell.fill.solid()
+            vector_cell.fill.fore_color.rgb = VECTOR_CELL_FILL_COLOR
+            vector_cell.line.color.rgb = VECTOR_CELL_BORDER_COLOR
+            vector_cell.line.width = VECTOR_CELL_BORDER_WIDTH
+
+            # Vector value text
+            tf = vector_cell.text_frame
+            tf.text = vector_value
+            tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+            p = tf.paragraphs[0]
+            p.alignment = PP_ALIGN.CENTER
+            p.font.size = FONT_SIZE_VECTOR
+            p.font.color.rgb = FONT_COLOR_VECTOR
+
+            # Last cell ("...") should be accent color
+            if vector_value == "...":
+                p.font.color.rgb = COLOR_ACCENT_BLUE
+
+            for run in p.runs:
+                run.font.name = FONT_FAMILY_VECTOR
+
+    return prs
+
 def create_placeholder_slide(prs, slide_num):
     """Creates a placeholder slide for later editing"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
@@ -832,11 +1147,23 @@ def create_presentation():
     # Slide 4: SOVEREIGN AI SOLUTION
     create_slide_4(prs)
 
-    # Slide 5: BRAIN-BRIDGES Hero Slide
+    # Slide 5: TO BE DESIGNED
     create_slide_5(prs)
 
+    # Slide 6: BRAIN-BRIDGES Hero Slide
+    create_slide_6(prs)
+
+    # Slide 7: TECHNICAL DEEP DIVE
+    create_slide_7(prs)
+
+    # Slide 8: Tokenization Intro - A Sample from legal domain
+    create_slide_8(prs)
+
+    # Slide 9: Vector Embeddings (Token → Vector Lookup)
+    create_slide_9(prs)
+
     # Additional slides as placeholders
-    for i in range(6, 18):
+    for i in range(10, 18):
         create_placeholder_slide(prs, i)
 
     return prs
