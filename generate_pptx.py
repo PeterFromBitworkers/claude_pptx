@@ -1110,6 +1110,324 @@ def create_slide_9(prs):
 
     return prs
 
+def create_slide_10(prs):
+    """Slide 10: Attention is all you need - Attention Matrix"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 10)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        ATTENTION_TITLE_X, ATTENTION_TITLE_Y,
+        ATTENTION_TITLE_WIDTH, ATTENTION_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = "Attention is all you need"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ATTENTION_TITLE
+    p.font.color.rgb = FONT_COLOR_ATTENTION_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ATTENTION_TITLE
+
+    # Helper function to get score color
+    def get_score_style(score):
+        """Returns (fill_color, border_color, text_color) for a given score"""
+        if score >= 0.8:
+            return (ATTENTION_SCORE_HIGH_FILL, ATTENTION_SCORE_HIGH_BORDER, ATTENTION_SCORE_HIGH_COLOR)
+        elif score >= 0.05:
+            return (ATTENTION_SCORE_MED_FILL, ATTENTION_SCORE_MED_BORDER, ATTENTION_SCORE_MED_COLOR)
+        elif score >= 0.02:
+            return (ATTENTION_SCORE_LOW_MED_FILL, ATTENTION_SCORE_LOW_MED_BORDER, ATTENTION_SCORE_LOW_MED_COLOR)
+        else:
+            return (ATTENTION_SCORE_LOW_FILL, ATTENTION_SCORE_LOW_BORDER, ATTENTION_SCORE_LOW_COLOR)
+
+    # Create 6x6 grid (header row + 5 data rows, header col + 5 data cols)
+    # Row 0: Header row
+    # Col 0: Empty top-left cell
+    # Cols 1-5: Token headers (Wit, nesses, must, tell, nothing)
+
+    # Empty top-left cell (transparent, no content)
+    # (We skip creating it since it's just empty space)
+
+    # Header row: Token headers (columns)
+    for col_idx, token in enumerate(ATTENTION_TOKENS):
+        x_pos = ATTENTION_MATRIX_X + ((col_idx + 1) * (ATTENTION_CELL_WIDTH + ATTENTION_CELL_GAP))
+        y_pos = ATTENTION_MATRIX_Y
+
+        cell = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            x_pos, y_pos,
+            ATTENTION_CELL_WIDTH, ATTENTION_CELL_HEIGHT
+        )
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = ATTENTION_HEADER_FILL_COLOR
+        cell.line.color.rgb = ATTENTION_HEADER_BORDER_COLOR
+        cell.line.width = ATTENTION_CELL_BORDER_WIDTH
+
+        tf = cell.text_frame
+        tf.text = token
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_ATTENTION_HEADER
+        p.font.color.rgb = FONT_COLOR_ATTENTION_HEADER
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_ATTENTION_HEADER
+
+    # Data rows (rows 1-5)
+    for row_idx, (row_token, row_scores) in enumerate(zip(ATTENTION_TOKENS, ATTENTION_MATRIX_DATA)):
+        y_pos = ATTENTION_MATRIX_Y + ((row_idx + 1) * (ATTENTION_CELL_HEIGHT + ATTENTION_CELL_GAP))
+
+        # Row header (token name)
+        x_pos = ATTENTION_MATRIX_X
+        cell = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            x_pos, y_pos,
+            ATTENTION_CELL_WIDTH, ATTENTION_CELL_HEIGHT
+        )
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = ATTENTION_HEADER_FILL_COLOR
+        cell.line.color.rgb = ATTENTION_HEADER_BORDER_COLOR
+        cell.line.width = ATTENTION_CELL_BORDER_WIDTH
+
+        tf = cell.text_frame
+        tf.text = row_token
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_ATTENTION_HEADER
+        p.font.color.rgb = FONT_COLOR_ATTENTION_HEADER
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_ATTENTION_HEADER
+
+        # Score cells
+        for col_idx, score in enumerate(row_scores):
+            x_pos = ATTENTION_MATRIX_X + ((col_idx + 1) * (ATTENTION_CELL_WIDTH + ATTENTION_CELL_GAP))
+
+            fill_color, border_color, text_color = get_score_style(score)
+
+            cell = slide.shapes.add_shape(
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                x_pos, y_pos,
+                ATTENTION_CELL_WIDTH, ATTENTION_CELL_HEIGHT
+            )
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = fill_color
+            cell.line.color.rgb = border_color
+            cell.line.width = ATTENTION_CELL_BORDER_WIDTH
+
+            tf = cell.text_frame
+            tf.text = f"{score:.2f}"
+            tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+            p = tf.paragraphs[0]
+            p.alignment = PP_ALIGN.CENTER
+            p.font.size = FONT_SIZE_ATTENTION_SCORE
+            p.font.color.rgb = text_color
+            for run in p.runs:
+                run.font.name = FONT_FAMILY_ATTENTION_SCORE
+
+    # Footnote
+    footnote_box = slide.shapes.add_textbox(
+        ATTENTION_FOOTNOTE_X, ATTENTION_FOOTNOTE_Y,
+        ATTENTION_FOOTNOTE_WIDTH, ATTENTION_FOOTNOTE_HEIGHT
+    )
+    tf = footnote_box.text_frame
+    tf.text = ATTENTION_FOOTNOTE_TEXT
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.RIGHT
+    p.font.size = FONT_SIZE_ATTENTION_FOOTNOTE
+    p.font.color.rgb = FONT_COLOR_ATTENTION_FOOTNOTE
+    p.font.italic = True
+
+    return prs
+
+def create_slide_11(prs):
+    """Slide 11: Next word prediction"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 11)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        PREDICTION_TITLE_X, PREDICTION_TITLE_Y,
+        PREDICTION_TITLE_WIDTH, PREDICTION_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = "Next word prediction"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_PREDICTION_TITLE
+    p.font.color.rgb = FONT_COLOR_PREDICTION_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_PREDICTION_TITLE
+
+    # Context Vector Bar
+    vector_bar = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        PREDICTION_CONTENT_X, PREDICTION_VECTOR_Y,
+        PREDICTION_CONTENT_WIDTH, PREDICTION_VECTOR_HEIGHT
+    )
+    vector_bar.fill.solid()
+    vector_bar.fill.fore_color.rgb = PREDICTION_VECTOR_FILL_COLOR
+    vector_bar.line.color.rgb = PREDICTION_VECTOR_BORDER_COLOR
+    vector_bar.line.width = PREDICTION_VECTOR_BORDER_WIDTH
+
+    # Context Vector Label (inside bar, top with equal margin)
+    label_box = slide.shapes.add_textbox(
+        PREDICTION_CONTENT_X + PREDICTION_VECTOR_MARGIN,
+        PREDICTION_VECTOR_Y + PREDICTION_VECTOR_MARGIN,
+        PREDICTION_CONTENT_WIDTH - (2 * PREDICTION_VECTOR_MARGIN), Inches(0.25)
+    )
+    tf = label_box.text_frame
+    tf.text = "CONTEXT VECTOR"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_PREDICTION_VECTOR_LABEL
+    p.font.color.rgb = FONT_COLOR_PREDICTION_VECTOR_LABEL
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Vector Segments (10 colored rectangles, evenly distributed with equal margins)
+    # Calculate available width: 12" - left margin - right margin
+    available_width = PREDICTION_CONTENT_WIDTH.inches - (2 * PREDICTION_VECTOR_MARGIN.inches)
+    # Calculate segment width: (available_width - 9 gaps) / 10 segments
+    segment_width = (available_width - (9 * PREDICTION_SEGMENT_GAP.inches)) / PREDICTION_SEGMENT_COUNT
+    # Position segments with equal margin from top of label and bottom of box
+    segments_y = PREDICTION_VECTOR_Y + PREDICTION_VECTOR_MARGIN + Inches(0.25) + PREDICTION_VECTOR_MARGIN
+
+    for i, color in enumerate(PREDICTION_SEGMENT_COLORS):
+        segment_x = PREDICTION_CONTENT_X + PREDICTION_VECTOR_MARGIN + (i * (Inches(segment_width) + PREDICTION_SEGMENT_GAP))
+
+        segment = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            segment_x, segments_y,
+            Inches(segment_width), PREDICTION_SEGMENT_HEIGHT
+        )
+        segment.fill.solid()
+        segment.fill.fore_color.rgb = color
+        segment.line.color.rgb = color
+
+    # Temperature Parameter Display (left side)
+    # Label "Temperature"
+    temp_label_box = slide.shapes.add_textbox(
+        PREDICTION_TEMP_X, PREDICTION_TEMP_Y,
+        PREDICTION_TEMP_WIDTH, Inches(0.4)
+    )
+    tf = temp_label_box.text_frame
+    tf.text = "Temperature"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_PREDICTION_TEMP_LABEL
+    p.font.color.rgb = FONT_COLOR_PREDICTION_TEMP_LABEL
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Value "0.8"
+    temp_value_box = slide.shapes.add_textbox(
+        PREDICTION_TEMP_X, PREDICTION_TEMP_Y + Inches(0.5),
+        PREDICTION_TEMP_WIDTH, Inches(0.8)
+    )
+    tf = temp_value_box.text_frame
+    tf.text = f"{PREDICTION_TEMP_VALUE:.1f}"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_PREDICTION_TEMP_VALUE
+    p.font.color.rgb = FONT_COLOR_PREDICTION_TEMP_VALUE
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Arrow down
+    arrow_box = slide.shapes.add_textbox(
+        PREDICTION_CONTENT_X + (PREDICTION_CONTENT_WIDTH / 2) - Inches(0.3),
+        PREDICTION_ARROW_Y,
+        Inches(0.6), Inches(0.5)
+    )
+    tf = arrow_box.text_frame
+    tf.text = PREDICTION_ARROW_TEXT
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_PREDICTION_ARROW
+    p.font.color.rgb = FONT_COLOR_PREDICTION_ARROW
+
+    # Helper function to get fill color
+    def get_fill_color(category):
+        if category == "highest":
+            return PREDICTION_FILL_HIGHEST
+        elif category == "high":
+            return PREDICTION_FILL_HIGH
+        elif category == "medium":
+            return PREDICTION_FILL_MEDIUM
+        else:  # low, lowest
+            return PREDICTION_FILL_LOW
+
+    # Probability bars
+    for i, pred_data in enumerate(PREDICTION_DATA):
+        y_pos = PREDICTION_PROB_Y_START + (i * (PREDICTION_PROB_BAR_HEIGHT + PREDICTION_PROB_GAP))
+
+        # Token label (left side, right-aligned text)
+        label_box = slide.shapes.add_textbox(
+            PREDICTION_PROB_LABEL_X, y_pos,
+            PREDICTION_PROB_LABEL_WIDTH, PREDICTION_PROB_BAR_HEIGHT
+        )
+        tf = label_box.text_frame
+        tf.text = pred_data["token"]
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.RIGHT
+        p.font.size = FONT_SIZE_PREDICTION_TOKEN
+
+        # Highest token gets green color
+        if pred_data["category"] == "highest":
+            p.font.color.rgb = FONT_COLOR_PREDICTION_TOKEN_HIGHEST
+            p.font.bold = True
+        else:
+            p.font.color.rgb = FONT_COLOR_PREDICTION_TOKEN
+
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_PREDICTION_TOKEN
+
+        # Probability bar background (right-aligned at fixed position)
+        bar_bg = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            PREDICTION_PROB_BAR_X, y_pos,
+            PREDICTION_PROB_BAR_WIDTH, PREDICTION_PROB_BAR_HEIGHT
+        )
+        bar_bg.fill.solid()
+        bar_bg.fill.fore_color.rgb = PREDICTION_PROB_BAR_FILL_COLOR
+        bar_bg.line.color.rgb = PREDICTION_PROB_BAR_BORDER_COLOR
+        bar_bg.line.width = PREDICTION_PROB_BAR_BORDER_WIDTH
+
+        # Probability fill (proportional to probability, left-aligned within bar)
+        fill_width = PREDICTION_PROB_BAR_WIDTH.inches * pred_data["probability"]
+        if fill_width > 0.1:  # Only draw if visible
+            bar_fill = slide.shapes.add_shape(
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                PREDICTION_PROB_BAR_X, y_pos,
+                Inches(fill_width), PREDICTION_PROB_BAR_HEIGHT
+            )
+            bar_fill.fill.solid()
+            bar_fill.fill.fore_color.rgb = get_fill_color(pred_data["category"])
+            bar_fill.line.color.rgb = get_fill_color(pred_data["category"])
+
+        # Probability value (right side of bar, always at same position)
+        value_box = slide.shapes.add_textbox(
+            PREDICTION_PROB_BAR_X + PREDICTION_PROB_BAR_WIDTH - Inches(0.8), y_pos,
+            Inches(0.7), PREDICTION_PROB_BAR_HEIGHT
+        )
+        tf = value_box.text_frame
+        tf.text = f"{pred_data['probability']:.2f}"
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.RIGHT
+        p.font.size = FONT_SIZE_PREDICTION_VALUE
+        p.font.color.rgb = FONT_COLOR_PREDICTION_VALUE
+        p.font.bold = True
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_PREDICTION_VALUE
+
+    return prs
+
 def create_placeholder_slide(prs, slide_num):
     """Creates a placeholder slide for later editing"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
@@ -1162,8 +1480,14 @@ def create_presentation():
     # Slide 9: Vector Embeddings (Token → Vector Lookup)
     create_slide_9(prs)
 
+    # Slide 10: Attention is all you need
+    create_slide_10(prs)
+
+    # Slide 11: Next word prediction
+    create_slide_11(prs)
+
     # Additional slides as placeholders
-    for i in range(10, 18):
+    for i in range(12, 18):
         create_placeholder_slide(prs, i)
 
     return prs

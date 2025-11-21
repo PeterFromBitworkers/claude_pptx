@@ -376,15 +376,14 @@ FONT_SIZE_TOKENIZATION_ARROW = Pt(64)             # 4rem equivalent
 FONT_COLOR_TOKENIZATION_ARROW = COLOR_ACCENT_BLUE
 
 # Token boxes in horizontal row (5 tokens)
+# ALIGNED WITH SLIDES 9 & 10: Total width = 12", Start X = 2"
 TOKENIZATION_TOKENS_Y = Inches(5.2)
 TOKENIZATION_TOKEN_HEIGHT = Inches(0.9)
-TOKENIZATION_TOKEN_GAP = Inches(0.35)             # Gap between tokens
-# Calculate x positions for 5 tokens centered
-# Each token width varies, but we'll use consistent width
+TOKENIZATION_TOKEN_GAP = Inches(0.125)            # Gap between tokens (calculated)
+# Total width: 12", 5 tokens
+# Token Width = (12 - 4*0.125) / 5 = 11.5 / 5 = 2.3"
 TOKENIZATION_TOKEN_WIDTH = Inches(2.3)
-# Total width needed: 5 * 2.3 + 4 * 0.35 = 11.5 + 1.4 = 12.9
-# Center: (16 - 12.9) / 2 = 1.55
-TOKENIZATION_TOKEN_X_START = Inches(1.55)         # In inches (converted to Inches object)
+TOKENIZATION_TOKEN_X_START = Inches(2)            # Aligned with slides 9 & 10
 
 # Token box styling
 TOKENIZATION_TOKEN_FILL_COLOR = RGBColor(31, 41, 55)
@@ -404,12 +403,13 @@ TOKENIZATION_TOKENS = ["Wit", "nesses", "must", "tell", "nothing"]
 
 # Tokenization Row Layout (5 rows: Wit, nesses, must, tell, nothing)
 # Each row has: [Token Box] → [Vector Grid with 6 cells]
+# ALIGNED WITH SLIDES 8 & 10: Total width = 12", Start X = 2"
 TOKEN_ROW_Y_START = 2.3                           # In inches - start position
 TOKEN_ROW_GAP = 1.1                               # In inches - gap between rows
 TOKEN_ROW_HEIGHT = 0.75                           # In inches - height per row
 
 # Token Box (left side)
-TOKEN_BOX_X = Inches(2.2)
+TOKEN_BOX_X = Inches(2)                           # Aligned with slides 8 & 10
 TOKEN_BOX_WIDTH = Inches(2.5)
 TOKEN_BOX_HEIGHT = Inches(0.75)
 TOKEN_BOX_FILL_COLOR = RGBColor(31, 41, 55)       # rgba(31, 41, 55, 0.8) from CSS
@@ -421,21 +421,21 @@ FONT_FAMILY_TOKEN = FONT_FAMILY_INTER_EXTRALIGHT  # font-weight: 200
 FONT_COLOR_TOKEN = COLOR_TEXT_WHITE
 
 # Arrow (center)
-ARROW_X = Inches(5.0)
+ARROW_X = Inches(4.7)                             # 2 + 2.5 + 0.2 gap
 ARROW_WIDTH = Inches(0.6)
 ARROW_TEXT = "→"
 FONT_SIZE_ARROW = Pt(36)
 FONT_COLOR_ARROW = COLOR_ACCENT_BLUE
 
 # Vector Grid (right side, 6 cells per row)
-VECTOR_GRID_X = Inches(5.9)
-VECTOR_GRID_WIDTH = Inches(8.1)                   # Total width for 6 cells
+VECTOR_GRID_X = Inches(5.5)                       # 4.7 + 0.6 + 0.2 gap
+VECTOR_GRID_WIDTH = Inches(8.5)                   # Total width: 2 + 12 - 5.5 = 8.5"
 VECTOR_GRID_FILL_COLOR = RGBColor(17, 24, 39)    # Background color (darker)
 VECTOR_GRID_BORDER_COLOR = RGBColor(77, 171, 247)  # Accent blue border
 VECTOR_GRID_BORDER_WIDTH = Pt(1)
 
 # Vector Cell (individual number boxes)
-VECTOR_CELL_WIDTH = Inches(1.2)                   # Width per cell
+VECTOR_CELL_WIDTH = Inches(1.29)                  # Width per cell (8.5 - 5*0.15) / 6
 VECTOR_CELL_GAP = Inches(0.15)                    # Gap between cells
 VECTOR_CELL_FILL_COLOR = RGBColor(31, 41, 55)    # Light background
 VECTOR_CELL_BORDER_COLOR = RGBColor(60, 80, 100)  # Subtle border (darker than accent)
@@ -452,6 +452,192 @@ TOKEN_DATA = [
     {"token": "must", "vectors": ["-0.56", "0.78", "-0.23", "0.41", "0.92", "..."]},
     {"token": "tell", "vectors": ["0.18", "-0.45", "0.73", "-0.28", "0.54", "..."]},
     {"token": "nothing", "vectors": ["0.67", "-0.12", "0.39", "0.85", "-0.71", "..."]}
+]
+
+# =============================================================================
+# LAYOUT - ATTENTION MATRIX SLIDE (Slide 10)
+# =============================================================================
+
+# Title (using content header style)
+ATTENTION_TITLE_X = Inches(1)
+ATTENTION_TITLE_Y = Inches(1)
+ATTENTION_TITLE_WIDTH = Inches(14)
+ATTENTION_TITLE_HEIGHT = Inches(0.8)
+FONT_SIZE_ATTENTION_TITLE = Pt(44)
+FONT_FAMILY_ATTENTION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
+FONT_COLOR_ATTENTION_TITLE = COLOR_ACCENT_BLUE
+
+# Attention Matrix Grid (6x6 grid = 1 header row + 5 data rows, 1 header col + 5 data cols)
+# ALIGNED WITH SLIDES 8 & 9: Total width = 12", Start X = 2"
+ATTENTION_MATRIX_X = Inches(2)                    # Aligned with slides 8 & 9
+ATTENTION_MATRIX_Y = Inches(2.6)                  # Increased spacing below title
+ATTENTION_CELL_WIDTH = Inches(1.9)                # Cell width (12" - 5*0.12") / 6 = 1.9"
+ATTENTION_CELL_HEIGHT = Inches(0.8)               # Cell height
+ATTENTION_CELL_GAP = Inches(0.12)                 # Gap between cells
+
+# Cell styling
+ATTENTION_CELL_BORDER_COLOR = RGBColor(77, 171, 247)  # Accent blue border
+ATTENTION_CELL_BORDER_WIDTH = Pt(1)
+ATTENTION_CELL_CORNER_RADIUS = Inches(0.067)      # 8px equivalent
+
+# Header cell (token headers)
+ATTENTION_HEADER_FILL_COLOR = RGBColor(38, 66, 96)  # rgba(77, 171, 247, 0.15) approximation
+ATTENTION_HEADER_BORDER_COLOR = COLOR_ACCENT_BLUE
+FONT_SIZE_ATTENTION_HEADER = Pt(18)               # 1.1rem
+FONT_FAMILY_ATTENTION_HEADER = FONT_FAMILY_INTER_REGULAR
+FONT_COLOR_ATTENTION_HEADER = COLOR_TEXT_WHITE
+
+# Score cell
+FONT_SIZE_ATTENTION_SCORE = Pt(16)                # 1rem
+FONT_FAMILY_ATTENTION_SCORE = FONT_FAMILY_MONOSPACE
+FONT_COLOR_ATTENTION_SCORE_DEFAULT = COLOR_TEXT_WHITE
+
+# Score colors (heatmap)
+# High scores (0.8-0.9): Green
+ATTENTION_SCORE_HIGH_FILL = RGBColor(16, 185, 129)    # #10b981 green
+ATTENTION_SCORE_HIGH_BORDER = RGBColor(16, 185, 129)
+ATTENTION_SCORE_HIGH_COLOR = RGBColor(255, 255, 255)
+
+# Medium scores (0.05-0.08): Blue
+ATTENTION_SCORE_MED_FILL = RGBColor(48, 86, 122)      # rgba(77, 171, 247, 0.25) approximation
+ATTENTION_SCORE_MED_BORDER = COLOR_ACCENT_BLUE
+ATTENTION_SCORE_MED_COLOR = COLOR_ACCENT_BLUE
+
+# Low-medium scores (0.02-0.04): Light blue
+ATTENTION_SCORE_LOW_MED_FILL = RGBColor(38, 66, 96)   # rgba(77, 171, 247, 0.15) approximation
+ATTENTION_SCORE_LOW_MED_BORDER = RGBColor(77, 171, 247)
+ATTENTION_SCORE_LOW_MED_COLOR = RGBColor(77, 171, 247)
+
+# Very low scores (0.01): Gray
+ATTENTION_SCORE_LOW_FILL = RGBColor(40, 42, 47)       # rgba(156, 163, 175, 0.1) approximation
+ATTENTION_SCORE_LOW_BORDER = RGBColor(100, 103, 110)  # rgba(156, 163, 175, 0.3)
+ATTENTION_SCORE_LOW_COLOR = RGBColor(156, 163, 175)
+
+# Footnote
+ATTENTION_FOOTNOTE_X = Inches(2)                  # Aligned with matrix
+ATTENTION_FOOTNOTE_Y = Inches(8.1)                # Below matrix (adjusted for new spacing)
+ATTENTION_FOOTNOTE_WIDTH = Inches(12)             # Same width as matrix
+ATTENTION_FOOTNOTE_HEIGHT = Inches(0.4)
+FONT_SIZE_ATTENTION_FOOTNOTE = Pt(14)             # 0.9rem
+FONT_COLOR_ATTENTION_FOOTNOTE = RGBColor(209, 213, 219)
+ATTENTION_FOOTNOTE_TEXT = "Relevance after Softmax normalization"
+
+# Attention matrix data (6x6 grid)
+ATTENTION_TOKENS = ["Wit", "nesses", "must", "tell", "nothing"]
+ATTENTION_MATRIX_DATA = [
+    [0.89, 0.07, 0.02, 0.01, 0.01],  # Wit
+    [0.08, 0.85, 0.05, 0.01, 0.01],  # nesses
+    [0.02, 0.03, 0.91, 0.02, 0.02],  # must
+    [0.01, 0.02, 0.06, 0.87, 0.04],  # tell
+    [0.01, 0.02, 0.05, 0.04, 0.88],  # nothing
+]
+
+# =============================================================================
+# LAYOUT - NEXT WORD PREDICTION SLIDE (Slide 11)
+# =============================================================================
+
+# Title (using content header style)
+PREDICTION_TITLE_X = Inches(1)
+PREDICTION_TITLE_Y = Inches(1)
+PREDICTION_TITLE_WIDTH = Inches(14)
+PREDICTION_TITLE_HEIGHT = Inches(0.8)
+FONT_SIZE_PREDICTION_TITLE = Pt(44)
+FONT_FAMILY_PREDICTION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
+FONT_COLOR_PREDICTION_TITLE = COLOR_ACCENT_BLUE
+
+# ALIGNED WITH SLIDES 8, 9, 10: Total width = 12", Start X = 2", End X = 14"
+PREDICTION_CONTENT_X = Inches(2)
+PREDICTION_CONTENT_WIDTH = Inches(12)
+PREDICTION_CONTENT_RIGHT = Inches(14)                 # Right edge for all elements
+
+# Context Vector Bar (top)
+PREDICTION_VECTOR_Y = Inches(2.6)
+PREDICTION_VECTOR_HEIGHT = Inches(1.05)         # Increased for equal margins
+PREDICTION_VECTOR_FILL_COLOR = COLOR_BACKGROUND_LIGHT
+PREDICTION_VECTOR_BORDER_COLOR = COLOR_BORDER
+PREDICTION_VECTOR_BORDER_WIDTH = Pt(1)
+
+# Context Vector Label and Segments - EQUAL MARGINS ALL AROUND
+PREDICTION_VECTOR_MARGIN = Inches(0.2)          # Equal margin on all sides (top, bottom, left, right)
+FONT_SIZE_PREDICTION_VECTOR_LABEL = Pt(14)      # 0.85rem uppercase
+FONT_COLOR_PREDICTION_VECTOR_LABEL = COLOR_TEXT_GRAY
+
+# Vector Segments (10 colored segments, evenly distributed)
+PREDICTION_SEGMENT_HEIGHT = Inches(0.3)         # 22px
+PREDICTION_SEGMENT_GAP = Inches(0.1)            # Gap between segments
+PREDICTION_SEGMENT_COUNT = 10                   # Number of segments
+PREDICTION_SEGMENT_COLORS = [
+    COLOR_ACCENT_BLUE,      # #4dabf7
+    COLOR_ACCENT_CYAN,      # #06b6d4
+    COLOR_ACCENT_GREEN,     # #10b981
+    COLOR_ACCENT_PURPLE,    # #8b5cf6
+    RGBColor(245, 158, 11), # #f59e0b orange
+    COLOR_ACCENT_RED,       # #ef4444
+    COLOR_ACCENT_BLUE,      # repeat
+    COLOR_ACCENT_CYAN,
+    COLOR_ACCENT_GREEN,
+    COLOR_ACCENT_PURPLE
+]
+
+# Temperature Parameter Display (left side)
+PREDICTION_TEMP_X = Inches(0.5)                 # Left side
+PREDICTION_TEMP_Y = Inches(4.8)                 # Vertically centered with bars
+PREDICTION_TEMP_WIDTH = Inches(1.2)
+PREDICTION_TEMP_HEIGHT = Inches(2.5)
+FONT_SIZE_PREDICTION_TEMP_LABEL = Pt(12)        # "Temperature"
+FONT_SIZE_PREDICTION_TEMP_VALUE = Pt(32)        # "0.8"
+FONT_COLOR_PREDICTION_TEMP_LABEL = COLOR_TEXT_GRAY
+FONT_COLOR_PREDICTION_TEMP_VALUE = COLOR_ACCENT_BLUE
+PREDICTION_TEMP_VALUE = 0.8                     # Default temperature value
+
+# Arrow down
+PREDICTION_ARROW_Y = Inches(3.95)               # Adjusted for new vector box height
+PREDICTION_ARROW_TEXT = "↓"
+FONT_SIZE_PREDICTION_ARROW = Pt(40)             # 2.5rem
+FONT_COLOR_PREDICTION_ARROW = COLOR_ACCENT_BLUE
+
+# Probability bars (RIGHT-ALIGNED at 14")
+PREDICTION_PROB_Y_START = Inches(4.6)
+PREDICTION_PROB_GAP = Inches(0.15)              # 10px gap
+PREDICTION_PROB_BAR_HEIGHT = Inches(0.48)       # 36px
+PREDICTION_PROB_BAR_WIDTH = Inches(8)           # Width for the bar
+PREDICTION_PROB_BAR_X = Inches(6)               # Bar starts at 6", ends at 14" (right-aligned)
+PREDICTION_PROB_LABEL_WIDTH = Inches(3.8)       # Width for token label (enough for "unless")
+PREDICTION_PROB_LABEL_GAP = Inches(0.2)         # Gap between label and bar
+PREDICTION_PROB_LABEL_X = Inches(2)             # Label starts at 2" (aligned with context vector box)
+
+# Probability bar styling
+PREDICTION_PROB_BAR_FILL_COLOR = COLOR_BACKGROUND_LIGHT
+PREDICTION_PROB_BAR_BORDER_COLOR = COLOR_BORDER
+PREDICTION_PROB_BAR_BORDER_WIDTH = Pt(1)
+
+# Token label styling
+FONT_SIZE_PREDICTION_TOKEN = Pt(18)             # 1.1rem
+FONT_FAMILY_PREDICTION_TOKEN = FONT_FAMILY_INTER_REGULAR
+FONT_COLOR_PREDICTION_TOKEN = COLOR_TEXT_GRAY
+
+# Probability value styling
+FONT_SIZE_PREDICTION_VALUE = Pt(16)
+FONT_FAMILY_PREDICTION_VALUE = FONT_FAMILY_MONOSPACE
+FONT_COLOR_PREDICTION_VALUE = COLOR_TEXT_WHITE
+
+# Probability fill colors (gradients approximated as solid colors)
+PREDICTION_FILL_HIGHEST = COLOR_ACCENT_GREEN    # Green for highest
+PREDICTION_FILL_HIGH = COLOR_ACCENT_BLUE        # Blue for high
+PREDICTION_FILL_MEDIUM = COLOR_ACCENT_PURPLE    # Purple for medium
+PREDICTION_FILL_LOW = RGBColor(107, 114, 128)   # Gray for low/lowest
+
+# Token color for highest
+FONT_COLOR_PREDICTION_TOKEN_HIGHEST = COLOR_ACCENT_GREEN
+
+# Prediction data (token, probability, category)
+PREDICTION_DATA = [
+    {"token": "but", "probability": 0.62, "category": "highest"},
+    {"token": "to", "probability": 0.18, "category": "high"},
+    {"token": "unless", "probability": 0.09, "category": "medium"},
+    {"token": "about", "probability": 0.06, "category": "medium"},
+    {"token": "when", "probability": 0.03, "category": "low"},
+    {"token": "no", "probability": 0.02, "category": "lowest"}
 ]
 
 # =============================================================================
