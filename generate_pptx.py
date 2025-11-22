@@ -2121,9 +2121,9 @@ def create_placeholder_slide(prs, slide_num):
     return prs
 
 def create_slide_19(prs):
-    """Slide 19: Chat API Architecture"""
+    """Slide 20: Chat API Architecture (was 19)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 19, 25)
+    apply_master_elements(slide, 20, 25)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -2244,9 +2244,9 @@ def create_slide_19(prs):
     return prs
 
 def create_slide_20(prs):
-    """Slide 20: Chat API Architecture (copy of slide 19)"""
+    """Slide 21: Chat API Architecture (copy of slide 19) (was 20)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 20, 25)
+    apply_master_elements(slide, 21, 25)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -2361,9 +2361,9 @@ def create_slide_20(prs):
     return prs
 
 def create_slide_21(prs):
-    """Slide 21: RETRIEVAL AUGMENTED GENERATION"""
+    """Slide 19: RETRIEVAL AUGMENTED GENERATION (moved from 21)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 21, 25)
+    apply_master_elements(slide, 19, 25)
 
     # The three keywords - using KEYWORD_THEME_TECH (like slides 4, 7, 16)
     keywords = [
@@ -2882,14 +2882,14 @@ def create_presentation():
     # Slide 18: The Encryption Dilemma
     create_slide_18(prs)
 
-    # Slide 19: Chat API Architecture
+    # Slide 19: RAG (moved from 21)
+    create_slide_21(prs)
+
+    # Slide 20: Chat API Architecture (was 19)
     create_slide_19(prs)
 
-    # Slide 20: Chat API Architecture (copy)
+    # Slide 21: Chat API Architecture (copy) (was 20)
     create_slide_20(prs)
-
-    # Slide 21: RAG
-    create_slide_21(prs)
 
     # Slide 22: Document Processing
     create_slide_22(prs)

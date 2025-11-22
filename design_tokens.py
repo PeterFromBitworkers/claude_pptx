@@ -894,24 +894,24 @@ ENCRYPTION_DECRYPTED_BLOCKS = ["Witnesses", "must", "tell", "nothing,", "but", "
 # =============================================================================
 
 # Title
-CHAT_API_TITLE_Y = Inches(0.8)
+CHAT_API_TITLE_Y = Inches(1.2)  # Match Slides 17/18 (was 0.8)
 FONT_SIZE_CHAT_API_TITLE = Pt(48)
 FONT_COLOR_CHAT_API_TITLE = COLOR_ACCENT_BLUE
 
-# Card Layout
-CHAT_API_CARD_X = Inches(2)  # Left margin
-CHAT_API_CARD_WIDTH = Inches(12)  # Full width minus margins
+# Card Layout - aligned with Slides 17/18 outer edges
+CHAT_API_CARD_X = Inches(2.9)  # Match Slide 17/18 left edge (was 2)
+CHAT_API_CARD_WIDTH = Inches(10.2)  # Match total width of both cards on 17/18: 2.9" to 13.1" (was 12)
 CHAT_API_CARD_HEIGHT = Inches(1.5)  # Height per card
 CHAT_API_CARD_GAP = Inches(0.3)  # Gap between cards (30px)
-CHAT_API_CARD_START_Y = Inches(2.2)  # Start position below title
+CHAT_API_CARD_START_Y = Inches(2.6)  # Adjusted for lower title position (was 2.2)
 
 # Card Styling
-CHAT_API_CARD_BORDER_WIDTH = Pt(4)  # Left border
+CHAT_API_CARD_BORDER_WIDTH = Pt(2)  # Left border - reduced to half (was 4)
 CHAT_API_CARD_BORDER_RADIUS = 0.15  # Rounded corners (adjustments parameter)
 CHAT_API_CARD_FILL_ALPHA = 0.1  # Background opacity
 
-# Metadata section (left side of card)
-CHAT_API_METADATA_WIDTH = Inches(3.3)  # 320px
+# Metadata section (left side of card) - adjusted for narrower cards
+CHAT_API_METADATA_WIDTH = Inches(2.8)  # Reduced for narrower cards (was 3.3)
 CHAT_API_METADATA_X_OFFSET = Inches(0.25)  # Padding from left
 
 # Role Badge (pill-shaped)
@@ -927,13 +927,13 @@ FONT_SIZE_CHAT_API_NOTE = Pt(11)
 FONT_COLOR_CHAT_API_NOTE = COLOR_TEXT_GRAY
 
 # Divider (vertical line)
-CHAT_API_DIVIDER_X_OFFSET = Inches(3.6)  # From left of card
+CHAT_API_DIVIDER_X_OFFSET = Inches(3.1)  # Adjusted for narrower cards (was 3.6)
 CHAT_API_DIVIDER_WIDTH = Pt(2)
 CHAT_API_DIVIDER_HEIGHT_OFFSET = Inches(0.15)  # Margin top/bottom
 
 # Message Content (right side)
-CHAT_API_CONTENT_X_OFFSET = Inches(4)  # From left of card (after divider)
-CHAT_API_CONTENT_WIDTH = Inches(7.75)  # Remaining width
+CHAT_API_CONTENT_X_OFFSET = Inches(3.45)  # Adjusted after divider (was 4)
+CHAT_API_CONTENT_WIDTH = Inches(6.5)  # Adjusted for narrower cards: 10.2 - 3.45 - 0.25 (was 7.75)
 FONT_SIZE_CHAT_API_CONTENT = Pt(13)
 FONT_COLOR_CHAT_API_CONTENT = RGBColor(255, 255, 255)  # White with opacity via text
 
