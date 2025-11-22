@@ -8,29 +8,50 @@ import subprocess
 import os
 
 # Icon files to convert
-icons = ["legal", "medical", "financial", "engineering"]
+icons = ["legal", "medical", "financial", "engineering", "thermometer", "encryption_lock", "encryption_unlock", "cloud_server"]
 
-# Output size: 3x for high DPI (48px base * 3 = 144px)
-output_size = 144
+# Output size: High resolution for sharp icons
+# Standard icons: 144px, Thermometer: 400px, Lock icons: 300px, Cloud: 300px
+output_sizes = {
+    "legal": 144,
+    "medical": 144,
+    "financial": 144,
+    "engineering": 144,
+    "thermometer": 400,  # Higher resolution for large display on slide
+    "encryption_lock": 300,  # High resolution for encryption slide
+    "encryption_unlock": 300,  # High resolution for encryption slide
+    "cloud_server": 300  # High resolution for encryption slide
+}
+
+# Icons that need tight cropping (export only the drawn area, no extra space)
+crop_to_drawing = ["cloud_server"]
 
 print("🎨 Converting SVG icons to high-resolution PNGs using Inkscape...")
 
 for icon_name in icons:
     svg_path = f"assets/icons/{icon_name}.svg"
     png_path = f"assets/icons/{icon_name}.png"
+    size = output_sizes.get(icon_name, 144)  # Default to 144 if not specified
 
     try:
-        # Use Inkscape to convert SVG to PNG
-        subprocess.run([
+        # Build Inkscape command
+        cmd = [
             "/opt/homebrew/bin/inkscape",
             svg_path,
             "--export-type=png",
             f"--export-filename={png_path}",
-            f"--export-width={output_size}",
-            f"--export-height={output_size}"
-        ], check=True, capture_output=True, text=True)
+            f"--export-width={size}",
+            f"--export-height={size}"
+        ]
 
-        print(f"   ✅ {icon_name}.svg → {icon_name}.png ({output_size}x{output_size}px)")
+        # Add --export-area-drawing for icons that need tight cropping
+        if icon_name in crop_to_drawing:
+            cmd.append("--export-area-drawing")
+
+        # Use Inkscape to convert SVG to PNG
+        subprocess.run(cmd, check=True, capture_output=True, text=True)
+
+        print(f"   ✅ {icon_name}.svg → {icon_name}.png ({size}x{size}px)")
     except subprocess.CalledProcessError as e:
         print(f"   ❌ Failed to convert {icon_name}.svg: {str(e)}")
         print(f"      stderr: {e.stderr}")

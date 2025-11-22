@@ -1306,14 +1306,6 @@ def create_slide_11(prs):
         segment.fill.fore_color.rgb = color
         segment.line.color.rgb = color
 
-    # Thermometer Icon (left side, spans from but to no)
-    # Add picture with only height specified to maintain aspect ratio
-    thermo_pic = slide.shapes.add_picture(
-        PREDICTION_THERMO_ICON,
-        PREDICTION_THERMO_X, PREDICTION_THERMO_Y,
-        height=PREDICTION_THERMO_HEIGHT
-    )
-
     # Arrow down
     arrow_box = slide.shapes.add_textbox(
         PREDICTION_CONTENT_X + (PREDICTION_CONTENT_WIDTH / 2) - Inches(0.3),
@@ -1403,6 +1395,14 @@ def create_slide_11(prs):
         p.font.bold = True
         for run in p.runs:
             run.font.name = FONT_FAMILY_PREDICTION_VALUE
+
+    # Thermometer Icon (left side, spans from but to no)
+    # Drawn LAST so it appears in foreground (can be clicked in PowerPoint)
+    thermo_pic = slide.shapes.add_picture(
+        PREDICTION_THERMO_ICON,
+        PREDICTION_THERMO_X, PREDICTION_THERMO_Y,
+        height=PREDICTION_THERMO_HEIGHT
+    )
 
     return prs
 
@@ -1772,7 +1772,7 @@ def create_slide_18(prs):
     for run in p.runs:
         run.font.name = FONT_FAMILY_ENCRYPTION_TITLE
 
-    # Subtitle
+    # Subtitle (red mono font like Slide 2)
     subtitle_box = slide.shapes.add_textbox(
         ENCRYPTION_TITLE_X, ENCRYPTION_SUBTITLE_Y,
         ENCRYPTION_TITLE_WIDTH, ENCRYPTION_TITLE_HEIGHT
@@ -1782,9 +1782,9 @@ def create_slide_18(prs):
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
     p.font.size = FONT_SIZE_ENCRYPTION_SUBTITLE
-    p.font.color.rgb = FONT_COLOR_ENCRYPTION_SUBTITLE
+    p.font.color.rgb = FONT_COLOR_CONTENT_SUBTITLE_ALERT  # Red like Slide 2
     for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_REGULAR
+        run.font.name = FONT_FAMILY_SUBTITLE  # Menlo mono font
 
     # === STEP 3: Remote Cloud Server (Top Center) ===
     # Card
@@ -1800,12 +1800,12 @@ def create_slide_18(prs):
     inference_card.adjustments[0] = 0.05
 
     # Icon (drawn first so title text appears on top)
-    icon_x = ENCRYPTION_TOP_X + Inches(ENCRYPTION_ICON_X_OFFSET)
+    icon_x = ENCRYPTION_TOP_X + Inches(ENCRYPTION_CLOUD_ICON_X_OFFSET)
     icon_y = ENCRYPTION_TOP_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
     cloud_icon = slide.shapes.add_picture(
         ENCRYPTION_CLOUD_ICON,
         icon_x, icon_y,
-        width=ENCRYPTION_ICON_WIDTH
+        width=ENCRYPTION_CLOUD_ICON_WIDTH
     )
 
     # Title (drawn after icon, appears on top in vertical layout, centered)
@@ -1852,7 +1852,7 @@ def create_slide_18(prs):
         ENCRYPTION_TOP_CARD_WIDTH - Inches(1.0), Inches(0.6)
     )
     tf = processing_box.text_frame
-    tf.text = "Processing..."
+    tf.text = "Inferencing"
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
@@ -1861,20 +1861,20 @@ def create_slide_18(prs):
     for run in p.runs:
         run.font.name = FONT_FAMILY_INTER_REGULAR
 
-    # Description
-    desc_box = slide.shapes.add_textbox(
-        ENCRYPTION_TOP_X + Inches(0.3),
-        ENCRYPTION_TOP_Y + Inches(ENCRYPTION_DESC_Y_OFFSET) - Inches(0.5),
-        ENCRYPTION_TOP_CARD_WIDTH - Inches(0.6), Inches(0.4)
-    )
-    tf = desc_box.text_frame
-    tf.text = "LLM processes plain text"
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_ENCRYPTION_DESC
-    p.font.color.rgb = COLOR_TEXT_GRAY
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_REGULAR
+    # Description - REMOVED (user request)
+    # desc_box = slide.shapes.add_textbox(
+    #     ENCRYPTION_TOP_X + Inches(0.3),
+    #     ENCRYPTION_TOP_Y + Inches(ENCRYPTION_DESC_Y_OFFSET) - Inches(0.5),
+    #     ENCRYPTION_TOP_CARD_WIDTH - Inches(0.6), Inches(0.4)
+    # )
+    # tf = desc_box.text_frame
+    # tf.text = "LLM processes plain text"
+    # p = tf.paragraphs[0]
+    # p.alignment = PP_ALIGN.CENTER
+    # p.font.size = FONT_SIZE_ENCRYPTION_DESC
+    # p.font.color.rgb = COLOR_TEXT_GRAY
+    # for run in p.runs:
+    #     run.font.name = FONT_FAMILY_INTER_REGULAR
 
     # === STEP 1: Encrypted Data (Bottom Left) ===
     # Card
@@ -1890,12 +1890,12 @@ def create_slide_18(prs):
     encrypted_card.adjustments[0] = 0.05
 
     # Icon (drawn first so title text appears on top)
-    icon_x = ENCRYPTION_LEFT_X + Inches(ENCRYPTION_ICON_X_OFFSET)
+    icon_x = ENCRYPTION_LEFT_X + Inches(ENCRYPTION_LOCK_ICON_X_OFFSET)
     icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
     lock_icon = slide.shapes.add_picture(
         ENCRYPTION_LOCK_ICON,
         icon_x, icon_y,
-        width=ENCRYPTION_ICON_WIDTH
+        width=ENCRYPTION_LOCK_ICON_WIDTH
     )
 
     # Title (drawn after icon, appears on top in vertical layout, centered)
@@ -1966,20 +1966,20 @@ def create_slide_18(prs):
         for run in p.runs:
             run.font.name = FONT_FAMILY_INTER_REGULAR
 
-    # Description
-    desc_box = slide.shapes.add_textbox(
-        ENCRYPTION_LEFT_X + Inches(0.3),
-        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DESC_Y_OFFSET),
-        ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
-    )
-    tf = desc_box.text_frame
-    tf.text = "Secure network transmission"
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_ENCRYPTION_DESC
-    p.font.color.rgb = COLOR_TEXT_GRAY
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_REGULAR
+    # Description - REMOVED (user request)
+    # desc_box = slide.shapes.add_textbox(
+    #     ENCRYPTION_LEFT_X + Inches(0.3),
+    #     ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DESC_Y_OFFSET),
+    #     ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
+    # )
+    # tf = desc_box.text_frame
+    # tf.text = "Secure network transmission"
+    # p = tf.paragraphs[0]
+    # p.alignment = PP_ALIGN.CENTER
+    # p.font.size = FONT_SIZE_ENCRYPTION_DESC
+    # p.font.color.rgb = COLOR_TEXT_GRAY
+    # for run in p.runs:
+    #     run.font.name = FONT_FAMILY_INTER_REGULAR
 
     # === STEP 2: Decrypted Data (Bottom Right) ===
     # Card
@@ -1995,12 +1995,12 @@ def create_slide_18(prs):
     decrypted_card.adjustments[0] = 0.05
 
     # Icon (drawn first so title text appears on top)
-    icon_x = ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_ICON_X_OFFSET)
+    icon_x = ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_LOCK_ICON_X_OFFSET)
     icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
     unlock_icon = slide.shapes.add_picture(
         ENCRYPTION_UNLOCK_ICON,
         icon_x, icon_y,
-        width=ENCRYPTION_ICON_WIDTH
+        width=ENCRYPTION_LOCK_ICON_WIDTH
     )
 
     # Title (drawn after icon, appears on top in vertical layout, centered)
@@ -2071,20 +2071,20 @@ def create_slide_18(prs):
         for run in p.runs:
             run.font.name = FONT_FAMILY_INTER_REGULAR
 
-    # Description
-    desc_box = slide.shapes.add_textbox(
-        ENCRYPTION_RIGHT_X + Inches(0.3),
-        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DESC_Y_OFFSET),
-        ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
-    )
-    tf = desc_box.text_frame
-    tf.text = "Plain text for AI processing"
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_ENCRYPTION_DESC
-    p.font.color.rgb = COLOR_TEXT_GRAY
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_REGULAR
+    # Description - REMOVED (user request)
+    # desc_box = slide.shapes.add_textbox(
+    #     ENCRYPTION_RIGHT_X + Inches(0.3),
+    #     ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DESC_Y_OFFSET),
+    #     ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
+    # )
+    # tf = desc_box.text_frame
+    # tf.text = "Plain text for AI processing"
+    # p = tf.paragraphs[0]
+    # p.alignment = PP_ALIGN.CENTER
+    # p.font.size = FONT_SIZE_ENCRYPTION_DESC
+    # p.font.color.rgb = COLOR_TEXT_GRAY
+    # for run in p.runs:
+    #     run.font.name = FONT_FAMILY_INTER_REGULAR
 
     return prs
 def create_placeholder_slide(prs, slide_num):

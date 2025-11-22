@@ -805,26 +805,26 @@ FONT_FAMILY_ENCRYPTION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
 FONT_COLOR_ENCRYPTION_TITLE = COLOR_ACCENT_BLUE
 
 # Subtitle
-ENCRYPTION_SUBTITLE_Y = Inches(1.6)  # Increased spacing from title
+ENCRYPTION_SUBTITLE_Y = Inches(1.65)  # More breathing room from title
 FONT_SIZE_ENCRYPTION_SUBTITLE = Pt(16)
 FONT_COLOR_ENCRYPTION_SUBTITLE = COLOR_TEXT_GRAY
 
 # Stage Cards Layout (smaller cards, better spacing)
-ENCRYPTION_CARD_WIDTH = Inches(5.3)
-ENCRYPTION_CARD_HEIGHT = Inches(3.2)
+ENCRYPTION_CARD_WIDTH = Inches(4.5)  # Reduced from 5.3 for smaller, more elegant cards
+ENCRYPTION_CARD_HEIGHT = Inches(2.8)  # Reduced from 3.2
 ENCRYPTION_CARD_BORDER_WIDTH = Pt(1.5)
 ENCRYPTION_CARD_FILL_COLOR = RGBColor(31, 41, 55)
 
-# Bottom row (Steps 1 & 2) - more space between cards
-ENCRYPTION_BOTTOM_Y = Inches(5.5)  # Moved down for better spacing
-ENCRYPTION_LEFT_X = Inches(0.8)
-ENCRYPTION_RIGHT_X = Inches(9.9)
+# Bottom row (Steps 1 & 2) - symmetric positioning
+ENCRYPTION_BOTTOM_Y = Inches(5.7)  # Slightly lower for more balanced spacing
+ENCRYPTION_LEFT_X = Inches(2.9)  # Centered: (16 - (4.5*2 + 1.2)) / 2 = 2.9
+ENCRYPTION_RIGHT_X = Inches(8.6)  # 2.9 + 4.5 + 1.2 = 8.6
 
 # Top center (Step 3) - smaller and centered
-ENCRYPTION_TOP_Y = Inches(2.4)  # Moved down for better spacing from subtitle
-ENCRYPTION_TOP_X = Inches(5.35)  # Centered (16 - 5.3) / 2
-ENCRYPTION_TOP_CARD_WIDTH = Inches(5.3)
-ENCRYPTION_TOP_CARD_HEIGHT = Inches(2.6)
+ENCRYPTION_TOP_Y = Inches(2.65)  # More breathing room from subtitle (was 2.4)
+ENCRYPTION_TOP_X = Inches(5.75)  # Centered: (16 - 4.5) / 2 = 5.75
+ENCRYPTION_TOP_CARD_WIDTH = Inches(4.5)  # Reduced from 5.3
+ENCRYPTION_TOP_CARD_HEIGHT = Inches(2.2)  # Reduced from 2.6
 
 # Step number (inside cards, blue circles, top left corner)
 ENCRYPTION_STEP_NUMBER_SIZE = Inches(0.65)
@@ -835,34 +835,41 @@ COLOR_ENCRYPTION_STEP_NUMBER_BG = COLOR_ACCENT_BLUE
 COLOR_ENCRYPTION_STEP_NUMBER_TEXT = COLOR_TEXT_WHITE
 
 # Stage header inside card (now below icon in vertical layout)
-ENCRYPTION_STAGE_TITLE_Y_OFFSET = 1.2  # Below icon with more space
+ENCRYPTION_STAGE_TITLE_Y_OFFSET = 1.0  # Below icon, adjusted for smaller cards
 ENCRYPTION_STAGE_TITLE_X_OFFSET = 0.3  # Left-aligned with step number
-FONT_SIZE_ENCRYPTION_STAGE_TITLE = Pt(18)
+FONT_SIZE_ENCRYPTION_STAGE_TITLE = Pt(16)  # Slightly smaller for compact layout
 FONT_FAMILY_ENCRYPTION_STAGE_TITLE = FONT_FAMILY_INTER_REGULAR
 
 # Icon area (now positioned above title in own row, centered horizontally)
-ENCRYPTION_ICON_WIDTH = Inches(1.7)  # 2x larger icons for better visibility
-ENCRYPTION_ICON_X_OFFSET = 1.8  # Centered: (5.3 - 1.7) / 2 = 1.8
-ENCRYPTION_ICON_Y_OFFSET = 0.2  # Top of card
+# Cloud icon (top card) - significantly reduced size
+ENCRYPTION_CLOUD_ICON_WIDTH = Inches(0.75)  # Much smaller, similar to locks
+ENCRYPTION_CLOUD_ICON_X_OFFSET = 1.875  # Centered: (4.5 - 0.75) / 2 = 1.875
+
+# Lock icons (bottom cards) - smaller, more subtle
+ENCRYPTION_LOCK_ICON_WIDTH = Inches(0.55)  # Smaller for subtle appearance
+ENCRYPTION_LOCK_ICON_X_OFFSET = 1.975  # Centered: (4.5 - 0.55) / 2 = 1.975
+
+# Y offset (same for all icons) - aligned with step number circles
+ENCRYPTION_ICON_Y_OFFSET = 0.3  # Aligned with number circles (was 0.15)
 
 # Data blocks with background (styled boxes)
-ENCRYPTION_DATA_Y_OFFSET = 1.8  # Below icon and title in vertical layout
-ENCRYPTION_DATA_BLOCK_WIDTH = Inches(1.4)  # Reduced to fit within card boundaries
-ENCRYPTION_DATA_BLOCK_HEIGHT = Inches(0.4)
-ENCRYPTION_DATA_BLOCK_GAP_X = Inches(0.15)  # Reduced gap to prevent overflow
-ENCRYPTION_DATA_BLOCK_GAP_Y = Inches(0.2)  # Increased vertical spacing
-ENCRYPTION_DATA_START_X_OFFSET = 0.5  # Increased left margin inside card
+ENCRYPTION_DATA_Y_OFFSET = 1.6  # Below icon and title in vertical layout
+ENCRYPTION_DATA_BLOCK_WIDTH = Inches(1.15)  # Scaled down for smaller cards
+ENCRYPTION_DATA_BLOCK_HEIGHT = Inches(0.35)  # Slightly smaller
+ENCRYPTION_DATA_BLOCK_GAP_X = Inches(0.15)  # Gap between blocks
+ENCRYPTION_DATA_BLOCK_GAP_Y = Inches(0.18)  # Vertical spacing
+ENCRYPTION_DATA_START_X_OFFSET = 0.4  # Centered: (4.5 - 3.75) / 2
 ENCRYPTION_DATA_BLOCK_BORDER_WIDTH = Pt(1)
 ENCRYPTION_DATA_BLOCK_FILL_ALPHA = 0.1  # Subtle background
-FONT_SIZE_ENCRYPTION_DATA = Pt(12)
+FONT_SIZE_ENCRYPTION_DATA = Pt(11)  # Slightly smaller font
 
 # Stage description at bottom
 ENCRYPTION_DESC_Y_OFFSET = 2.5  # Moved up for better margin from bottom
 FONT_SIZE_ENCRYPTION_DESC = Pt(12)
 
 # Processing text (for Step 3)
-ENCRYPTION_PROCESSING_Y_OFFSET = 1.3
-FONT_SIZE_ENCRYPTION_PROCESSING = Pt(24)
+ENCRYPTION_PROCESSING_Y_OFFSET = 1.1  # Adjusted for smaller top card
+FONT_SIZE_ENCRYPTION_PROCESSING = Pt(20)  # Slightly smaller
 
 # Colors (adjusted to match blue/cyan spectrum of other slides)
 COLOR_ENCRYPTION_ENCRYPTED = RGBColor(139, 92, 246)  # Purple/Violet #8b5cf6
@@ -875,7 +882,7 @@ ENCRYPTION_UNLOCK_ICON = "assets/icons/encryption_unlock.png"
 ENCRYPTION_CLOUD_ICON = "assets/icons/cloud_server.png"  # Reuse from Slide 17
 
 # Data
-ENCRYPTION_ENCRYPTED_BLOCKS = ["♦7k9mR2p", "nQ4▲B1zL", "wE8†Y3sM", "fG2hJ6◈N", "aM9▼R4pL", "vN3s✤8wK"]
+ENCRYPTION_ENCRYPTED_BLOCKS = ["x7k9mR2p", "nQ4▲B1zL", "wE8†Y3sM", "fG2hJ6◈N", "aM9▼R4pL", "vN3s✤8wK"]
 ENCRYPTION_DECRYPTED_BLOCKS = ["Witnesses", "must", "tell", "nothing,", "but", "the"]
 
 # =============================================================================
