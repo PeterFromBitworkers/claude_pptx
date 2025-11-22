@@ -114,7 +114,7 @@ def apply_master_elements(slide, slide_num, total_slides=17):
 def create_slide_1(prs):
     """Slide 1: THE AI PARADOX"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 1)
+    apply_master_elements(slide, 1, 20)
 
     # The three keywords - using KEYWORD_THEME_PROBLEM
     keywords = [
@@ -148,7 +148,7 @@ def create_slide_1(prs):
 def create_slide_2(prs):
     """Slide 2: Organisations want AI"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 2)
+    apply_master_elements(slide, 2, 20)
 
     # Fixed header
     title_box = slide.shapes.add_textbox(
@@ -305,7 +305,7 @@ def create_slide_2(prs):
 def create_slide_3(prs):
     """Slide 3: Market Reality"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 3)
+    apply_master_elements(slide, 3, 20)
 
     # Fixed header
     title_box = slide.shapes.add_textbox(
@@ -475,7 +475,7 @@ def create_slide_3(prs):
 def create_slide_4(prs):
     """Slide 4: SOVEREIGN AI SOLUTION"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 4)
+    apply_master_elements(slide, 4, 20)
 
     # The three keywords - using KEYWORD_THEME_SOLUTION
     keywords = [
@@ -509,7 +509,7 @@ def create_slide_4(prs):
 def create_slide_5(prs):
     """Slide 5: BRAIN-BRIDGES Introduction (like Slide 6 but with text instead of features)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 5)
+    apply_master_elements(slide, 5, 20)
 
     # =========================================================================
     # LEFT SIDE: Title, Subtitle, Description Text
@@ -652,7 +652,7 @@ def create_slide_5(prs):
 def create_slide_6(prs):
     """Slide 6: BRAIN-BRIDGES Hero Slide"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 6)
+    apply_master_elements(slide, 6, 20)
 
     # =========================================================================
     # LEFT SIDE: Title, Subtitle, Features
@@ -941,7 +941,7 @@ def create_slide_6(prs):
 def create_slide_7(prs):
     """Slide 7: UNDERSTANDING INFERENCE MECHANICS"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 7)
+    apply_master_elements(slide, 7, 20)
 
     # The three keywords - using KEYWORD_THEME_TECH
     keywords = [
@@ -975,7 +975,7 @@ def create_slide_7(prs):
 def create_slide_8(prs):
     """Slide 8: Tokenization Intro - A Sample from legal domain"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 8)
+    apply_master_elements(slide, 8, 20)
 
     # Title: "A Sample from legal domain:"
     title_box = slide.shapes.add_textbox(
@@ -1036,7 +1036,7 @@ def create_slide_8(prs):
 def create_slide_9(prs):
     """Slide 9: Vector Embeddings (Token → Vector Lookup)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 9)
+    apply_master_elements(slide, 9, 20)
 
     # Create each token row (Wit, nesses, must, tell, nothing)
     for i, token_info in enumerate(TOKEN_DATA):
@@ -1113,7 +1113,7 @@ def create_slide_9(prs):
 def create_slide_10(prs):
     """Slide 10: Attention is all you need - Attention Matrix"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 10)
+    apply_master_elements(slide, 10, 20)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1244,7 +1244,7 @@ def create_slide_10(prs):
 def create_slide_11(prs):
     """Slide 11: Next word prediction"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 11)
+    apply_master_elements(slide, 11, 20)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1553,7 +1553,7 @@ def create_slide_15(prs):
 def create_slide_16(prs):
     """Slide 16: ON PREMISE MATTERS"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 16)
+    apply_master_elements(slide, 16, 20)
 
     # The three keywords - using KEYWORD_THEME_SOLUTION
     keywords = [
@@ -1587,7 +1587,7 @@ def create_slide_16(prs):
 def create_slide_17(prs):
     """Slide 17: The Fundamental Security Conflict"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 17)
+    apply_master_elements(slide, 17, 20)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1753,6 +1753,343 @@ def create_slide_17(prs):
 
     return prs
 
+def create_slide_18(prs):
+    """Slide 18: The Encryption Dilemma - Redesigned Layout"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 18, 20)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        ENCRYPTION_TITLE_X, ENCRYPTION_TITLE_Y,
+        ENCRYPTION_TITLE_WIDTH, ENCRYPTION_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = "The Encryption Dilemma"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_TITLE
+    p.font.color.rgb = FONT_COLOR_ENCRYPTION_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_TITLE
+
+    # Subtitle
+    subtitle_box = slide.shapes.add_textbox(
+        ENCRYPTION_TITLE_X, ENCRYPTION_SUBTITLE_Y,
+        ENCRYPTION_TITLE_WIDTH, ENCRYPTION_TITLE_HEIGHT
+    )
+    tf = subtitle_box.text_frame
+    tf.text = "Data must be decrypted for inference processing"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_SUBTITLE
+    p.font.color.rgb = FONT_COLOR_ENCRYPTION_SUBTITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # === STEP 3: Remote Cloud Server (Top Center) ===
+    # Step number (blue circle, above card)
+    step3_num_circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        ENCRYPTION_TOP_X + Inches(ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET),
+        ENCRYPTION_TOP_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE),
+        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
+    )
+    step3_num_circle.fill.solid()
+    step3_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
+    step3_num_circle.line.width = Pt(0)
+
+    # Text directly in the OVAL shape
+    tf = step3_num_circle.text_frame
+    tf.text = "3"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
+    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
+
+    # Card
+    inference_card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        ENCRYPTION_TOP_X, ENCRYPTION_TOP_Y,
+        ENCRYPTION_TOP_CARD_WIDTH, ENCRYPTION_TOP_CARD_HEIGHT
+    )
+    inference_card.fill.solid()
+    inference_card.fill.fore_color.rgb = ENCRYPTION_CARD_FILL_COLOR
+    inference_card.line.color.rgb = COLOR_ENCRYPTION_INFERENCE
+    inference_card.line.width = ENCRYPTION_CARD_BORDER_WIDTH
+    inference_card.adjustments[0] = 0.05
+
+    # Title
+    stage_title_box = slide.shapes.add_textbox(
+        ENCRYPTION_TOP_X + Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET),
+        ENCRYPTION_TOP_Y + Inches(ENCRYPTION_STAGE_TITLE_Y_OFFSET),
+        ENCRYPTION_TOP_CARD_WIDTH - Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET + 1.5), Inches(0.4)
+    )
+    tf = stage_title_box.text_frame
+    tf.text = "Remote Cloud Server"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.LEFT
+    p.font.size = FONT_SIZE_ENCRYPTION_STAGE_TITLE
+    p.font.color.rgb = COLOR_ENCRYPTION_INFERENCE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
+
+    # Icon - temporarily disabled for debugging
+    # icon_x = ENCRYPTION_TOP_X + ENCRYPTION_TOP_CARD_WIDTH - Inches(ENCRYPTION_ICON_WIDTH) - Inches(0.3)
+    # icon_y = ENCRYPTION_TOP_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
+    # cloud_icon = slide.shapes.add_picture(
+    #     ENCRYPTION_CLOUD_ICON,
+    #     icon_x, icon_y,
+    #     width=ENCRYPTION_ICON_WIDTH
+    # )
+
+    # Processing text
+    processing_box = slide.shapes.add_textbox(
+        ENCRYPTION_TOP_X + Inches(0.5),
+        ENCRYPTION_TOP_Y + Inches(ENCRYPTION_PROCESSING_Y_OFFSET),
+        ENCRYPTION_TOP_CARD_WIDTH - Inches(1.0), Inches(0.6)
+    )
+    tf = processing_box.text_frame
+    tf.text = "Processing..."
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_PROCESSING
+    p.font.color.rgb = COLOR_ENCRYPTION_INFERENCE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Description
+    desc_box = slide.shapes.add_textbox(
+        ENCRYPTION_TOP_X + Inches(0.3),
+        ENCRYPTION_TOP_Y + Inches(ENCRYPTION_DESC_Y_OFFSET) - Inches(0.5),
+        ENCRYPTION_TOP_CARD_WIDTH - Inches(0.6), Inches(0.4)
+    )
+    tf = desc_box.text_frame
+    tf.text = "LLM processes plain text"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_DESC
+    p.font.color.rgb = COLOR_TEXT_GRAY
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # === STEP 1: Encrypted Data (Bottom Left) ===
+    # Step number (blue circle, above card)
+    step1_num_circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        ENCRYPTION_LEFT_X + Inches(ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE),
+        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
+    )
+    step1_num_circle.fill.solid()
+    step1_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
+    step1_num_circle.line.width = Pt(0)
+
+    # Text directly in the OVAL shape
+    tf = step1_num_circle.text_frame
+    tf.text = "1"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
+    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
+
+    # Card
+    encrypted_card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        ENCRYPTION_LEFT_X, ENCRYPTION_BOTTOM_Y,
+        ENCRYPTION_CARD_WIDTH, ENCRYPTION_CARD_HEIGHT
+    )
+    encrypted_card.fill.solid()
+    encrypted_card.fill.fore_color.rgb = ENCRYPTION_CARD_FILL_COLOR
+    encrypted_card.line.color.rgb = COLOR_ENCRYPTION_ENCRYPTED
+    encrypted_card.line.width = ENCRYPTION_CARD_BORDER_WIDTH
+    encrypted_card.adjustments[0] = 0.05
+
+    # Title
+    stage_title_box = slide.shapes.add_textbox(
+        ENCRYPTION_LEFT_X + Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STAGE_TITLE_Y_OFFSET),
+        ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET + 1.5), Inches(0.4)
+    )
+    tf = stage_title_box.text_frame
+    tf.text = "Encrypted Data"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.LEFT
+    p.font.size = FONT_SIZE_ENCRYPTION_STAGE_TITLE
+    p.font.color.rgb = COLOR_ENCRYPTION_ENCRYPTED
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
+
+    # Icon - temporarily disabled for debugging
+    # icon_x = ENCRYPTION_LEFT_X + ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_ICON_WIDTH) - Inches(0.3)
+    # icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
+    # lock_icon = slide.shapes.add_picture(
+    #     ENCRYPTION_LOCK_ICON,
+    #     icon_x, icon_y,
+    #     width=ENCRYPTION_ICON_WIDTH
+    # )
+
+    # Data blocks (encrypted) - styled with borders
+    for i, block_text in enumerate(ENCRYPTION_ENCRYPTED_BLOCKS):
+        row = i // 3
+        col = i % 3
+        block_x = ENCRYPTION_LEFT_X + Inches(ENCRYPTION_DATA_START_X_OFFSET) + (col * (ENCRYPTION_DATA_BLOCK_WIDTH + ENCRYPTION_DATA_BLOCK_GAP_X))
+        block_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DATA_Y_OFFSET) + (row * (ENCRYPTION_DATA_BLOCK_HEIGHT + ENCRYPTION_DATA_BLOCK_GAP_Y))
+
+        # Box with border and text inside
+        block_shape = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            block_x, block_y,
+            ENCRYPTION_DATA_BLOCK_WIDTH, ENCRYPTION_DATA_BLOCK_HEIGHT
+        )
+        block_shape.fill.solid()
+        block_shape.fill.fore_color.rgb = ENCRYPTION_CARD_FILL_COLOR
+        block_shape.line.color.rgb = COLOR_ENCRYPTION_ENCRYPTED
+        block_shape.line.width = ENCRYPTION_DATA_BLOCK_BORDER_WIDTH
+        block_shape.adjustments[0] = 0.1
+
+        # Text directly in the shape
+        tf = block_shape.text_frame
+        tf.text = block_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_ENCRYPTION_DATA
+        p.font.color.rgb = COLOR_ENCRYPTION_ENCRYPTED
+        p.font.bold = True
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Description
+    desc_box = slide.shapes.add_textbox(
+        ENCRYPTION_LEFT_X + Inches(0.3),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DESC_Y_OFFSET),
+        ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
+    )
+    tf = desc_box.text_frame
+    tf.text = "Secure network transmission"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_DESC
+    p.font.color.rgb = COLOR_TEXT_GRAY
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # === STEP 2: Decrypted Data (Bottom Right) ===
+    # Step number (blue circle, above card)
+    step2_num_circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE),
+        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
+    )
+    step2_num_circle.fill.solid()
+    step2_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
+    step2_num_circle.line.width = Pt(0)
+
+    # Text directly in the OVAL shape
+    tf = step2_num_circle.text_frame
+    tf.text = "2"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
+    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
+
+    # Card
+    decrypted_card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        ENCRYPTION_RIGHT_X, ENCRYPTION_BOTTOM_Y,
+        ENCRYPTION_CARD_WIDTH, ENCRYPTION_CARD_HEIGHT
+    )
+    decrypted_card.fill.solid()
+    decrypted_card.fill.fore_color.rgb = ENCRYPTION_CARD_FILL_COLOR
+    decrypted_card.line.color.rgb = COLOR_ENCRYPTION_DECRYPTED
+    decrypted_card.line.width = ENCRYPTION_CARD_BORDER_WIDTH
+    decrypted_card.adjustments[0] = 0.05
+
+    # Title
+    stage_title_box = slide.shapes.add_textbox(
+        ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STAGE_TITLE_Y_OFFSET),
+        ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET + 1.5), Inches(0.4)
+    )
+    tf = stage_title_box.text_frame
+    tf.text = "Decrypted Data"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.LEFT
+    p.font.size = FONT_SIZE_ENCRYPTION_STAGE_TITLE
+    p.font.color.rgb = COLOR_ENCRYPTION_DECRYPTED
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
+
+    # Icon - temporarily disabled for debugging
+    # icon_x = ENCRYPTION_RIGHT_X + ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_ICON_WIDTH) - Inches(0.3)
+    # icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
+    # unlock_icon = slide.shapes.add_picture(
+    #     ENCRYPTION_UNLOCK_ICON,
+    #     icon_x, icon_y,
+    #     width=ENCRYPTION_ICON_WIDTH
+    # )
+
+    # Data blocks (decrypted) - styled with borders
+    for i, block_text in enumerate(ENCRYPTION_DECRYPTED_BLOCKS):
+        row = i // 3
+        col = i % 3
+        block_x = ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_DATA_START_X_OFFSET) + (col * (ENCRYPTION_DATA_BLOCK_WIDTH + ENCRYPTION_DATA_BLOCK_GAP_X))
+        block_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DATA_Y_OFFSET) + (row * (ENCRYPTION_DATA_BLOCK_HEIGHT + ENCRYPTION_DATA_BLOCK_GAP_Y))
+
+        # Box with border and text inside
+        block_shape = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            block_x, block_y,
+            ENCRYPTION_DATA_BLOCK_WIDTH, ENCRYPTION_DATA_BLOCK_HEIGHT
+        )
+        block_shape.fill.solid()
+        block_shape.fill.fore_color.rgb = ENCRYPTION_CARD_FILL_COLOR
+        block_shape.line.color.rgb = COLOR_ENCRYPTION_DECRYPTED
+        block_shape.line.width = ENCRYPTION_DATA_BLOCK_BORDER_WIDTH
+        block_shape.adjustments[0] = 0.1
+
+        # Text directly in the shape
+        tf = block_shape.text_frame
+        tf.text = block_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_ENCRYPTION_DATA
+        p.font.color.rgb = COLOR_ENCRYPTION_DECRYPTED
+        p.font.bold = True
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Description
+    desc_box = slide.shapes.add_textbox(
+        ENCRYPTION_RIGHT_X + Inches(0.3),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_DESC_Y_OFFSET),
+        ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
+    )
+    tf = desc_box.text_frame
+    tf.text = "Plain text for AI processing"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_DESC
+    p.font.color.rgb = COLOR_TEXT_GRAY
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    return prs
 def create_placeholder_slide(prs, slide_num):
     """Creates a placeholder slide for later editing"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
@@ -1822,6 +2159,9 @@ def create_presentation():
 
     # Slide 17: The Fundamental Security Conflict
     create_slide_17(prs)
+
+    # Slide 18: The Encryption Dilemma
+    create_slide_18(prs)
 
     return prs
 

@@ -792,6 +792,92 @@ SECURITY_LOCAL_STEPS = [
 ]
 
 # =============================================================================
+# SLIDE 18 - THE ENCRYPTION DILEMMA
+# =============================================================================
+
+# Title
+ENCRYPTION_TITLE_X = Inches(1)
+ENCRYPTION_TITLE_Y = Inches(0.8)
+ENCRYPTION_TITLE_WIDTH = Inches(14)
+ENCRYPTION_TITLE_HEIGHT = Inches(0.6)
+FONT_SIZE_ENCRYPTION_TITLE = Pt(48)
+FONT_FAMILY_ENCRYPTION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
+FONT_COLOR_ENCRYPTION_TITLE = COLOR_ACCENT_BLUE
+
+# Subtitle
+ENCRYPTION_SUBTITLE_Y = Inches(1.5)
+FONT_SIZE_ENCRYPTION_SUBTITLE = Pt(16)
+FONT_COLOR_ENCRYPTION_SUBTITLE = COLOR_TEXT_GRAY
+
+# Stage Cards Layout (smaller cards, better spacing)
+ENCRYPTION_CARD_WIDTH = Inches(5.3)
+ENCRYPTION_CARD_HEIGHT = Inches(3.2)
+ENCRYPTION_CARD_BORDER_WIDTH = Pt(1.5)
+ENCRYPTION_CARD_FILL_COLOR = RGBColor(31, 41, 55)
+
+# Bottom row (Steps 1 & 2) - more space between cards
+ENCRYPTION_BOTTOM_Y = Inches(5.3)
+ENCRYPTION_LEFT_X = Inches(0.8)
+ENCRYPTION_RIGHT_X = Inches(9.9)
+
+# Top center (Step 3) - smaller and centered
+ENCRYPTION_TOP_Y = Inches(2.2)
+ENCRYPTION_TOP_X = Inches(5.35)  # Centered (16 - 5.3) / 2
+ENCRYPTION_TOP_CARD_WIDTH = Inches(5.3)
+ENCRYPTION_TOP_CARD_HEIGHT = Inches(2.6)
+
+# Step number (outside cards, blue circles)
+ENCRYPTION_STEP_NUMBER_SIZE = Inches(0.65)
+ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE = -0.8  # Above card
+ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET = 2.325  # Center of card (5.3 / 2 - 0.65 / 2)
+FONT_SIZE_ENCRYPTION_STEP_NUMBER = Pt(22)
+COLOR_ENCRYPTION_STEP_NUMBER_BG = COLOR_ACCENT_BLUE
+COLOR_ENCRYPTION_STEP_NUMBER_TEXT = COLOR_TEXT_WHITE
+
+# Stage header inside card
+ENCRYPTION_STAGE_TITLE_Y_OFFSET = 0.15
+ENCRYPTION_STAGE_TITLE_X_OFFSET = 0.4
+FONT_SIZE_ENCRYPTION_STAGE_TITLE = Pt(18)
+FONT_FAMILY_ENCRYPTION_STAGE_TITLE = FONT_FAMILY_INTER_REGULAR
+
+# Icon area
+ENCRYPTION_ICON_WIDTH = Inches(1.2)
+ENCRYPTION_ICON_Y_OFFSET = 0.15  # Same as title, placed at right side
+
+# Data blocks with background (styled boxes)
+ENCRYPTION_DATA_Y_OFFSET = 0.9
+ENCRYPTION_DATA_BLOCK_WIDTH = Inches(1.5)
+ENCRYPTION_DATA_BLOCK_HEIGHT = Inches(0.4)
+ENCRYPTION_DATA_BLOCK_GAP_X = Inches(0.2)
+ENCRYPTION_DATA_BLOCK_GAP_Y = Inches(0.15)
+ENCRYPTION_DATA_START_X_OFFSET = 0.4
+ENCRYPTION_DATA_BLOCK_BORDER_WIDTH = Pt(1)
+ENCRYPTION_DATA_BLOCK_FILL_ALPHA = 0.1  # Subtle background
+FONT_SIZE_ENCRYPTION_DATA = Pt(12)
+
+# Stage description at bottom
+ENCRYPTION_DESC_Y_OFFSET = 2.7  # From top of card
+FONT_SIZE_ENCRYPTION_DESC = Pt(12)
+
+# Processing text (for Step 3)
+ENCRYPTION_PROCESSING_Y_OFFSET = 1.3
+FONT_SIZE_ENCRYPTION_PROCESSING = Pt(24)
+
+# Colors
+COLOR_ENCRYPTION_ENCRYPTED = RGBColor(239, 68, 68)  # Red #ef4444
+COLOR_ENCRYPTION_DECRYPTED = RGBColor(251, 191, 36)  # Yellow/Amber #fbbf24
+COLOR_ENCRYPTION_INFERENCE = COLOR_ACCENT_GREEN      # Green #10b981
+
+# Icons
+ENCRYPTION_LOCK_ICON = "assets/icons/encryption_lock.png"
+ENCRYPTION_UNLOCK_ICON = "assets/icons/encryption_unlock.png"
+ENCRYPTION_CLOUD_ICON = "assets/icons/cloud_server.png"  # Reuse from Slide 17
+
+# Data
+ENCRYPTION_ENCRYPTED_BLOCKS = ["♦7k9mR2p", "nQ4▲B1zL", "wE8†Y3sM", "fG2hJ6◈N", "aM9▼R4pL", "vN3s✤8wK"]
+ENCRYPTION_DECRYPTED_BLOCKS = ["Witnesses", "must", "tell", "nothing,", "but", "the"]
+
+# =============================================================================
 # LAYOUT - PLACEHOLDER SLIDES
 # =============================================================================
 
