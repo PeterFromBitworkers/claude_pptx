@@ -1645,26 +1645,33 @@ def create_slide_17(prs):
     for i, step_text in enumerate(SECURITY_CLOUD_STEPS):
         step_y = SECURITY_CARD_Y + Inches(SECURITY_STEP_Y_START_OFFSET + (i * (SECURITY_STEP_HEIGHT.inches + SECURITY_STEP_GAP.inches)))
 
-        # Step number in colored circle
-        num_box = slide.shapes.add_textbox(
-            SECURITY_CARD_LEFT_X + Inches(SECURITY_STEP_X_OFFSET), step_y,
-            Inches(0.5), SECURITY_STEP_HEIGHT
+        # Step number in colored circle (filled oval like Slide 18)
+        num_circle = slide.shapes.add_shape(
+            MSO_SHAPE.OVAL,
+            SECURITY_CARD_LEFT_X + Inches(SECURITY_STEP_X_OFFSET),
+            step_y + (SECURITY_STEP_HEIGHT - SECURITY_STEP_NUMBER_CIRCLE_SIZE) / 2,  # Center vertically
+            SECURITY_STEP_NUMBER_CIRCLE_SIZE, SECURITY_STEP_NUMBER_CIRCLE_SIZE
         )
-        tf = num_box.text_frame
+        num_circle.fill.solid()
+        num_circle.fill.fore_color.rgb = COLOR_SECURITY_CLOUD  # Red fill
+        num_circle.line.fill.background()  # No border at all
+
+        # Text directly in the oval shape
+        tf = num_circle.text_frame
         tf.text = str(i + 1)
         tf.vertical_anchor = MSO_ANCHOR.MIDDLE
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
         p.font.size = FONT_SIZE_SECURITY_STEP_NUMBER
-        p.font.color.rgb = COLOR_SECURITY_CLOUD
+        p.font.color.rgb = COLOR_TEXT_WHITE  # White text on colored background
         p.font.bold = True
         for run in p.runs:
             run.font.name = FONT_FAMILY_SECURITY_STEP
 
         # Step text
         text_box = slide.shapes.add_textbox(
-            SECURITY_CARD_LEFT_X + Inches(SECURITY_STEP_X_OFFSET + 0.7), step_y,
-            SECURITY_CARD_WIDTH - Inches(SECURITY_STEP_X_OFFSET + 0.9), SECURITY_STEP_HEIGHT
+            SECURITY_CARD_LEFT_X + Inches(SECURITY_STEP_X_OFFSET + SECURITY_STEP_TEXT_X_OFFSET), step_y,
+            SECURITY_CARD_WIDTH - Inches(SECURITY_STEP_X_OFFSET + SECURITY_STEP_TEXT_X_OFFSET + 0.2), SECURITY_STEP_HEIGHT
         )
         tf = text_box.text_frame
         tf.text = step_text
@@ -1719,26 +1726,33 @@ def create_slide_17(prs):
     for i, step_text in enumerate(SECURITY_LOCAL_STEPS):
         step_y = SECURITY_CARD_Y + Inches(SECURITY_STEP_Y_START_OFFSET + (i * (SECURITY_STEP_HEIGHT.inches + SECURITY_STEP_GAP.inches)))
 
-        # Step number in colored circle
-        num_box = slide.shapes.add_textbox(
-            SECURITY_CARD_RIGHT_X + Inches(SECURITY_STEP_X_OFFSET), step_y,
-            Inches(0.5), SECURITY_STEP_HEIGHT
+        # Step number in colored circle (filled oval like Slide 18)
+        num_circle = slide.shapes.add_shape(
+            MSO_SHAPE.OVAL,
+            SECURITY_CARD_RIGHT_X + Inches(SECURITY_STEP_X_OFFSET),
+            step_y + (SECURITY_STEP_HEIGHT - SECURITY_STEP_NUMBER_CIRCLE_SIZE) / 2,  # Center vertically
+            SECURITY_STEP_NUMBER_CIRCLE_SIZE, SECURITY_STEP_NUMBER_CIRCLE_SIZE
         )
-        tf = num_box.text_frame
+        num_circle.fill.solid()
+        num_circle.fill.fore_color.rgb = COLOR_SECURITY_LOCAL  # Green fill
+        num_circle.line.fill.background()  # No border at all
+
+        # Text directly in the oval shape
+        tf = num_circle.text_frame
         tf.text = str(i + 1)
         tf.vertical_anchor = MSO_ANCHOR.MIDDLE
         p = tf.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
         p.font.size = FONT_SIZE_SECURITY_STEP_NUMBER
-        p.font.color.rgb = COLOR_SECURITY_LOCAL
+        p.font.color.rgb = COLOR_TEXT_WHITE  # White text on colored background
         p.font.bold = True
         for run in p.runs:
             run.font.name = FONT_FAMILY_SECURITY_STEP
 
         # Step text
         text_box = slide.shapes.add_textbox(
-            SECURITY_CARD_RIGHT_X + Inches(SECURITY_STEP_X_OFFSET + 0.7), step_y,
-            SECURITY_CARD_WIDTH - Inches(SECURITY_STEP_X_OFFSET + 0.9), SECURITY_STEP_HEIGHT
+            SECURITY_CARD_RIGHT_X + Inches(SECURITY_STEP_X_OFFSET + SECURITY_STEP_TEXT_X_OFFSET), step_y,
+            SECURITY_CARD_WIDTH - Inches(SECURITY_STEP_X_OFFSET + SECURITY_STEP_TEXT_X_OFFSET + 0.2), SECURITY_STEP_HEIGHT
         )
         tf = text_box.text_frame
         tf.text = step_text

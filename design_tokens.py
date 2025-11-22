@@ -738,13 +738,13 @@ FONT_SIZE_SECURITY_TITLE = Pt(44)
 FONT_FAMILY_SECURITY_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
 FONT_COLOR_SECURITY_TITLE = COLOR_ACCENT_BLUE
 
-# Two-column layout (card containers)
-SECURITY_CARD_WIDTH = Inches(6.5)
-SECURITY_CARD_HEIGHT = Inches(5.5)
-SECURITY_CARD_GAP = Inches(0.5)
+# Two-column layout (card containers) - aligned with Slide 18
+SECURITY_CARD_WIDTH = Inches(4.5)  # Match Slide 18 (was 6.5)
+SECURITY_CARD_HEIGHT = Inches(5.0)  # Reduced but enough for content (was 5.5)
+SECURITY_CARD_GAP = Inches(1.2)  # Gap between cards (calculated from positions)
 SECURITY_CARD_Y = Inches(2.5)
-SECURITY_CARD_LEFT_X = Inches(1)
-SECURITY_CARD_RIGHT_X = Inches(8.5)
+SECURITY_CARD_LEFT_X = Inches(2.9)  # Match Slide 18 ENCRYPTION_LEFT_X
+SECURITY_CARD_RIGHT_X = Inches(8.6)  # Match Slide 18 ENCRYPTION_RIGHT_X
 
 # Card styling
 SECURITY_CARD_BORDER_WIDTH = Pt(2)
@@ -752,21 +752,25 @@ SECURITY_CARD_FILL_COLOR = RGBColor(31, 41, 55)  # Slightly lighter than backgro
 
 # Column titles (inside cards)
 SECURITY_COL_TITLE_Y_OFFSET = 0.3  # From top of card
-FONT_SIZE_SECURITY_COL_TITLE = Pt(26)
+FONT_SIZE_SECURITY_COL_TITLE = Pt(22)  # Reduced for smaller cards (was 26)
 FONT_FAMILY_SECURITY_COL_TITLE = FONT_FAMILY_INTER_REGULAR
-SECURITY_COL_TITLE_HEIGHT = Inches(0.5)
+SECURITY_COL_TITLE_HEIGHT = Inches(0.45)  # Slightly reduced (was 0.5)
 
 # Icon placeholder area
-SECURITY_ICON_Y_OFFSET = 1.0  # From top of card
-SECURITY_ICON_HEIGHT = Inches(1.2)
+SECURITY_ICON_Y_OFFSET = 0.9  # From top of card (adjusted for smaller cards)
+SECURITY_ICON_HEIGHT = Inches(1.0)  # Reduced (was 1.2)
 
 # Flow steps (3 per column, inside cards)
-SECURITY_STEP_HEIGHT = Inches(0.6)
-SECURITY_STEP_GAP = Inches(0.25)
-SECURITY_STEP_Y_START_OFFSET = 2.5  # From top of card
-SECURITY_STEP_X_OFFSET = 0.4  # From left edge of card
-FONT_SIZE_SECURITY_STEP_NUMBER = Pt(20)
-FONT_SIZE_SECURITY_STEP_TEXT = Pt(15)
+SECURITY_STEP_HEIGHT = Inches(0.55)  # Slightly reduced (was 0.6)
+SECURITY_STEP_GAP = Inches(0.22)  # Slightly reduced (was 0.25)
+SECURITY_STEP_Y_START_OFFSET = 2.3  # From top of card (adjusted for smaller cards, was 2.5)
+SECURITY_STEP_X_OFFSET = 0.35  # From left edge of card (adjusted for narrower cards, was 0.4)
+
+# Step number circles (colored circles like Slide 18)
+SECURITY_STEP_NUMBER_CIRCLE_SIZE = Inches(0.5)  # Circle diameter
+SECURITY_STEP_TEXT_X_OFFSET = 0.7  # Distance from left edge to text start (after circle)
+FONT_SIZE_SECURITY_STEP_NUMBER = Pt(18)  # Slightly smaller (was 20)
+FONT_SIZE_SECURITY_STEP_TEXT = Pt(14)  # Slightly smaller (was 15)
 FONT_FAMILY_SECURITY_STEP = FONT_FAMILY_INTER_REGULAR
 
 # Colors
@@ -776,7 +780,7 @@ COLOR_SECURITY_LOCAL = COLOR_ACCENT_GREEN      # Green #10b981
 # Icons
 SECURITY_CLOUD_ICON = "assets/icons/cloud_server.png"
 SECURITY_LOCAL_ICON = "assets/icons/local_server.png"
-SECURITY_ICON_WIDTH = Inches(2)
+SECURITY_ICON_WIDTH = Inches(1.3)  # Reduced to fit smaller cards (was 2)
 
 # Data
 SECURITY_CLOUD_STEPS = [
@@ -797,7 +801,7 @@ SECURITY_LOCAL_STEPS = [
 
 # Title
 ENCRYPTION_TITLE_X = Inches(1)
-ENCRYPTION_TITLE_Y = Inches(0.8)
+ENCRYPTION_TITLE_Y = Inches(1.2)  # Match Slide 17 (was 0.8)
 ENCRYPTION_TITLE_WIDTH = Inches(14)
 ENCRYPTION_TITLE_HEIGHT = Inches(0.6)
 FONT_SIZE_ENCRYPTION_TITLE = Pt(48)
@@ -805,7 +809,7 @@ FONT_FAMILY_ENCRYPTION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
 FONT_COLOR_ENCRYPTION_TITLE = COLOR_ACCENT_BLUE
 
 # Subtitle
-ENCRYPTION_SUBTITLE_Y = Inches(1.65)  # More breathing room from title
+ENCRYPTION_SUBTITLE_Y = Inches(2.05)  # Adjusted for new title position (was 1.65)
 FONT_SIZE_ENCRYPTION_SUBTITLE = Pt(16)
 FONT_COLOR_ENCRYPTION_SUBTITLE = COLOR_TEXT_GRAY
 
@@ -816,12 +820,12 @@ ENCRYPTION_CARD_BORDER_WIDTH = Pt(1.5)
 ENCRYPTION_CARD_FILL_COLOR = RGBColor(31, 41, 55)
 
 # Bottom row (Steps 1 & 2) - symmetric positioning
-ENCRYPTION_BOTTOM_Y = Inches(5.7)  # Slightly lower for more balanced spacing
+ENCRYPTION_BOTTOM_Y = Inches(5.9)  # Adjusted for lower title position (was 5.7)
 ENCRYPTION_LEFT_X = Inches(2.9)  # Centered: (16 - (4.5*2 + 1.2)) / 2 = 2.9
 ENCRYPTION_RIGHT_X = Inches(8.6)  # 2.9 + 4.5 + 1.2 = 8.6
 
 # Top center (Step 3) - smaller and centered
-ENCRYPTION_TOP_Y = Inches(2.65)  # More breathing room from subtitle (was 2.4)
+ENCRYPTION_TOP_Y = Inches(3.05)  # Adjusted for new title/subtitle position (was 2.65)
 ENCRYPTION_TOP_X = Inches(5.75)  # Centered: (16 - 4.5) / 2 = 5.75
 ENCRYPTION_TOP_CARD_WIDTH = Inches(4.5)  # Reduced from 5.3
 ENCRYPTION_TOP_CARD_HEIGHT = Inches(2.2)  # Reduced from 2.6
