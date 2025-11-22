@@ -552,13 +552,14 @@ PREDICTION_CONTENT_RIGHT = Inches(14)                 # Right edge for all eleme
 
 # Context Vector Bar (top)
 PREDICTION_VECTOR_Y = Inches(2.6)
-PREDICTION_VECTOR_HEIGHT = Inches(1.05)         # Increased for equal margins
+PREDICTION_VECTOR_HEIGHT = Inches(1.15)         # 0.2 + 0.25 + 0.2 + 0.3 + 0.2 = 1.15"
 PREDICTION_VECTOR_FILL_COLOR = COLOR_BACKGROUND_LIGHT
 PREDICTION_VECTOR_BORDER_COLOR = COLOR_BORDER
 PREDICTION_VECTOR_BORDER_WIDTH = Pt(1)
 
 # Context Vector Label and Segments - EQUAL MARGINS ALL AROUND
 PREDICTION_VECTOR_MARGIN = Inches(0.2)          # Equal margin on all sides (top, bottom, left, right)
+PREDICTION_VECTOR_LABEL_HEIGHT = Inches(0.25)   # Label height
 FONT_SIZE_PREDICTION_VECTOR_LABEL = Pt(14)      # 0.85rem uppercase
 FONT_COLOR_PREDICTION_VECTOR_LABEL = COLOR_TEXT_GRAY
 
@@ -579,19 +580,18 @@ PREDICTION_SEGMENT_COLORS = [
     COLOR_ACCENT_PURPLE
 ]
 
-# Temperature Parameter Display (left side)
-PREDICTION_TEMP_X = Inches(0.5)                 # Left side
-PREDICTION_TEMP_Y = Inches(4.8)                 # Vertically centered with bars
-PREDICTION_TEMP_WIDTH = Inches(1.2)
-PREDICTION_TEMP_HEIGHT = Inches(2.5)
-FONT_SIZE_PREDICTION_TEMP_LABEL = Pt(12)        # "Temperature"
-FONT_SIZE_PREDICTION_TEMP_VALUE = Pt(32)        # "0.8"
-FONT_COLOR_PREDICTION_TEMP_LABEL = COLOR_TEXT_GRAY
-FONT_COLOR_PREDICTION_TEMP_VALUE = COLOR_ACCENT_BLUE
-PREDICTION_TEMP_VALUE = 0.8                     # Default temperature value
+# Temperature Thermometer Icon (left side, spans from but to no)
+PREDICTION_THERMO_ICON = "assets/icons/thermometer.png"
+PREDICTION_THERMO_X = Inches(2)                 # Left-aligned with Context Vector Box
+# Height calculated dynamically: spans all 6 bars + 5 gaps
+# = 6 * PREDICTION_PROB_BAR_HEIGHT + 5 * PREDICTION_PROB_GAP
+PREDICTION_THERMO_HEIGHT = Inches(3.63)         # 6*0.48 + 5*0.15 = 2.88 + 0.75
+# Y position = same as first bar (but)
+PREDICTION_THERMO_Y = Inches(4.6)               # Same as PREDICTION_PROB_Y_START
+# Width: Don't specify - let PowerPoint maintain aspect ratio
 
 # Arrow down
-PREDICTION_ARROW_Y = Inches(3.95)               # Adjusted for new vector box height
+PREDICTION_ARROW_Y = Inches(4.0)                # Adjusted for new vector box height (2.6 + 1.15 + 0.25)
 PREDICTION_ARROW_TEXT = "↓"
 FONT_SIZE_PREDICTION_ARROW = Pt(40)             # 2.5rem
 FONT_COLOR_PREDICTION_ARROW = COLOR_ACCENT_BLUE
@@ -638,6 +638,157 @@ PREDICTION_DATA = [
     {"token": "about", "probability": 0.06, "category": "medium"},
     {"token": "when", "probability": 0.03, "category": "low"},
     {"token": "no", "probability": 0.02, "category": "lowest"}
+]
+
+# =============================================================================
+# LAYOUT - AUTOREGRESSION SLIDES (Slides 12-15, one per step)
+# =============================================================================
+
+# Title
+AUTOREGRESS_TITLE_X = Inches(2.5)
+AUTOREGRESS_TITLE_Y = Inches(1.2)
+AUTOREGRESS_TITLE_WIDTH = Inches(11)
+AUTOREGRESS_TITLE_HEIGHT = Inches(0.8)
+FONT_SIZE_AUTOREGRESS_TITLE = Pt(44)
+FONT_FAMILY_AUTOREGRESS_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
+FONT_COLOR_AUTOREGRESS_TITLE = COLOR_ACCENT_BLUE
+
+# Subtitle (e.g., "Step 1: Original Input")
+AUTOREGRESS_SUBTITLE_X = Inches(2.5)
+AUTOREGRESS_SUBTITLE_Y = Inches(2.1)
+AUTOREGRESS_SUBTITLE_WIDTH = Inches(11)
+AUTOREGRESS_SUBTITLE_HEIGHT = Inches(0.4)
+FONT_SIZE_AUTOREGRESS_SUBTITLE = Pt(18)
+FONT_FAMILY_AUTOREGRESS_SUBTITLE = FONT_FAMILY_INTER_REGULAR
+FONT_COLOR_AUTOREGRESS_SUBTITLE = COLOR_ACCENT_BLUE
+
+# Token row (horizontally centered on slide)
+AUTOREGRESS_TOKEN_Y = Inches(3.5)                 # Vertically centered
+AUTOREGRESS_TOKEN_WIDTH = Inches(1.3)             # Width per token
+AUTOREGRESS_TOKEN_HEIGHT = Inches(0.6)
+AUTOREGRESS_TOKEN_GAP = Inches(0.15)              # Gap between tokens
+AUTOREGRESS_TOKEN_FILL_COLOR = RGBColor(31, 41, 55)
+AUTOREGRESS_TOKEN_BORDER_COLOR = RGBColor(77, 171, 247)
+AUTOREGRESS_TOKEN_BORDER_WIDTH = Pt(1.5)
+FONT_SIZE_AUTOREGRESS_TOKEN = Pt(20)
+FONT_FAMILY_AUTOREGRESS_TOKEN = FONT_FAMILY_INTER_EXTRALIGHT
+FONT_COLOR_AUTOREGRESS_TOKEN = COLOR_TEXT_WHITE
+
+# New token styling (green)
+AUTOREGRESS_TOKEN_NEW_FILL = RGBColor(16, 185, 129)
+AUTOREGRESS_TOKEN_NEW_BORDER = COLOR_ACCENT_GREEN
+FONT_COLOR_AUTOREGRESS_TOKEN_NEW = COLOR_ACCENT_GREEN
+
+# LLM Arrow (horizontal: → LLM →)
+AUTOREGRESS_LLM_ARROW = "→ LLM →"
+AUTOREGRESS_LLM_ARROW_WIDTH = Inches(1.8)         # Width for LLM arrow box
+AUTOREGRESS_LLM_ARROW_GAP = Inches(0.3)           # Gap before/after arrow
+FONT_SIZE_AUTOREGRESS_LLM_ARROW = Pt(32)
+FONT_COLOR_AUTOREGRESS_LLM_ARROW = COLOR_ACCENT_BLUE
+
+# Completion message (Slide 15 only)
+AUTOREGRESS_COMPLETION_Y = Inches(5.5)
+FONT_SIZE_AUTOREGRESS_COMPLETION = Pt(16)
+FONT_FAMILY_AUTOREGRESS_COMPLETION = FONT_FAMILY_INTER_REGULAR
+FONT_COLOR_AUTOREGRESS_COMPLETION = COLOR_ACCENT_GREEN
+
+# Data for each slide
+AUTOREGRESS_STEP_1 = {
+    "title": "Autoregression",
+    "subtitle": "Step 1: Original Input",
+    "tokens": ["Wit", "nesses", "must", "tell", "nothing"],
+    "new_token_index": None,
+    "predicted": "but"
+}
+
+AUTOREGRESS_STEP_2 = {
+    "title": "Autoregression",
+    "subtitle": "Step 2: Extended Input",
+    "tokens": ["Wit", "nesses", "must", "tell", "nothing", "but"],
+    "new_token_index": 5,  # "but" is new
+    "predicted": "the"
+}
+
+AUTOREGRESS_STEP_3 = {
+    "title": "Autoregression",
+    "subtitle": "Step 3: Extended Again",
+    "tokens": ["Wit", "nesses", "must", "tell", "nothing", "but", "the"],
+    "new_token_index": 6,  # "the" is new
+    "predicted": "truth"
+}
+
+AUTOREGRESS_STEP_FINAL = {
+    "title": "Autoregression",
+    "subtitle": "Complete Sentence",
+    "tokens": ["Wit", "nesses", "must", "tell", "nothing", "but", "the", "truth"],
+    "new_token_index": 7,  # "truth" is new
+    "predicted": None  # No prediction on final slide
+}
+
+# =============================================================================
+# SLIDE 17 - SECURITY CONFLICT COMPARISON
+# =============================================================================
+
+# Title
+SECURITY_TITLE_X = Inches(1)
+SECURITY_TITLE_Y = Inches(1.2)
+SECURITY_TITLE_WIDTH = Inches(14)
+SECURITY_TITLE_HEIGHT = Inches(0.8)
+FONT_SIZE_SECURITY_TITLE = Pt(44)
+FONT_FAMILY_SECURITY_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
+FONT_COLOR_SECURITY_TITLE = COLOR_ACCENT_BLUE
+
+# Two-column layout (card containers)
+SECURITY_CARD_WIDTH = Inches(6.5)
+SECURITY_CARD_HEIGHT = Inches(5.5)
+SECURITY_CARD_GAP = Inches(0.5)
+SECURITY_CARD_Y = Inches(2.5)
+SECURITY_CARD_LEFT_X = Inches(1)
+SECURITY_CARD_RIGHT_X = Inches(8.5)
+
+# Card styling
+SECURITY_CARD_BORDER_WIDTH = Pt(2)
+SECURITY_CARD_FILL_COLOR = RGBColor(31, 41, 55)  # Slightly lighter than background
+
+# Column titles (inside cards)
+SECURITY_COL_TITLE_Y_OFFSET = 0.3  # From top of card
+FONT_SIZE_SECURITY_COL_TITLE = Pt(26)
+FONT_FAMILY_SECURITY_COL_TITLE = FONT_FAMILY_INTER_REGULAR
+SECURITY_COL_TITLE_HEIGHT = Inches(0.5)
+
+# Icon placeholder area
+SECURITY_ICON_Y_OFFSET = 1.0  # From top of card
+SECURITY_ICON_HEIGHT = Inches(1.2)
+
+# Flow steps (3 per column, inside cards)
+SECURITY_STEP_HEIGHT = Inches(0.6)
+SECURITY_STEP_GAP = Inches(0.25)
+SECURITY_STEP_Y_START_OFFSET = 2.5  # From top of card
+SECURITY_STEP_X_OFFSET = 0.4  # From left edge of card
+FONT_SIZE_SECURITY_STEP_NUMBER = Pt(20)
+FONT_SIZE_SECURITY_STEP_TEXT = Pt(15)
+FONT_FAMILY_SECURITY_STEP = FONT_FAMILY_INTER_REGULAR
+
+# Colors
+COLOR_SECURITY_CLOUD = RGBColor(239, 68, 68)  # Red #ef4444
+COLOR_SECURITY_LOCAL = COLOR_ACCENT_GREEN      # Green #10b981
+
+# Icons
+SECURITY_CLOUD_ICON = "assets/icons/cloud_server.png"
+SECURITY_LOCAL_ICON = "assets/icons/local_server.png"
+SECURITY_ICON_WIDTH = Inches(2)
+
+# Data
+SECURITY_CLOUD_STEPS = [
+    "Data leaves your premises",
+    "Decrypted on external GPUs",
+    "Results returned to you"
+]
+
+SECURITY_LOCAL_STEPS = [
+    "Data stays in your building",
+    "Processed on your hardware",
+    "Remains within your control"
 ]
 
 # =============================================================================

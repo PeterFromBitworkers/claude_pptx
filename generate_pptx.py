@@ -939,15 +939,15 @@ def create_slide_6(prs):
     return prs
 
 def create_slide_7(prs):
-    """Slide 7: TECHNICAL DEEP DIVE"""
+    """Slide 7: UNDERSTANDING INFERENCE MECHANICS"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     apply_master_elements(slide, 7)
 
     # The three keywords - using KEYWORD_THEME_TECH
     keywords = [
-        {"text": "TECHNICAL", "color": KEYWORD_THEME_TECH[0]},
-        {"text": "DEEP", "color": KEYWORD_THEME_TECH[1]},
-        {"text": "DIVE", "color": KEYWORD_THEME_TECH[2]}
+        {"text": "UNDERSTANDING", "color": KEYWORD_THEME_TECH[0]},
+        {"text": "INFERENCE", "color": KEYWORD_THEME_TECH[1]},
+        {"text": "MECHANICS", "color": KEYWORD_THEME_TECH[2]}
     ]
 
     for i, keyword in enumerate(keywords):
@@ -1275,7 +1275,7 @@ def create_slide_11(prs):
     label_box = slide.shapes.add_textbox(
         PREDICTION_CONTENT_X + PREDICTION_VECTOR_MARGIN,
         PREDICTION_VECTOR_Y + PREDICTION_VECTOR_MARGIN,
-        PREDICTION_CONTENT_WIDTH - (2 * PREDICTION_VECTOR_MARGIN), Inches(0.25)
+        PREDICTION_CONTENT_WIDTH - (2 * PREDICTION_VECTOR_MARGIN), PREDICTION_VECTOR_LABEL_HEIGHT
     )
     tf = label_box.text_frame
     tf.text = "CONTEXT VECTOR"
@@ -1291,8 +1291,8 @@ def create_slide_11(prs):
     available_width = PREDICTION_CONTENT_WIDTH.inches - (2 * PREDICTION_VECTOR_MARGIN.inches)
     # Calculate segment width: (available_width - 9 gaps) / 10 segments
     segment_width = (available_width - (9 * PREDICTION_SEGMENT_GAP.inches)) / PREDICTION_SEGMENT_COUNT
-    # Position segments with equal margin from top of label and bottom of box
-    segments_y = PREDICTION_VECTOR_Y + PREDICTION_VECTOR_MARGIN + Inches(0.25) + PREDICTION_VECTOR_MARGIN
+    # Position segments: top + top_margin + label_height + middle_margin
+    segments_y = PREDICTION_VECTOR_Y + PREDICTION_VECTOR_MARGIN + PREDICTION_VECTOR_LABEL_HEIGHT + PREDICTION_VECTOR_MARGIN
 
     for i, color in enumerate(PREDICTION_SEGMENT_COLORS):
         segment_x = PREDICTION_CONTENT_X + PREDICTION_VECTOR_MARGIN + (i * (Inches(segment_width) + PREDICTION_SEGMENT_GAP))
@@ -1306,35 +1306,13 @@ def create_slide_11(prs):
         segment.fill.fore_color.rgb = color
         segment.line.color.rgb = color
 
-    # Temperature Parameter Display (left side)
-    # Label "Temperature"
-    temp_label_box = slide.shapes.add_textbox(
-        PREDICTION_TEMP_X, PREDICTION_TEMP_Y,
-        PREDICTION_TEMP_WIDTH, Inches(0.4)
+    # Thermometer Icon (left side, spans from but to no)
+    # Add picture with only height specified to maintain aspect ratio
+    thermo_pic = slide.shapes.add_picture(
+        PREDICTION_THERMO_ICON,
+        PREDICTION_THERMO_X, PREDICTION_THERMO_Y,
+        height=PREDICTION_THERMO_HEIGHT
     )
-    tf = temp_label_box.text_frame
-    tf.text = "Temperature"
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_PREDICTION_TEMP_LABEL
-    p.font.color.rgb = FONT_COLOR_PREDICTION_TEMP_LABEL
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_REGULAR
-
-    # Value "0.8"
-    temp_value_box = slide.shapes.add_textbox(
-        PREDICTION_TEMP_X, PREDICTION_TEMP_Y + Inches(0.5),
-        PREDICTION_TEMP_WIDTH, Inches(0.8)
-    )
-    tf = temp_value_box.text_frame
-    tf.text = f"{PREDICTION_TEMP_VALUE:.1f}"
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_PREDICTION_TEMP_VALUE
-    p.font.color.rgb = FONT_COLOR_PREDICTION_TEMP_VALUE
-    p.font.bold = True
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_REGULAR
 
     # Arrow down
     arrow_box = slide.shapes.add_textbox(
@@ -1428,6 +1406,353 @@ def create_slide_11(prs):
 
     return prs
 
+def create_autoregression_slide(prs, slide_num, step_data):
+    """Helper function to create an autoregression slide"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, slide_num)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        AUTOREGRESS_TITLE_X, AUTOREGRESS_TITLE_Y,
+        AUTOREGRESS_TITLE_WIDTH, AUTOREGRESS_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = step_data["title"]
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_AUTOREGRESS_TITLE
+    p.font.color.rgb = FONT_COLOR_AUTOREGRESS_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_AUTOREGRESS_TITLE
+
+    # Subtitle
+    subtitle_box = slide.shapes.add_textbox(
+        AUTOREGRESS_SUBTITLE_X, AUTOREGRESS_SUBTITLE_Y,
+        AUTOREGRESS_SUBTITLE_WIDTH, AUTOREGRESS_SUBTITLE_HEIGHT
+    )
+    tf = subtitle_box.text_frame
+    tf.text = step_data["subtitle"]
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_AUTOREGRESS_SUBTITLE
+    p.font.color.rgb = FONT_COLOR_AUTOREGRESS_SUBTITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_AUTOREGRESS_SUBTITLE
+
+    # Calculate total width of token row
+    num_tokens = len(step_data["tokens"])
+    tokens_width = (num_tokens * AUTOREGRESS_TOKEN_WIDTH.inches) + ((num_tokens - 1) * AUTOREGRESS_TOKEN_GAP.inches)
+
+    # Add arrow and predicted token width if present
+    if step_data["predicted"] is not None:
+        tokens_width += AUTOREGRESS_LLM_ARROW_GAP.inches + AUTOREGRESS_LLM_ARROW_WIDTH.inches + AUTOREGRESS_LLM_ARROW_GAP.inches + AUTOREGRESS_TOKEN_WIDTH.inches
+
+    # Center the entire row
+    token_x_start = Inches((16 - tokens_width) / 2)
+
+    # Token boxes row (horizontally aligned)
+    for token_idx, token_text in enumerate(step_data["tokens"]):
+        token_x = token_x_start + (token_idx * (AUTOREGRESS_TOKEN_WIDTH + AUTOREGRESS_TOKEN_GAP))
+
+        # Determine if this is the new token (highlighted in green)
+        is_new_token = (step_data["new_token_index"] is not None and
+                      token_idx == step_data["new_token_index"])
+
+        # Token box
+        token_box = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            token_x, AUTOREGRESS_TOKEN_Y,
+            AUTOREGRESS_TOKEN_WIDTH, AUTOREGRESS_TOKEN_HEIGHT
+        )
+        token_box.fill.solid()
+
+        if is_new_token:
+            # New token: green fill and border
+            token_box.fill.fore_color.rgb = AUTOREGRESS_TOKEN_NEW_FILL
+            token_box.line.color.rgb = AUTOREGRESS_TOKEN_NEW_BORDER
+        else:
+            # Existing token: blue fill and border
+            token_box.fill.fore_color.rgb = AUTOREGRESS_TOKEN_FILL_COLOR
+            token_box.line.color.rgb = AUTOREGRESS_TOKEN_BORDER_COLOR
+
+        token_box.line.width = AUTOREGRESS_TOKEN_BORDER_WIDTH
+
+        # Token text
+        tf = token_box.text_frame
+        tf.text = token_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_AUTOREGRESS_TOKEN
+
+        if is_new_token:
+            p.font.color.rgb = FONT_COLOR_AUTOREGRESS_TOKEN_NEW
+        else:
+            p.font.color.rgb = FONT_COLOR_AUTOREGRESS_TOKEN
+
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_AUTOREGRESS_TOKEN
+
+    # LLM Arrow and Predicted token (if present)
+    if step_data["predicted"] is not None:
+        # LLM Arrow
+        llm_arrow_x = token_x_start + (num_tokens * (AUTOREGRESS_TOKEN_WIDTH + AUTOREGRESS_TOKEN_GAP)) - AUTOREGRESS_TOKEN_GAP + AUTOREGRESS_LLM_ARROW_GAP
+        llm_arrow_box = slide.shapes.add_textbox(
+            llm_arrow_x, AUTOREGRESS_TOKEN_Y,
+            AUTOREGRESS_LLM_ARROW_WIDTH, AUTOREGRESS_TOKEN_HEIGHT
+        )
+        tf = llm_arrow_box.text_frame
+        tf.text = AUTOREGRESS_LLM_ARROW
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_AUTOREGRESS_LLM_ARROW
+        p.font.color.rgb = FONT_COLOR_AUTOREGRESS_LLM_ARROW
+
+        # Predicted token (right of arrow, in green)
+        predicted_x = llm_arrow_x + AUTOREGRESS_LLM_ARROW_WIDTH + AUTOREGRESS_LLM_ARROW_GAP
+        predicted_box = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            predicted_x, AUTOREGRESS_TOKEN_Y,
+            AUTOREGRESS_TOKEN_WIDTH, AUTOREGRESS_TOKEN_HEIGHT
+        )
+        predicted_box.fill.solid()
+        predicted_box.fill.fore_color.rgb = AUTOREGRESS_TOKEN_NEW_FILL
+        predicted_box.line.color.rgb = AUTOREGRESS_TOKEN_NEW_BORDER
+        predicted_box.line.width = AUTOREGRESS_TOKEN_BORDER_WIDTH
+
+        tf = predicted_box.text_frame
+        tf.text = step_data["predicted"]
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_AUTOREGRESS_TOKEN
+        p.font.color.rgb = FONT_COLOR_AUTOREGRESS_TOKEN_NEW
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_AUTOREGRESS_TOKEN
+    # Final slide: no completion message (user requested clean final slide)
+
+    return prs
+
+def create_slide_12(prs):
+    """Slide 12: Autoregression - Step 1"""
+    return create_autoregression_slide(prs, 12, AUTOREGRESS_STEP_1)
+
+def create_slide_13(prs):
+    """Slide 13: Autoregression - Step 2"""
+    return create_autoregression_slide(prs, 13, AUTOREGRESS_STEP_2)
+
+def create_slide_14(prs):
+    """Slide 14: Autoregression - Step 3"""
+    return create_autoregression_slide(prs, 14, AUTOREGRESS_STEP_3)
+
+def create_slide_15(prs):
+    """Slide 15: Autoregression - Final"""
+    return create_autoregression_slide(prs, 15, AUTOREGRESS_STEP_FINAL)
+
+def create_slide_16(prs):
+    """Slide 16: ON PREMISE MATTERS"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 16)
+
+    # The three keywords - using KEYWORD_THEME_SOLUTION
+    keywords = [
+        {"text": "ON", "color": KEYWORD_THEME_SOLUTION[0]},
+        {"text": "PREMISE", "color": KEYWORD_THEME_SOLUTION[1]},
+        {"text": "MATTERS", "color": KEYWORD_THEME_SOLUTION[2]}
+    ]
+
+    for i, keyword in enumerate(keywords):
+        y_pos = KEYWORD_Y_START + (i * KEYWORD_Y_GAP)
+
+        keyword_box = slide.shapes.add_textbox(
+            KEYWORD_BOX_X, Inches(y_pos),
+            KEYWORD_BOX_WIDTH, KEYWORD_BOX_HEIGHT
+        )
+        tf = keyword_box.text_frame
+        tf.text = keyword["text"]
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_KEYWORD
+        p.font.bold = FONT_BOLD_KEYWORD
+        p.font.color.rgb = keyword["color"]
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_KEYWORD  # Inter ExtraLight (font-weight: 200)
+            run.font.character_spacing = FONT_LETTER_SPACING_KEYWORD
+
+    return prs
+
+def create_slide_17(prs):
+    """Slide 17: The Fundamental Security Conflict"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 17)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        SECURITY_TITLE_X, SECURITY_TITLE_Y,
+        SECURITY_TITLE_WIDTH, SECURITY_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = "The Fundamental Security Conflict"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_SECURITY_TITLE
+    p.font.color.rgb = FONT_COLOR_SECURITY_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_SECURITY_TITLE
+
+    # === LEFT CARD: Cloud Providers (Red) ===
+    # Card container with red border
+    cloud_card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        SECURITY_CARD_LEFT_X, SECURITY_CARD_Y,
+        SECURITY_CARD_WIDTH, SECURITY_CARD_HEIGHT
+    )
+    cloud_card.fill.solid()
+    cloud_card.fill.fore_color.rgb = SECURITY_CARD_FILL_COLOR
+    cloud_card.line.color.rgb = COLOR_SECURITY_CLOUD
+    cloud_card.line.width = SECURITY_CARD_BORDER_WIDTH
+    cloud_card.adjustments[0] = 0.05  # Rounded corners
+
+    # Card title
+    cloud_title_box = slide.shapes.add_textbox(
+        SECURITY_CARD_LEFT_X, SECURITY_CARD_Y + Inches(SECURITY_COL_TITLE_Y_OFFSET),
+        SECURITY_CARD_WIDTH, SECURITY_COL_TITLE_HEIGHT
+    )
+    tf = cloud_title_box.text_frame
+    tf.text = "Cloud Providers"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_SECURITY_COL_TITLE
+    p.font.color.rgb = COLOR_SECURITY_CLOUD
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_SECURITY_COL_TITLE
+
+    # Cloud icon
+    cloud_icon_x = SECURITY_CARD_LEFT_X + (SECURITY_CARD_WIDTH - SECURITY_ICON_WIDTH) / 2
+    cloud_icon_y = SECURITY_CARD_Y + Inches(SECURITY_ICON_Y_OFFSET)
+    cloud_icon = slide.shapes.add_picture(
+        SECURITY_CLOUD_ICON,
+        cloud_icon_x,
+        cloud_icon_y,
+        width=SECURITY_ICON_WIDTH
+    )
+
+    # Cloud steps
+    for i, step_text in enumerate(SECURITY_CLOUD_STEPS):
+        step_y = SECURITY_CARD_Y + Inches(SECURITY_STEP_Y_START_OFFSET + (i * (SECURITY_STEP_HEIGHT.inches + SECURITY_STEP_GAP.inches)))
+
+        # Step number in colored circle
+        num_box = slide.shapes.add_textbox(
+            SECURITY_CARD_LEFT_X + Inches(SECURITY_STEP_X_OFFSET), step_y,
+            Inches(0.5), SECURITY_STEP_HEIGHT
+        )
+        tf = num_box.text_frame
+        tf.text = str(i + 1)
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_SECURITY_STEP_NUMBER
+        p.font.color.rgb = COLOR_SECURITY_CLOUD
+        p.font.bold = True
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_SECURITY_STEP
+
+        # Step text
+        text_box = slide.shapes.add_textbox(
+            SECURITY_CARD_LEFT_X + Inches(SECURITY_STEP_X_OFFSET + 0.7), step_y,
+            SECURITY_CARD_WIDTH - Inches(SECURITY_STEP_X_OFFSET + 0.9), SECURITY_STEP_HEIGHT
+        )
+        tf = text_box.text_frame
+        tf.text = step_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        tf.word_wrap = True
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.font.size = FONT_SIZE_SECURITY_STEP_TEXT
+        p.font.color.rgb = COLOR_TEXT_WHITE
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_SECURITY_STEP
+
+    # === RIGHT CARD: Brain-Bridges (Green) ===
+    # Card container with green border
+    local_card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        SECURITY_CARD_RIGHT_X, SECURITY_CARD_Y,
+        SECURITY_CARD_WIDTH, SECURITY_CARD_HEIGHT
+    )
+    local_card.fill.solid()
+    local_card.fill.fore_color.rgb = SECURITY_CARD_FILL_COLOR
+    local_card.line.color.rgb = COLOR_SECURITY_LOCAL
+    local_card.line.width = SECURITY_CARD_BORDER_WIDTH
+    local_card.adjustments[0] = 0.05  # Rounded corners
+
+    # Card title
+    local_title_box = slide.shapes.add_textbox(
+        SECURITY_CARD_RIGHT_X, SECURITY_CARD_Y + Inches(SECURITY_COL_TITLE_Y_OFFSET),
+        SECURITY_CARD_WIDTH, SECURITY_COL_TITLE_HEIGHT
+    )
+    tf = local_title_box.text_frame
+    tf.text = "Brain-Bridges"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_SECURITY_COL_TITLE
+    p.font.color.rgb = COLOR_SECURITY_LOCAL
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_SECURITY_COL_TITLE
+
+    # Local icon
+    local_icon_x = SECURITY_CARD_RIGHT_X + (SECURITY_CARD_WIDTH - SECURITY_ICON_WIDTH) / 2
+    local_icon_y = SECURITY_CARD_Y + Inches(SECURITY_ICON_Y_OFFSET)
+    local_icon = slide.shapes.add_picture(
+        SECURITY_LOCAL_ICON,
+        local_icon_x,
+        local_icon_y,
+        width=SECURITY_ICON_WIDTH
+    )
+
+    # Local steps
+    for i, step_text in enumerate(SECURITY_LOCAL_STEPS):
+        step_y = SECURITY_CARD_Y + Inches(SECURITY_STEP_Y_START_OFFSET + (i * (SECURITY_STEP_HEIGHT.inches + SECURITY_STEP_GAP.inches)))
+
+        # Step number in colored circle
+        num_box = slide.shapes.add_textbox(
+            SECURITY_CARD_RIGHT_X + Inches(SECURITY_STEP_X_OFFSET), step_y,
+            Inches(0.5), SECURITY_STEP_HEIGHT
+        )
+        tf = num_box.text_frame
+        tf.text = str(i + 1)
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_SECURITY_STEP_NUMBER
+        p.font.color.rgb = COLOR_SECURITY_LOCAL
+        p.font.bold = True
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_SECURITY_STEP
+
+        # Step text
+        text_box = slide.shapes.add_textbox(
+            SECURITY_CARD_RIGHT_X + Inches(SECURITY_STEP_X_OFFSET + 0.7), step_y,
+            SECURITY_CARD_WIDTH - Inches(SECURITY_STEP_X_OFFSET + 0.9), SECURITY_STEP_HEIGHT
+        )
+        tf = text_box.text_frame
+        tf.text = step_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        tf.word_wrap = True
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.font.size = FONT_SIZE_SECURITY_STEP_TEXT
+        p.font.color.rgb = COLOR_TEXT_WHITE
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_SECURITY_STEP
+
+    return prs
+
 def create_placeholder_slide(prs, slide_num):
     """Creates a placeholder slide for later editing"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
@@ -1486,9 +1811,17 @@ def create_presentation():
     # Slide 11: Next word prediction
     create_slide_11(prs)
 
-    # Additional slides as placeholders
-    for i in range(12, 18):
-        create_placeholder_slide(prs, i)
+    # Slides 12-15: Autoregression (4 separate slides)
+    create_slide_12(prs)  # Step 1
+    create_slide_13(prs)  # Step 2
+    create_slide_14(prs)  # Step 3
+    create_slide_15(prs)  # Final
+
+    # Slide 16: ON PREMISE MATTERS
+    create_slide_16(prs)
+
+    # Slide 17: The Fundamental Security Conflict
+    create_slide_17(prs)
 
     return prs
 
