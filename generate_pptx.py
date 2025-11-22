@@ -114,7 +114,7 @@ def apply_master_elements(slide, slide_num, total_slides=17):
 def create_slide_1(prs):
     """Slide 1: THE AI PARADOX"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 1, 20)
+    apply_master_elements(slide, 1, 25)
 
     # The three keywords - using KEYWORD_THEME_PROBLEM
     keywords = [
@@ -148,7 +148,7 @@ def create_slide_1(prs):
 def create_slide_2(prs):
     """Slide 2: Organisations want AI"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 2, 20)
+    apply_master_elements(slide, 2, 25)
 
     # Fixed header
     title_box = slide.shapes.add_textbox(
@@ -305,7 +305,7 @@ def create_slide_2(prs):
 def create_slide_3(prs):
     """Slide 3: Market Reality"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 3, 20)
+    apply_master_elements(slide, 3, 25)
 
     # Fixed header
     title_box = slide.shapes.add_textbox(
@@ -475,7 +475,7 @@ def create_slide_3(prs):
 def create_slide_4(prs):
     """Slide 4: SOVEREIGN AI SOLUTION"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 4, 20)
+    apply_master_elements(slide, 4, 25)
 
     # The three keywords - using KEYWORD_THEME_SOLUTION
     keywords = [
@@ -509,7 +509,7 @@ def create_slide_4(prs):
 def create_slide_5(prs):
     """Slide 5: BRAIN-BRIDGES Introduction (like Slide 6 but with text instead of features)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 5, 20)
+    apply_master_elements(slide, 5, 25)
 
     # =========================================================================
     # LEFT SIDE: Title, Subtitle, Description Text
@@ -652,7 +652,7 @@ def create_slide_5(prs):
 def create_slide_6(prs):
     """Slide 6: BRAIN-BRIDGES Hero Slide"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 6, 20)
+    apply_master_elements(slide, 6, 25)
 
     # =========================================================================
     # LEFT SIDE: Title, Subtitle, Features
@@ -941,7 +941,7 @@ def create_slide_6(prs):
 def create_slide_7(prs):
     """Slide 7: UNDERSTANDING INFERENCE MECHANICS"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 7, 20)
+    apply_master_elements(slide, 7, 25)
 
     # The three keywords - using KEYWORD_THEME_TECH
     keywords = [
@@ -975,7 +975,7 @@ def create_slide_7(prs):
 def create_slide_8(prs):
     """Slide 8: Tokenization Intro - A Sample from legal domain"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 8, 20)
+    apply_master_elements(slide, 8, 25)
 
     # Title: "A Sample from legal domain:"
     title_box = slide.shapes.add_textbox(
@@ -1036,7 +1036,7 @@ def create_slide_8(prs):
 def create_slide_9(prs):
     """Slide 9: Vector Embeddings (Token → Vector Lookup)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 9, 20)
+    apply_master_elements(slide, 9, 25)
 
     # Create each token row (Wit, nesses, must, tell, nothing)
     for i, token_info in enumerate(TOKEN_DATA):
@@ -1113,7 +1113,7 @@ def create_slide_9(prs):
 def create_slide_10(prs):
     """Slide 10: Attention is all you need - Attention Matrix"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 10, 20)
+    apply_master_elements(slide, 10, 25)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1244,7 +1244,7 @@ def create_slide_10(prs):
 def create_slide_11(prs):
     """Slide 11: Next word prediction"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 11, 20)
+    apply_master_elements(slide, 11, 25)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1553,7 +1553,7 @@ def create_slide_15(prs):
 def create_slide_16(prs):
     """Slide 16: ON PREMISE MATTERS"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 16, 20)
+    apply_master_elements(slide, 16, 25)
 
     # The three keywords - using KEYWORD_THEME_SOLUTION
     keywords = [
@@ -1587,7 +1587,7 @@ def create_slide_16(prs):
 def create_slide_17(prs):
     """Slide 17: The Fundamental Security Conflict"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 17, 20)
+    apply_master_elements(slide, 17, 25)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1756,7 +1756,7 @@ def create_slide_17(prs):
 def create_slide_18(prs):
     """Slide 18: The Encryption Dilemma - Redesigned Layout"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 18, 20)
+    apply_master_elements(slide, 18, 25)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1787,29 +1787,6 @@ def create_slide_18(prs):
         run.font.name = FONT_FAMILY_INTER_REGULAR
 
     # === STEP 3: Remote Cloud Server (Top Center) ===
-    # Step number (blue circle, above card)
-    step3_num_circle = slide.shapes.add_shape(
-        MSO_SHAPE.OVAL,
-        ENCRYPTION_TOP_X + Inches(ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET),
-        ENCRYPTION_TOP_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE),
-        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
-    )
-    step3_num_circle.fill.solid()
-    step3_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
-    step3_num_circle.line.width = Pt(0)
-
-    # Text directly in the OVAL shape
-    tf = step3_num_circle.text_frame
-    tf.text = "3"
-    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
-    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
-    p.font.bold = True
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
-
     # Card
     inference_card = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
@@ -1822,29 +1799,51 @@ def create_slide_18(prs):
     inference_card.line.width = ENCRYPTION_CARD_BORDER_WIDTH
     inference_card.adjustments[0] = 0.05
 
-    # Title
+    # Icon (drawn first so title text appears on top)
+    icon_x = ENCRYPTION_TOP_X + Inches(ENCRYPTION_ICON_X_OFFSET)
+    icon_y = ENCRYPTION_TOP_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
+    cloud_icon = slide.shapes.add_picture(
+        ENCRYPTION_CLOUD_ICON,
+        icon_x, icon_y,
+        width=ENCRYPTION_ICON_WIDTH
+    )
+
+    # Title (drawn after icon, appears on top in vertical layout, centered)
     stage_title_box = slide.shapes.add_textbox(
         ENCRYPTION_TOP_X + Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET),
         ENCRYPTION_TOP_Y + Inches(ENCRYPTION_STAGE_TITLE_Y_OFFSET),
-        ENCRYPTION_TOP_CARD_WIDTH - Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET + 1.5), Inches(0.4)
+        ENCRYPTION_TOP_CARD_WIDTH - Inches(0.6), Inches(0.4)
     )
     tf = stage_title_box.text_frame
     tf.text = "Remote Cloud Server"
     p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
+    p.alignment = PP_ALIGN.CENTER
     p.font.size = FONT_SIZE_ENCRYPTION_STAGE_TITLE
     p.font.color.rgb = COLOR_ENCRYPTION_INFERENCE
     for run in p.runs:
         run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
 
-    # Icon - temporarily disabled for debugging
-    # icon_x = ENCRYPTION_TOP_X + ENCRYPTION_TOP_CARD_WIDTH - Inches(ENCRYPTION_ICON_WIDTH) - Inches(0.3)
-    # icon_y = ENCRYPTION_TOP_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
-    # cloud_icon = slide.shapes.add_picture(
-    #     ENCRYPTION_CLOUD_ICON,
-    #     icon_x, icon_y,
-    #     width=ENCRYPTION_ICON_WIDTH
-    # )
+    # Step number (blue circle, drawn last to appear on top)
+    step3_num_circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        ENCRYPTION_TOP_X + Inches(ENCRYPTION_STEP_NUMBER_X_OFFSET_INSIDE),
+        ENCRYPTION_TOP_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_INSIDE),
+        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
+    )
+    step3_num_circle.fill.solid()
+    step3_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
+    step3_num_circle.line.width = Pt(0)
+    # Text directly in the OVAL shape
+    tf = step3_num_circle.text_frame
+    tf.text = "3"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
+    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
 
     # Processing text
     processing_box = slide.shapes.add_textbox(
@@ -1878,29 +1877,6 @@ def create_slide_18(prs):
         run.font.name = FONT_FAMILY_INTER_REGULAR
 
     # === STEP 1: Encrypted Data (Bottom Left) ===
-    # Step number (blue circle, above card)
-    step1_num_circle = slide.shapes.add_shape(
-        MSO_SHAPE.OVAL,
-        ENCRYPTION_LEFT_X + Inches(ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET),
-        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE),
-        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
-    )
-    step1_num_circle.fill.solid()
-    step1_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
-    step1_num_circle.line.width = Pt(0)
-
-    # Text directly in the OVAL shape
-    tf = step1_num_circle.text_frame
-    tf.text = "1"
-    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
-    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
-    p.font.bold = True
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
-
     # Card
     encrypted_card = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
@@ -1913,29 +1889,51 @@ def create_slide_18(prs):
     encrypted_card.line.width = ENCRYPTION_CARD_BORDER_WIDTH
     encrypted_card.adjustments[0] = 0.05
 
-    # Title
+    # Icon (drawn first so title text appears on top)
+    icon_x = ENCRYPTION_LEFT_X + Inches(ENCRYPTION_ICON_X_OFFSET)
+    icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
+    lock_icon = slide.shapes.add_picture(
+        ENCRYPTION_LOCK_ICON,
+        icon_x, icon_y,
+        width=ENCRYPTION_ICON_WIDTH
+    )
+
+    # Title (drawn after icon, appears on top in vertical layout, centered)
     stage_title_box = slide.shapes.add_textbox(
         ENCRYPTION_LEFT_X + Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET),
         ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STAGE_TITLE_Y_OFFSET),
-        ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET + 1.5), Inches(0.4)
+        ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
     )
     tf = stage_title_box.text_frame
     tf.text = "Encrypted Data"
     p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
+    p.alignment = PP_ALIGN.CENTER
     p.font.size = FONT_SIZE_ENCRYPTION_STAGE_TITLE
     p.font.color.rgb = COLOR_ENCRYPTION_ENCRYPTED
     for run in p.runs:
         run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
 
-    # Icon - temporarily disabled for debugging
-    # icon_x = ENCRYPTION_LEFT_X + ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_ICON_WIDTH) - Inches(0.3)
-    # icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
-    # lock_icon = slide.shapes.add_picture(
-    #     ENCRYPTION_LOCK_ICON,
-    #     icon_x, icon_y,
-    #     width=ENCRYPTION_ICON_WIDTH
-    # )
+    # Step number (blue circle, drawn last to appear on top)
+    step1_num_circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        ENCRYPTION_LEFT_X + Inches(ENCRYPTION_STEP_NUMBER_X_OFFSET_INSIDE),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_INSIDE),
+        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
+    )
+    step1_num_circle.fill.solid()
+    step1_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
+    step1_num_circle.line.width = Pt(0)
+    # Text directly in the OVAL shape
+    tf = step1_num_circle.text_frame
+    tf.text = "1"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
+    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
 
     # Data blocks (encrypted) - styled with borders
     for i, block_text in enumerate(ENCRYPTION_ENCRYPTED_BLOCKS):
@@ -1984,29 +1982,6 @@ def create_slide_18(prs):
         run.font.name = FONT_FAMILY_INTER_REGULAR
 
     # === STEP 2: Decrypted Data (Bottom Right) ===
-    # Step number (blue circle, above card)
-    step2_num_circle = slide.shapes.add_shape(
-        MSO_SHAPE.OVAL,
-        ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET),
-        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE),
-        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
-    )
-    step2_num_circle.fill.solid()
-    step2_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
-    step2_num_circle.line.width = Pt(0)
-
-    # Text directly in the OVAL shape
-    tf = step2_num_circle.text_frame
-    tf.text = "2"
-    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
-    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
-    p.font.bold = True
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
-
     # Card
     decrypted_card = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
@@ -2019,29 +1994,51 @@ def create_slide_18(prs):
     decrypted_card.line.width = ENCRYPTION_CARD_BORDER_WIDTH
     decrypted_card.adjustments[0] = 0.05
 
-    # Title
+    # Icon (drawn first so title text appears on top)
+    icon_x = ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_ICON_X_OFFSET)
+    icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
+    unlock_icon = slide.shapes.add_picture(
+        ENCRYPTION_UNLOCK_ICON,
+        icon_x, icon_y,
+        width=ENCRYPTION_ICON_WIDTH
+    )
+
+    # Title (drawn after icon, appears on top in vertical layout, centered)
     stage_title_box = slide.shapes.add_textbox(
         ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET),
         ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STAGE_TITLE_Y_OFFSET),
-        ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_STAGE_TITLE_X_OFFSET + 1.5), Inches(0.4)
+        ENCRYPTION_CARD_WIDTH - Inches(0.6), Inches(0.4)
     )
     tf = stage_title_box.text_frame
     tf.text = "Decrypted Data"
     p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
+    p.alignment = PP_ALIGN.CENTER
     p.font.size = FONT_SIZE_ENCRYPTION_STAGE_TITLE
     p.font.color.rgb = COLOR_ENCRYPTION_DECRYPTED
     for run in p.runs:
         run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
 
-    # Icon - temporarily disabled for debugging
-    # icon_x = ENCRYPTION_RIGHT_X + ENCRYPTION_CARD_WIDTH - Inches(ENCRYPTION_ICON_WIDTH) - Inches(0.3)
-    # icon_y = ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_ICON_Y_OFFSET)
-    # unlock_icon = slide.shapes.add_picture(
-    #     ENCRYPTION_UNLOCK_ICON,
-    #     icon_x, icon_y,
-    #     width=ENCRYPTION_ICON_WIDTH
-    # )
+    # Step number (blue circle, drawn last to appear on top)
+    step2_num_circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        ENCRYPTION_RIGHT_X + Inches(ENCRYPTION_STEP_NUMBER_X_OFFSET_INSIDE),
+        ENCRYPTION_BOTTOM_Y + Inches(ENCRYPTION_STEP_NUMBER_Y_OFFSET_INSIDE),
+        ENCRYPTION_STEP_NUMBER_SIZE, ENCRYPTION_STEP_NUMBER_SIZE
+    )
+    step2_num_circle.fill.solid()
+    step2_num_circle.fill.fore_color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_BG
+    step2_num_circle.line.width = Pt(0)
+    # Text directly in the OVAL shape
+    tf = step2_num_circle.text_frame
+    tf.text = "2"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_ENCRYPTION_STEP_NUMBER
+    p.font.color.rgb = COLOR_ENCRYPTION_STEP_NUMBER_TEXT
+    p.font.bold = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_ENCRYPTION_STAGE_TITLE
 
     # Data blocks (decrypted) - styled with borders
     for i, block_text in enumerate(ENCRYPTION_DECRYPTED_BLOCKS):
@@ -2109,6 +2106,714 @@ def create_placeholder_slide(prs, slide_num):
 
     return prs
 
+def create_slide_19(prs):
+    """Slide 19: Chat API Architecture"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 19, 25)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        Inches(1), CHAT_API_TITLE_Y,
+        Inches(14), Inches(0.6)
+    )
+    tf = title_box.text_frame
+    tf.text = "Chat API Architecture"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_CHAT_API_TITLE
+    p.font.color.rgb = FONT_COLOR_CHAT_API_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_EXTRALIGHT
+
+    # Card data: (role_name, badge_text, note_text, content_text, color)
+    cards = [
+        ("SYSTEM", "SYSTEM", "Hidden instructions that guide AI behavior", CHAT_API_SYSTEM_TEXT, COLOR_CHAT_API_SYSTEM),
+        ("USER", "USER", "Actual request from the user", CHAT_API_USER_TEXT, COLOR_CHAT_API_USER),
+        ("ASSISTANT", "ASSISTANT", "AI response following system instructions", CHAT_API_ASSISTANT_TEXT, COLOR_CHAT_API_ASSISTANT)
+    ]
+
+    # Create each card
+    for i, (role_name, badge_text, note_text, content_text, color) in enumerate(cards):
+        card_y = CHAT_API_CARD_START_Y + (i * (CHAT_API_CARD_HEIGHT + CHAT_API_CARD_GAP))
+
+        # Card frame - NO BACKGROUND, only border (minimalist)
+        card = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            CHAT_API_CARD_X, card_y,
+            CHAT_API_CARD_WIDTH, CHAT_API_CARD_HEIGHT
+        )
+        # No background fill - transparent
+        card.fill.background()
+        # Colored border only
+        card.line.color.rgb = color
+        card.line.width = CHAT_API_CARD_BORDER_WIDTH
+        card.adjustments[0] = CHAT_API_CARD_BORDER_RADIUS
+        # No shadow
+        card.shadow.inherit = False
+
+        # Role Badge - NO BACKGROUND, only border (minimalist)
+        badge = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            CHAT_API_CARD_X + CHAT_API_METADATA_X_OFFSET,
+            card_y + CHAT_API_BADGE_Y_OFFSET,
+            CHAT_API_BADGE_WIDTH, CHAT_API_BADGE_HEIGHT
+        )
+        # No background fill - transparent
+        badge.fill.background()
+        # Colored border only
+        badge.line.color.rgb = color
+        badge.line.width = CHAT_API_BADGE_BORDER_WIDTH
+        badge.adjustments[0] = 0.5  # Very rounded for pill shape
+        # No shadow
+        badge.shadow.inherit = False
+
+        # Badge text (full color)
+        tf = badge.text_frame
+        tf.text = badge_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_CHAT_API_BADGE
+        p.font.color.rgb = color
+        p.font.bold = True
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+        # Message note (description under badge)
+        note_box = slide.shapes.add_textbox(
+            CHAT_API_CARD_X + CHAT_API_METADATA_X_OFFSET,
+            card_y + CHAT_API_NOTE_Y_OFFSET,
+            CHAT_API_METADATA_WIDTH, Inches(0.4)
+        )
+        tf = note_box.text_frame
+        tf.text = note_text
+        tf.word_wrap = True
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.font.size = FONT_SIZE_CHAT_API_NOTE
+        p.font.color.rgb = FONT_COLOR_CHAT_API_NOTE
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+        # Vertical divider line (using a thin rectangle shape)
+        divider_height = CHAT_API_CARD_HEIGHT - (2 * CHAT_API_DIVIDER_HEIGHT_OFFSET)
+        divider = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE,
+            CHAT_API_CARD_X + CHAT_API_DIVIDER_X_OFFSET,
+            card_y + CHAT_API_DIVIDER_HEIGHT_OFFSET,
+            Pt(2),  # Width
+            divider_height
+        )
+        divider.fill.solid()
+        divider.fill.fore_color.rgb = RGBColor(255, 255, 255)
+        divider.fill.transparency = 0.7  # Semi-transparent
+        divider.line.fill.background()  # No border
+
+        # Message content (main text on right)
+        content_box = slide.shapes.add_textbox(
+            CHAT_API_CARD_X + CHAT_API_CONTENT_X_OFFSET,
+            card_y + Inches(0.15),  # Centered vertically
+            CHAT_API_CONTENT_WIDTH,
+            CHAT_API_CARD_HEIGHT - Inches(0.3)
+        )
+        tf = content_box.text_frame
+        tf.text = content_text
+        tf.word_wrap = True
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.font.size = FONT_SIZE_CHAT_API_CONTENT
+        p.font.color.rgb = FONT_COLOR_CHAT_API_CONTENT
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    return prs
+
+def create_slide_20(prs):
+    """Slide 20: Chat API Architecture (copy of slide 19)"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 20, 25)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        Inches(1), CHAT_API_TITLE_Y,
+        Inches(14), Inches(0.6)
+    )
+    tf = title_box.text_frame
+    tf.text = "Chat API Architecture"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_CHAT_API_TITLE
+    p.font.color.rgb = FONT_COLOR_CHAT_API_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_EXTRALIGHT
+
+    # Card data: (role_name, badge_text, note_text, content_text, color)
+    cards = [
+        ("SYSTEM", "SYSTEM", "Hidden instructions that guide AI behavior", CHAT_API_SYSTEM_TEXT, COLOR_CHAT_API_SYSTEM),
+        ("USER", "USER", "Actual request from the user", CHAT_API_USER_TEXT, COLOR_CHAT_API_USER),
+        ("ASSISTANT", "ASSISTANT", "AI response following system instructions", CHAT_API_ASSISTANT_TEXT, COLOR_CHAT_API_ASSISTANT)
+    ]
+
+    # Create each card
+    for i, (role_name, badge_text, note_text, content_text, color) in enumerate(cards):
+        card_y = CHAT_API_CARD_START_Y + (i * (CHAT_API_CARD_HEIGHT + CHAT_API_CARD_GAP))
+
+        # Card frame - NO BACKGROUND, only border (minimalist)
+        card = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            CHAT_API_CARD_X, card_y,
+            CHAT_API_CARD_WIDTH, CHAT_API_CARD_HEIGHT
+        )
+        card.fill.background()
+        card.line.color.rgb = color
+        card.line.width = CHAT_API_CARD_BORDER_WIDTH
+        card.adjustments[0] = CHAT_API_CARD_BORDER_RADIUS
+        card.shadow.inherit = False
+
+        # Role Badge - NO BACKGROUND, only border (minimalist)
+        badge = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            CHAT_API_CARD_X + CHAT_API_METADATA_X_OFFSET,
+            card_y + CHAT_API_BADGE_Y_OFFSET,
+            CHAT_API_BADGE_WIDTH, CHAT_API_BADGE_HEIGHT
+        )
+        badge.fill.background()
+        badge.line.color.rgb = color
+        badge.line.width = CHAT_API_BADGE_BORDER_WIDTH
+        badge.adjustments[0] = 0.5
+        badge.shadow.inherit = False
+
+        # Badge text
+        tf = badge.text_frame
+        tf.text = badge_text
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_CHAT_API_BADGE
+        p.font.color.rgb = color
+        p.font.bold = True
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+        # Message note
+        note_box = slide.shapes.add_textbox(
+            CHAT_API_CARD_X + CHAT_API_METADATA_X_OFFSET,
+            card_y + CHAT_API_NOTE_Y_OFFSET,
+            CHAT_API_METADATA_WIDTH, Inches(0.4)
+        )
+        tf = note_box.text_frame
+        tf.text = note_text
+        tf.word_wrap = True
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.font.size = FONT_SIZE_CHAT_API_NOTE
+        p.font.color.rgb = FONT_COLOR_CHAT_API_NOTE
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+        # Vertical divider
+        divider_height = CHAT_API_CARD_HEIGHT - (2 * CHAT_API_DIVIDER_HEIGHT_OFFSET)
+        divider = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE,
+            CHAT_API_CARD_X + CHAT_API_DIVIDER_X_OFFSET,
+            card_y + CHAT_API_DIVIDER_HEIGHT_OFFSET,
+            Pt(2),
+            divider_height
+        )
+        divider.fill.solid()
+        divider.fill.fore_color.rgb = RGBColor(255, 255, 255)
+        divider.fill.transparency = 0.7
+        divider.line.fill.background()
+
+        # Message content
+        content_box = slide.shapes.add_textbox(
+            CHAT_API_CARD_X + CHAT_API_CONTENT_X_OFFSET,
+            card_y + Inches(0.15),
+            CHAT_API_CONTENT_WIDTH,
+            CHAT_API_CARD_HEIGHT - Inches(0.3)
+        )
+        tf = content_box.text_frame
+        tf.text = content_text
+        tf.word_wrap = True
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.font.size = FONT_SIZE_CHAT_API_CONTENT
+        p.font.color.rgb = FONT_COLOR_CHAT_API_CONTENT
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    return prs
+
+def create_slide_21(prs):
+    """Slide 21: RETRIEVAL AUGMENTED GENERATION"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 21, 25)
+
+    # The three keywords - using KEYWORD_THEME_TECH (like slides 4, 7, 16)
+    keywords = [
+        {"text": "RETRIEVAL", "color": KEYWORD_THEME_TECH[0]},
+        {"text": "AUGMENTED", "color": KEYWORD_THEME_TECH[1]},
+        {"text": "GENERATION", "color": KEYWORD_THEME_TECH[2]}
+    ]
+
+    for i, keyword in enumerate(keywords):
+        y_pos = KEYWORD_Y_START + (i * KEYWORD_Y_GAP)
+
+        keyword_box = slide.shapes.add_textbox(
+            KEYWORD_BOX_X, Inches(y_pos),
+            KEYWORD_BOX_WIDTH, KEYWORD_BOX_HEIGHT
+        )
+        tf = keyword_box.text_frame
+        tf.text = keyword["text"]
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_KEYWORD
+        p.font.bold = FONT_BOLD_KEYWORD
+        p.font.color.rgb = keyword["color"]
+
+        # CRITICAL: Font name must be set at RUN level!
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_KEYWORD  # Inter ExtraLight (font-weight: 200)
+            run.font.character_spacing = FONT_LETTER_SPACING_KEYWORD
+
+    return prs
+
+def create_slide_22(prs):
+    """Slide 22: Document Processing (RAG)"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 22, 25)
+
+    # Title - Fixed header
+    title_box = slide.shapes.add_textbox(
+        CONTENT_HEADER_X, CONTENT_HEADER_Y,
+        CONTENT_HEADER_WIDTH, CONTENT_HEADER_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = DOC_PROC_TITLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_CONTENT_TITLE
+    p.font.bold = FONT_BOLD_CONTENT_TITLE
+    p.font.color.rgb = FONT_COLOR_CONTENT_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+    # === LEFT: PDF Documents ===
+    # PDF1 (red) - bottom layer
+    pdf1 = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        DOC_PROC_PDF_X, DOC_PROC_PDF_Y,
+        DOC_PROC_PDF_WIDTH, DOC_PROC_PDF_HEIGHT
+    )
+    pdf1.fill.solid()
+    pdf1.fill.fore_color.rgb = COLOR_BACKGROUND_LIGHT
+    pdf1.line.color.rgb = RGBColor(64, 64, 64)
+    pdf1.line.width = DOC_PROC_PDF_BORDER_WIDTH
+    pdf1.rotation = -5  # Slight rotation
+
+    # PDF1 Header
+    pdf1_header = slide.shapes.add_textbox(
+        DOC_PROC_PDF_X + Inches(0.15), DOC_PROC_PDF_Y + Inches(0.15),
+        DOC_PROC_PDF_WIDTH - Inches(0.3), Inches(0.4)
+    )
+    tf = pdf1_header.text_frame
+    tf.text = "📄 PDF1"
+    p = tf.paragraphs[0]
+    p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
+    p.font.bold = True
+    p.font.color.rgb = COLOR_PDF1
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+    # PDF2 (cyan) - top layer, offset
+    pdf2_x = DOC_PROC_PDF_X + Inches(0.4)
+    pdf2_y = DOC_PROC_PDF_Y + Inches(0.3)
+    pdf2 = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        pdf2_x, pdf2_y,
+        DOC_PROC_PDF_WIDTH, DOC_PROC_PDF_HEIGHT
+    )
+    pdf2.fill.solid()
+    pdf2.fill.fore_color.rgb = COLOR_BACKGROUND_LIGHT
+    pdf2.line.color.rgb = RGBColor(64, 64, 64)
+    pdf2.line.width = DOC_PROC_PDF_BORDER_WIDTH
+    pdf2.rotation = 3  # Slight rotation opposite direction
+
+    # PDF2 Header
+    pdf2_header = slide.shapes.add_textbox(
+        pdf2_x + Inches(0.15), pdf2_y + Inches(0.15),
+        DOC_PROC_PDF_WIDTH - Inches(0.3), Inches(0.4)
+    )
+    tf = pdf2_header.text_frame
+    tf.text = "📄 PDF2"
+    p = tf.paragraphs[0]
+    p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
+    p.font.bold = True
+    p.font.color.rgb = COLOR_PDF2
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+    # === CENTER: Arrow ===
+    arrow_box = slide.shapes.add_textbox(
+        DOC_PROC_ARROW_X, DOC_PROC_ARROW_Y,
+        Inches(1), Inches(1)
+    )
+    tf = arrow_box.text_frame
+    tf.text = "→"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = DOC_PROC_ARROW_SIZE
+    p.font.color.rgb = COLOR_ACCENT_BLUE
+
+    # === RIGHT: Vector Matrix ===
+    chunks = [
+        ("Chunk 1", ["0.23", "-0.15", "0.87", "-0.42", "0.66", "..."]),
+        ("Chunk 2", ["0.45", "-0.67", "0.12", "0.89", "-0.34", "..."]),
+        ("Chunk 3", ["-0.56", "0.78", "-0.23", "0.41", "0.92", "..."]),
+        ("Chunk n", ["0.33", "-0.42", "0.71", "-0.18", "0.64", "..."])
+    ]
+
+    current_y = DOC_PROC_VECTOR_Y
+    for chunk_label, values in chunks:
+        # Label
+        label_box = slide.shapes.add_textbox(
+            DOC_PROC_VECTOR_X, current_y,
+            DOC_PROC_VECTOR_LABEL_WIDTH, DOC_PROC_VECTOR_CELL_HEIGHT
+        )
+        tf = label_box.text_frame
+        tf.text = chunk_label
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.RIGHT
+        p.font.size = FONT_SIZE_DOC_PROC_LABEL
+        p.font.bold = True
+        p.font.color.rgb = COLOR_ACCENT_BLUE
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+        # Vector cells
+        cell_x = DOC_PROC_VECTOR_X + DOC_PROC_VECTOR_LABEL_WIDTH + Inches(0.2)
+        for i, value in enumerate(values):
+            cell = slide.shapes.add_shape(
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                cell_x + (i * (DOC_PROC_VECTOR_CELL_WIDTH + Inches(0.08))), current_y,
+                DOC_PROC_VECTOR_CELL_WIDTH, DOC_PROC_VECTOR_CELL_HEIGHT
+            )
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = COLOR_BACKGROUND_LIGHT
+            cell.line.color.rgb = RGBColor(64, 64, 64)
+            cell.line.width = Pt(1)
+
+            # Cell text
+            tf = cell.text_frame
+            tf.text = value
+            tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+            p = tf.paragraphs[0]
+            p.alignment = PP_ALIGN.CENTER
+            p.font.size = FONT_SIZE_DOC_PROC_VECTOR
+            p.font.color.rgb = COLOR_TEXT_GRAY
+            for run in p.runs:
+                run.font.name = FONT_FAMILY_MONOSPACE
+
+        current_y += DOC_PROC_VECTOR_CELL_HEIGHT + Inches(0.2)
+
+    # === BOTTOM: User Query Section ===
+    # User icon (simple circle with "U")
+    user_circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        Inches(2), DOC_PROC_QUERY_Y,
+        DOC_PROC_USER_ICON_SIZE, DOC_PROC_USER_ICON_SIZE
+    )
+    user_circle.fill.background()
+    user_circle.line.color.rgb = COLOR_ACCENT_BLUE
+    user_circle.line.width = Pt(2)
+
+    user_icon_text = slide.shapes.add_textbox(
+        Inches(2), DOC_PROC_QUERY_Y,
+        DOC_PROC_USER_ICON_SIZE, DOC_PROC_USER_ICON_SIZE
+    )
+    tf = user_icon_text.text_frame
+    tf.text = "👤"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = Pt(20)
+
+    # Query text
+    query_box = slide.shapes.add_textbox(
+        Inches(2.8), DOC_PROC_QUERY_Y,
+        DOC_PROC_QUERY_TEXT_WIDTH, Inches(0.5)
+    )
+    tf = query_box.text_frame
+    tf.text = '"What are the compliance requirements?"'
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.LEFT
+    p.font.size = FONT_SIZE_DOC_PROC_QUERY
+    p.font.color.rgb = COLOR_TEXT_WHITE
+    p.font.italic = True
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Arrow
+    arrow_box2 = slide.shapes.add_textbox(
+        DOC_PROC_QUERY_ARROW_X, DOC_PROC_QUERY_Y,
+        Inches(0.5), Inches(0.5)
+    )
+    tf = arrow_box2.text_frame
+    tf.text = "→"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = Pt(36)
+    p.font.color.rgb = COLOR_ACCENT_BLUE
+
+    # Search term vector
+    search_label = slide.shapes.add_textbox(
+        DOC_PROC_SEARCH_X, DOC_PROC_QUERY_Y - Inches(0.3),
+        Inches(2), Inches(0.25)
+    )
+    tf = search_label.text_frame
+    tf.text = "Search term"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.LEFT
+    p.font.size = FONT_SIZE_DOC_PROC_LABEL
+    p.font.bold = True
+    p.font.color.rgb = COLOR_ACCENT_BLUE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+    # Search vector cells (highlighted in blue)
+    search_values = ["0.19", "-0.73", "0.44", "0.88", "-0.31", "..."]
+    cell_x = DOC_PROC_SEARCH_X
+    cell_y = DOC_PROC_QUERY_Y + Inches(0.05)
+    for i, value in enumerate(search_values):
+        cell = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            cell_x + (i * (DOC_PROC_VECTOR_CELL_WIDTH + Inches(0.08))), cell_y,
+            DOC_PROC_VECTOR_CELL_WIDTH, DOC_PROC_VECTOR_CELL_HEIGHT
+        )
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = RGBColor(30, 60, 90)  # Dark blue background
+        cell.line.color.rgb = COLOR_ACCENT_BLUE
+        cell.line.width = Pt(2)
+
+        # Cell text
+        tf = cell.text_frame
+        tf.text = value
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.font.size = FONT_SIZE_DOC_PROC_VECTOR
+        p.font.bold = True
+        p.font.color.rgb = COLOR_ACCENT_BLUE
+        for run in p.runs:
+            run.font.name = FONT_FAMILY_MONOSPACE
+
+    return prs
+
+def create_why_now_slide(prs, slide_num, step_data):
+    """Helper function to create a single Why Now slide with one card"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, slide_num, 25)
+
+    # Title - prominent at top
+    title_box = slide.shapes.add_textbox(
+        Inches(1), WHY_NOW_TITLE_Y,
+        Inches(14), Inches(0.6)
+    )
+    tf = title_box.text_frame
+    tf.text = WHY_NOW_TITLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_WHY_NOW_TITLE
+    p.font.bold = True
+    p.font.color.rgb = COLOR_ACCENT_BLUE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_BOLD
+
+    # Subtitle
+    subtitle_box = slide.shapes.add_textbox(
+        Inches(1), WHY_NOW_SUBTITLE_Y,
+        Inches(14), Inches(0.3)
+    )
+    tf = subtitle_box.text_frame
+    tf.text = WHY_NOW_SUBTITLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_WHY_NOW_SUBTITLE
+    p.font.bold = True
+    p.font.color.rgb = COLOR_ACCENT_BLUE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_MONOSPACE
+
+    # Card background
+    card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        WHY_NOW_CARD_X, WHY_NOW_CARD_Y,
+        WHY_NOW_CARD_WIDTH, WHY_NOW_CARD_HEIGHT
+    )
+    card.fill.solid()
+    card.fill.fore_color.rgb = RGBColor(31, 41, 55)
+    card.line.color.rgb = RGBColor(64, 64, 64)
+    card.line.width = WHY_NOW_CARD_BORDER_WIDTH
+    card.adjustments[0] = 0.08
+
+    # Step number circle
+    circle = slide.shapes.add_shape(
+        MSO_SHAPE.OVAL,
+        WHY_NOW_CARD_X + WHY_NOW_CIRCLE_X_OFFSET,
+        WHY_NOW_CARD_Y + WHY_NOW_CIRCLE_Y_OFFSET,
+        WHY_NOW_CIRCLE_SIZE, WHY_NOW_CIRCLE_SIZE
+    )
+    circle.fill.solid()
+    circle.fill.fore_color.rgb = COLOR_ACCENT_BLUE
+    circle.line.width = Pt(0)
+
+    # Number text
+    num_box = slide.shapes.add_textbox(
+        WHY_NOW_CARD_X + WHY_NOW_CIRCLE_X_OFFSET,
+        WHY_NOW_CARD_Y + WHY_NOW_CIRCLE_Y_OFFSET,
+        WHY_NOW_CIRCLE_SIZE, WHY_NOW_CIRCLE_SIZE
+    )
+    tf = num_box.text_frame
+    tf.text = step_data["number"]
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_WHY_NOW_STEP_NUMBER
+    p.font.bold = True
+    p.font.color.rgb = COLOR_TEXT_WHITE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_BOLD
+
+    # Step title
+    title_x = WHY_NOW_CARD_X + WHY_NOW_CONTENT_X_OFFSET
+    title_y = WHY_NOW_CARD_Y + WHY_NOW_TITLE_Y_OFFSET
+    step_title_box = slide.shapes.add_textbox(
+        title_x, title_y,
+        Inches(9), Inches(0.35)
+    )
+    tf = step_title_box.text_frame
+    tf.text = step_data["title"]
+    p = tf.paragraphs[0]
+    p.font.size = FONT_SIZE_WHY_NOW_STEP_TITLE
+    p.font.bold = True
+    p.font.color.rgb = COLOR_TEXT_WHITE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+    # Bullets (stacked vertically)
+    bullets_x = title_x
+    bullets_y = WHY_NOW_CARD_Y + WHY_NOW_BULLETS_Y_OFFSET
+    bullet_width = Inches(11)
+
+    for i, (label, text) in enumerate(step_data["bullets"]):
+        bullet_y = bullets_y + (i * (WHY_NOW_BULLET_HEIGHT + WHY_NOW_BULLET_GAP))
+
+        bullet_box = slide.shapes.add_textbox(
+            bullets_x, bullet_y,
+            bullet_width, WHY_NOW_BULLET_HEIGHT
+        )
+        tf = bullet_box.text_frame
+        tf.word_wrap = True
+
+        # Add text with bold label
+        p = tf.paragraphs[0]
+        run1 = p.add_run()
+        run1.text = f"▸ {label} "
+        run1.font.size = FONT_SIZE_WHY_NOW_BULLET
+        run1.font.bold = True
+        run1.font.color.rgb = COLOR_TEXT_WHITE
+        run1.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+        run2 = p.add_run()
+        run2.text = text
+        run2.font.size = FONT_SIZE_WHY_NOW_BULLET
+        run2.font.color.rgb = COLOR_TEXT_GRAY
+        run2.font.name = FONT_FAMILY_INTER_REGULAR
+
+    # Indicator badge
+    indicator = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        WHY_NOW_CARD_X + WHY_NOW_INDICATOR_X_OFFSET,
+        WHY_NOW_CARD_Y + WHY_NOW_INDICATOR_Y_OFFSET,
+        WHY_NOW_INDICATOR_WIDTH, WHY_NOW_INDICATOR_HEIGHT
+    )
+    indicator.fill.background()
+    indicator.line.color.rgb = step_data["indicator_color"]
+    indicator.line.width = Pt(1)
+    indicator.adjustments[0] = 0.25
+
+    # Indicator text
+    ind_text_box = slide.shapes.add_textbox(
+        WHY_NOW_CARD_X + WHY_NOW_INDICATOR_X_OFFSET,
+        WHY_NOW_CARD_Y + WHY_NOW_INDICATOR_Y_OFFSET,
+        WHY_NOW_INDICATOR_WIDTH, WHY_NOW_INDICATOR_HEIGHT
+    )
+    tf = ind_text_box.text_frame
+    tf.text = step_data["indicator"]
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_WHY_NOW_INDICATOR
+    p.font.bold = True
+    p.font.color.rgb = step_data["indicator_color"]
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+
+    return prs
+
+def create_slide_23(prs):
+    """Slide 23: Why Now? - Card 1: AI Infrastructure Maturity"""
+    step_data = {
+        "number": "1",
+        "title": "AI Infrastructure Maturity",
+        "bullets": [
+            ("Cost Revolution:", "Dramatic hardware price reductions alongside significant power efficiency improvements"),
+            ("Container Management:", "Streamlined deployment and orchestration through Docker containerization technologies"),
+            ("Performance & Memory:", "Remarkable computational performance gains with extensive shared memory capabilities"),
+            ("Form & Operation:", "Ultra-compact form factors enabling whisper-quiet, enterprise-grade operation")
+        ],
+        "indicator": "⚡ TECHNICAL READINESS",
+        "indicator_color": COLOR_WHY_NOW_TECH
+    }
+    return create_why_now_slide(prs, 23, step_data)
+
+def create_slide_24(prs):
+    """Slide 24: Why Now? - Card 2: Knowledge Worker Evolution"""
+    step_data = {
+        "number": "2",
+        "title": "Knowledge Worker Evolution",
+        "bullets": [
+            ("Phase 1 - Playground:", "ChatGPT experimentation and individual productivity gains"),
+            ("Phase 2 - Copilot:", "AI-assisted workflows and collaborative human-AI work"),
+            ("Phase 3 - Workforce:", "Autonomous AI agents managing organizational knowledge"),
+            ("Current Reality:", "73% of enterprises remain stuck between Phase 1-2")
+        ],
+        "indicator": "📈 MARKET DEMAND",
+        "indicator_color": COLOR_WHY_NOW_MARKET
+    }
+    return create_why_now_slide(prs, 24, step_data)
+
+def create_slide_25(prs):
+    """Slide 25: Why Now? - Card 3: Data Sovereignty Crisis"""
+    step_data = {
+        "number": "3",
+        "title": "Data Sovereignty Crisis",
+        "bullets": [
+            ("Regulatory Enforcement:", "EU AI Act and GDPR violations creating existential compliance risks"),
+            ("Corporate Barriers:", "Fortune 500 companies cite data residency as primary AI adoption blocker"),
+            ("Market Solution:", "Local plug-and-play AI becoming the gold standard for enterprises"),
+            ("Value Proposition:", "Complete control, zero compliance risk, instant deployment capabilities")
+        ],
+        "indicator": "🏛️ REGULATORY FORCE",
+        "indicator_color": COLOR_WHY_NOW_REGULATORY
+    }
+    return create_why_now_slide(prs, 25, step_data)
+
 def create_presentation():
     """Creates the complete presentation with consistent master elements"""
     prs = Presentation()
@@ -2162,6 +2867,27 @@ def create_presentation():
 
     # Slide 18: The Encryption Dilemma
     create_slide_18(prs)
+
+    # Slide 19: Chat API Architecture
+    create_slide_19(prs)
+
+    # Slide 20: Chat API Architecture (copy)
+    create_slide_20(prs)
+
+    # Slide 21: RAG
+    create_slide_21(prs)
+
+    # Slide 22: Document Processing
+    create_slide_22(prs)
+
+    # Slide 23: Why Now? - Card 1: AI Infrastructure Maturity
+    create_slide_23(prs)
+
+    # Slide 24: Why Now? - Card 2: Knowledge Worker Evolution
+    create_slide_24(prs)
+
+    # Slide 25: Why Now? - Card 3: Data Sovereignty Crisis
+    create_slide_25(prs)
 
     return prs
 

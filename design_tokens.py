@@ -805,7 +805,7 @@ FONT_FAMILY_ENCRYPTION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
 FONT_COLOR_ENCRYPTION_TITLE = COLOR_ACCENT_BLUE
 
 # Subtitle
-ENCRYPTION_SUBTITLE_Y = Inches(1.5)
+ENCRYPTION_SUBTITLE_Y = Inches(1.6)  # Increased spacing from title
 FONT_SIZE_ENCRYPTION_SUBTITLE = Pt(16)
 FONT_COLOR_ENCRYPTION_SUBTITLE = COLOR_TEXT_GRAY
 
@@ -816,56 +816,57 @@ ENCRYPTION_CARD_BORDER_WIDTH = Pt(1.5)
 ENCRYPTION_CARD_FILL_COLOR = RGBColor(31, 41, 55)
 
 # Bottom row (Steps 1 & 2) - more space between cards
-ENCRYPTION_BOTTOM_Y = Inches(5.3)
+ENCRYPTION_BOTTOM_Y = Inches(5.5)  # Moved down for better spacing
 ENCRYPTION_LEFT_X = Inches(0.8)
 ENCRYPTION_RIGHT_X = Inches(9.9)
 
 # Top center (Step 3) - smaller and centered
-ENCRYPTION_TOP_Y = Inches(2.2)
+ENCRYPTION_TOP_Y = Inches(2.4)  # Moved down for better spacing from subtitle
 ENCRYPTION_TOP_X = Inches(5.35)  # Centered (16 - 5.3) / 2
 ENCRYPTION_TOP_CARD_WIDTH = Inches(5.3)
 ENCRYPTION_TOP_CARD_HEIGHT = Inches(2.6)
 
-# Step number (outside cards, blue circles)
+# Step number (inside cards, blue circles, top left corner)
 ENCRYPTION_STEP_NUMBER_SIZE = Inches(0.65)
-ENCRYPTION_STEP_NUMBER_Y_OFFSET_OUTSIDE = -0.8  # Above card
-ENCRYPTION_STEP_NUMBER_X_CENTER_OFFSET = 2.325  # Center of card (5.3 / 2 - 0.65 / 2)
+ENCRYPTION_STEP_NUMBER_Y_OFFSET_INSIDE = 0.3  # From top of card
+ENCRYPTION_STEP_NUMBER_X_OFFSET_INSIDE = 0.3  # From left of card
 FONT_SIZE_ENCRYPTION_STEP_NUMBER = Pt(22)
 COLOR_ENCRYPTION_STEP_NUMBER_BG = COLOR_ACCENT_BLUE
 COLOR_ENCRYPTION_STEP_NUMBER_TEXT = COLOR_TEXT_WHITE
 
-# Stage header inside card
-ENCRYPTION_STAGE_TITLE_Y_OFFSET = 0.15
-ENCRYPTION_STAGE_TITLE_X_OFFSET = 0.4
+# Stage header inside card (now below icon in vertical layout)
+ENCRYPTION_STAGE_TITLE_Y_OFFSET = 1.2  # Below icon with more space
+ENCRYPTION_STAGE_TITLE_X_OFFSET = 0.3  # Left-aligned with step number
 FONT_SIZE_ENCRYPTION_STAGE_TITLE = Pt(18)
 FONT_FAMILY_ENCRYPTION_STAGE_TITLE = FONT_FAMILY_INTER_REGULAR
 
-# Icon area
-ENCRYPTION_ICON_WIDTH = Inches(1.2)
-ENCRYPTION_ICON_Y_OFFSET = 0.15  # Same as title, placed at right side
+# Icon area (now positioned above title in own row, centered horizontally)
+ENCRYPTION_ICON_WIDTH = Inches(1.7)  # 2x larger icons for better visibility
+ENCRYPTION_ICON_X_OFFSET = 1.8  # Centered: (5.3 - 1.7) / 2 = 1.8
+ENCRYPTION_ICON_Y_OFFSET = 0.2  # Top of card
 
 # Data blocks with background (styled boxes)
-ENCRYPTION_DATA_Y_OFFSET = 0.9
-ENCRYPTION_DATA_BLOCK_WIDTH = Inches(1.5)
+ENCRYPTION_DATA_Y_OFFSET = 1.8  # Below icon and title in vertical layout
+ENCRYPTION_DATA_BLOCK_WIDTH = Inches(1.4)  # Reduced to fit within card boundaries
 ENCRYPTION_DATA_BLOCK_HEIGHT = Inches(0.4)
-ENCRYPTION_DATA_BLOCK_GAP_X = Inches(0.2)
-ENCRYPTION_DATA_BLOCK_GAP_Y = Inches(0.15)
-ENCRYPTION_DATA_START_X_OFFSET = 0.4
+ENCRYPTION_DATA_BLOCK_GAP_X = Inches(0.15)  # Reduced gap to prevent overflow
+ENCRYPTION_DATA_BLOCK_GAP_Y = Inches(0.2)  # Increased vertical spacing
+ENCRYPTION_DATA_START_X_OFFSET = 0.5  # Increased left margin inside card
 ENCRYPTION_DATA_BLOCK_BORDER_WIDTH = Pt(1)
 ENCRYPTION_DATA_BLOCK_FILL_ALPHA = 0.1  # Subtle background
 FONT_SIZE_ENCRYPTION_DATA = Pt(12)
 
 # Stage description at bottom
-ENCRYPTION_DESC_Y_OFFSET = 2.7  # From top of card
+ENCRYPTION_DESC_Y_OFFSET = 2.5  # Moved up for better margin from bottom
 FONT_SIZE_ENCRYPTION_DESC = Pt(12)
 
 # Processing text (for Step 3)
 ENCRYPTION_PROCESSING_Y_OFFSET = 1.3
 FONT_SIZE_ENCRYPTION_PROCESSING = Pt(24)
 
-# Colors
-COLOR_ENCRYPTION_ENCRYPTED = RGBColor(239, 68, 68)  # Red #ef4444
-COLOR_ENCRYPTION_DECRYPTED = RGBColor(251, 191, 36)  # Yellow/Amber #fbbf24
+# Colors (adjusted to match blue/cyan spectrum of other slides)
+COLOR_ENCRYPTION_ENCRYPTED = RGBColor(139, 92, 246)  # Purple/Violet #8b5cf6
+COLOR_ENCRYPTION_DECRYPTED = RGBColor(34, 211, 238)  # Cyan #22d3ee
 COLOR_ENCRYPTION_INFERENCE = COLOR_ACCENT_GREEN      # Green #10b981
 
 # Icons
@@ -876,6 +877,164 @@ ENCRYPTION_CLOUD_ICON = "assets/icons/cloud_server.png"  # Reuse from Slide 17
 # Data
 ENCRYPTION_ENCRYPTED_BLOCKS = ["♦7k9mR2p", "nQ4▲B1zL", "wE8†Y3sM", "fG2hJ6◈N", "aM9▼R4pL", "vN3s✤8wK"]
 ENCRYPTION_DECRYPTED_BLOCKS = ["Witnesses", "must", "tell", "nothing,", "but", "the"]
+
+# =============================================================================
+# SLIDE 19 - CHAT API ARCHITECTURE
+# =============================================================================
+
+# Title
+CHAT_API_TITLE_Y = Inches(0.8)
+FONT_SIZE_CHAT_API_TITLE = Pt(48)
+FONT_COLOR_CHAT_API_TITLE = COLOR_ACCENT_BLUE
+
+# Card Layout
+CHAT_API_CARD_X = Inches(2)  # Left margin
+CHAT_API_CARD_WIDTH = Inches(12)  # Full width minus margins
+CHAT_API_CARD_HEIGHT = Inches(1.5)  # Height per card
+CHAT_API_CARD_GAP = Inches(0.3)  # Gap between cards (30px)
+CHAT_API_CARD_START_Y = Inches(2.2)  # Start position below title
+
+# Card Styling
+CHAT_API_CARD_BORDER_WIDTH = Pt(4)  # Left border
+CHAT_API_CARD_BORDER_RADIUS = 0.15  # Rounded corners (adjustments parameter)
+CHAT_API_CARD_FILL_ALPHA = 0.1  # Background opacity
+
+# Metadata section (left side of card)
+CHAT_API_METADATA_WIDTH = Inches(3.3)  # 320px
+CHAT_API_METADATA_X_OFFSET = Inches(0.25)  # Padding from left
+
+# Role Badge (pill-shaped)
+CHAT_API_BADGE_HEIGHT = Inches(0.35)
+CHAT_API_BADGE_WIDTH = Inches(1.5)
+CHAT_API_BADGE_Y_OFFSET = Inches(0.25)  # From top of card
+CHAT_API_BADGE_BORDER_WIDTH = Pt(1)
+FONT_SIZE_CHAT_API_BADGE = Pt(14)
+
+# Message Note (description under badge)
+CHAT_API_NOTE_Y_OFFSET = Inches(0.7)  # From top of card
+FONT_SIZE_CHAT_API_NOTE = Pt(11)
+FONT_COLOR_CHAT_API_NOTE = COLOR_TEXT_GRAY
+
+# Divider (vertical line)
+CHAT_API_DIVIDER_X_OFFSET = Inches(3.6)  # From left of card
+CHAT_API_DIVIDER_WIDTH = Pt(2)
+CHAT_API_DIVIDER_HEIGHT_OFFSET = Inches(0.15)  # Margin top/bottom
+
+# Message Content (right side)
+CHAT_API_CONTENT_X_OFFSET = Inches(4)  # From left of card (after divider)
+CHAT_API_CONTENT_WIDTH = Inches(7.75)  # Remaining width
+FONT_SIZE_CHAT_API_CONTENT = Pt(13)
+FONT_COLOR_CHAT_API_CONTENT = RGBColor(255, 255, 255)  # White with opacity via text
+
+# Colors for each role
+COLOR_CHAT_API_SYSTEM = RGBColor(16, 185, 129)  # #10b981 green
+COLOR_CHAT_API_USER = COLOR_ACCENT_BLUE  # #4dabf7 blue
+COLOR_CHAT_API_ASSISTANT = RGBColor(6, 182, 212)  # #06b6d4 cyan
+
+# Content for each role
+CHAT_API_SYSTEM_TEXT = "Sie sind ein spezialisierter KI-Assistent für Dr. Weber & Partner Rechtsanwälte. Beachten Sie stets das Mandantengeheimnis und deutsche Rechtsstandards."
+CHAT_API_USER_TEXT = "Erstelle einen Geschäftsführervertrag für ein Maschinenbauunternehmen in Bayern mit 150 Mitarbeitern"
+CHAT_API_ASSISTANT_TEXT = "Ich erstelle einen maßgeschneiderten Geschäftsführervertrag basierend auf aktueller deutscher Rechtsprechung und Ihren Kanzlei-Standards..."
+
+# =============================================================================
+# LAYOUT - SLIDE 22: DOCUMENT PROCESSING (RAG)
+# =============================================================================
+
+# Title
+DOC_PROC_TITLE = "Document Processing"
+
+# PDF Documents (left side)
+DOC_PROC_PDF_X = Inches(1.5)
+DOC_PROC_PDF_Y = Inches(2.0)
+DOC_PROC_PDF_WIDTH = Inches(2.5)
+DOC_PROC_PDF_HEIGHT = Inches(3.2)
+DOC_PROC_PDF_BORDER_WIDTH = Pt(2)
+
+# PDF Colors
+COLOR_PDF1 = RGBColor(239, 68, 68)  # #ef4444 red
+COLOR_PDF2 = RGBColor(6, 182, 212)  # #06b6d4 cyan
+
+# Text lines in PDF
+DOC_PROC_TEXT_LINE_HEIGHT = Pt(2.5)
+DOC_PROC_TEXT_LINE_GAP = Pt(6)
+
+# Arrow (center)
+DOC_PROC_ARROW_X = Inches(5.5)
+DOC_PROC_ARROW_Y = Inches(3.3)
+DOC_PROC_ARROW_SIZE = Pt(48)
+
+# Vectors (right side)
+DOC_PROC_VECTOR_X = Inches(8.5)
+DOC_PROC_VECTOR_Y = Inches(2.0)
+DOC_PROC_VECTOR_LABEL_WIDTH = Inches(0.9)
+DOC_PROC_VECTOR_CELL_WIDTH = Inches(0.65)
+DOC_PROC_VECTOR_CELL_HEIGHT = Inches(0.35)
+DOC_PROC_VECTOR_GAP = Pt(8)
+DOC_PROC_VECTOR_ROW_GAP = Pt(20)
+
+# User Query Section (bottom)
+DOC_PROC_QUERY_Y = Inches(5.8)
+DOC_PROC_USER_ICON_SIZE = Inches(0.5)
+DOC_PROC_QUERY_TEXT_WIDTH = Inches(4.5)
+DOC_PROC_QUERY_ARROW_X = Inches(7.75)
+DOC_PROC_SEARCH_X = Inches(9.5)
+
+# Fonts
+FONT_SIZE_DOC_PROC_LABEL = Pt(11)
+FONT_SIZE_DOC_PROC_VECTOR = Pt(9)
+FONT_SIZE_DOC_PROC_QUERY = Pt(13)
+FONT_SIZE_DOC_PROC_PDF_HEADER = Pt(11)
+
+# =============================================================================
+# LAYOUT - SLIDE 23: WHY NOW
+# =============================================================================
+
+# Title and subtitle
+WHY_NOW_TITLE = "WHY NOW?"
+WHY_NOW_SUBTITLE = "The perfect storm for local AI"
+WHY_NOW_TITLE_Y = Inches(0.8)
+WHY_NOW_SUBTITLE_Y = Inches(1.5)
+
+# Single card layout (one card per slide)
+WHY_NOW_CARD_X = Inches(1.5)
+WHY_NOW_CARD_Y = Inches(2.2)  # Single card position
+WHY_NOW_CARD_WIDTH = Inches(13)
+WHY_NOW_CARD_HEIGHT = Inches(4.0)  # Much taller for single card
+WHY_NOW_CARD_BORDER_WIDTH = Pt(2)
+
+# Step number circle
+WHY_NOW_CIRCLE_SIZE = Inches(0.6)
+WHY_NOW_CIRCLE_X_OFFSET = Inches(0.3)
+WHY_NOW_CIRCLE_Y_OFFSET = Inches(0.05)
+
+# Content positioning
+WHY_NOW_CONTENT_X_OFFSET = Inches(1.2)
+WHY_NOW_TITLE_Y_OFFSET = Inches(0.2)
+WHY_NOW_BULLETS_Y_OFFSET = Inches(0.7)
+WHY_NOW_BULLET_HEIGHT = Inches(0.45)  # More space per bullet
+WHY_NOW_BULLET_GAP = Inches(0.15)
+
+# Indicator badges (positioned below bullets, bottom left)
+WHY_NOW_INDICATOR_X_OFFSET = Inches(1.2)
+WHY_NOW_INDICATOR_Y_OFFSET = Inches(3.5)
+WHY_NOW_INDICATOR_WIDTH = Inches(2.3)
+WHY_NOW_INDICATOR_HEIGHT = Inches(0.3)
+
+# Card corner radius
+WHY_NOW_CARD_CORNER_RADIUS = Inches(0.15)
+
+# Colors for indicators
+COLOR_WHY_NOW_TECH = RGBColor(16, 185, 129)      # #10b981 green
+COLOR_WHY_NOW_MARKET = RGBColor(245, 158, 11)   # #f59e0b orange
+COLOR_WHY_NOW_REGULATORY = RGBColor(239, 68, 68) # #ef4444 red
+
+# Fonts
+FONT_SIZE_WHY_NOW_TITLE = Pt(48)
+FONT_SIZE_WHY_NOW_SUBTITLE = Pt(16)
+FONT_SIZE_WHY_NOW_STEP_TITLE = Pt(14)
+FONT_SIZE_WHY_NOW_BULLET = Pt(9)
+FONT_SIZE_WHY_NOW_INDICATOR = Pt(9)
+FONT_SIZE_WHY_NOW_STEP_NUMBER = Pt(24)
 
 # =============================================================================
 # LAYOUT - PLACEHOLDER SLIDES
