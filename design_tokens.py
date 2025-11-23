@@ -1009,25 +1009,32 @@ DOC_PROC_TITLE_Y = CHAT_API_TITLE_Y  # Inches(1.2) - match Slide 22
 FONT_SIZE_DOC_PROC_TITLE = FONT_SIZE_CHAT_API_TITLE  # Pt(48)
 FONT_FAMILY_DOC_PROC_TITLE = FONT_FAMILY_INTER_EXTRALIGHT  # Match Slide 22
 
-# SYMMETRICAL 2x2 MATRIX LAYOUT
+# SYMMETRICAL 2x2 MATRIX LAYOUT - COMPACT
 # Total slide width: 16"
-# Layout: [Left Col: 4.5"] [Gap: 1.5"] [Arrow: 1"] [Gap: 1.5"] [Right Col: 4.5"] = 13" + 1.5" margins each side
+# Compact layout with elements closer together, more outer space
 
-# Column positions (symmetrical)
-DOC_PROC_COL_LEFT_X = Inches(1.5)    # Left column start
-DOC_PROC_COL_RIGHT_X = Inches(9.5)   # Right column start (1.5 + 4.5 + 1.5 + 1 + 1.5 = 10)
-DOC_PROC_ARROW_CENTER_X = Inches(7.25)  # Arrow center (1.5 + 4.5 + 1.5 + 0.5 = 7.75, adjusted to 7.25)
+# Column positions (closer together)
+DOC_PROC_COL_LEFT_X = Inches(2.5)     # Left column start (moved right)
+DOC_PROC_COL_RIGHT_X = Inches(8.5)    # Right column start (moved left)
+# Arrow X: Exactly between PDF right edge and Vector left edge
+# PDFs end at ~5.0" (2.5 + 2.1 + 0.4 offset), Vectors start at 8.5"
+# Center: (5.0 + 8.5) / 2 = 6.75"
+DOC_PROC_ARROW_CENTER_X = Inches(6.75)
 
-# Row positions (symmetrical)
-DOC_PROC_ROW_TOP_Y = Inches(2.8)     # Top row (PDFs, Vectors)
-DOC_PROC_ROW_BOTTOM_Y = Inches(6.3)  # Bottom row (User Query, Search Vector) - deeper for better arrow flow
+# Row positions (vertically centered within each row)
+DOC_PROC_ROW_TOP_Y = Inches(2.8)      # Top row - PDF/Vector start
+DOC_PROC_ROW_TOP_CENTER = Inches(4.2) # Top row vertical center (2.8 + 1.4)
+DOC_PROC_ROW_BOTTOM_Y = Inches(6.5)   # Bottom row - User Query start
+DOC_PROC_ROW_BOTTOM_CENTER = Inches(7.0)  # Bottom row vertical center (6.5 + 0.5)
 
-# ROW 1 LEFT: PDF Documents - 2 rows layout
+# ROW 1 LEFT: PDF Documents - A4 format (taller)
 DOC_PROC_PDF_X = DOC_PROC_COL_LEFT_X
 DOC_PROC_PDF_Y = DOC_PROC_ROW_TOP_Y
-DOC_PROC_PDF_WIDTH = Inches(2.5)
-DOC_PROC_PDF_HEIGHT = Inches(2.0)
+DOC_PROC_PDF_WIDTH = Inches(2.1)      # Narrower for A4 proportions
+DOC_PROC_PDF_HEIGHT = Inches(2.8)     # A4 proportions (1:1.33 ratio) - reduced for more space
 DOC_PROC_PDF_BORDER_WIDTH = Pt(2)
+DOC_PROC_PDF_ROTATION_1 = -5          # PDF1 rotation angle
+DOC_PROC_PDF_ROTATION_2 = 3           # PDF2 rotation angle
 
 # PDF Colors
 COLOR_PDF1 = RGBColor(239, 68, 68)  # #ef4444 red
@@ -1035,23 +1042,32 @@ COLOR_PDF2 = RGBColor(6, 182, 212)  # #06b6d4 cyan
 
 # Icons
 DOC_PROC_PDF_ICON = "assets/icons/pdf_document.png"
+DOC_PROC_PDF_ICON_SIZE = Inches(0.18)  # Smaller Adobe logo size
 DOC_PROC_USER_ICON = "assets/icons/user_face.png"
 
-# ARROWS (unified size and position)
+# ARROWS (unified size and position, centered in each row)
 DOC_PROC_ARROW_X = DOC_PROC_ARROW_CENTER_X  # Same X for both arrows
-DOC_PROC_ARROW_TOP_Y = Inches(3.5)  # Top arrow Y (centered in top row)
-DOC_PROC_ARROW_BOTTOM_Y = Inches(7.0)  # Bottom arrow Y (centered in bottom row) - adjusted for deeper bottom row
+DOC_PROC_ARROW_TOP_Y = DOC_PROC_ROW_TOP_CENTER  # Centered in top row (4.2")
+DOC_PROC_ARROW_BOTTOM_Y = DOC_PROC_ROW_BOTTOM_CENTER  # Centered in bottom row (7.0")
 DOC_PROC_ARROW_SIZE = Pt(48)  # Unified arrow size
 DOC_PROC_ARROW_WIDTH = Inches(1.0)  # Arrow textbox width
 
-# ROW 1 RIGHT: Vector Chunks
+# Text paragraph lines (subtle visual elements inside PDFs)
+DOC_PROC_TEXT_LINE_HEIGHT = Pt(1)     # Very thin lines
+DOC_PROC_TEXT_LINE_GAP = Inches(0.08)  # Small gap between lines
+DOC_PROC_TEXT_LINE_COLOR = RGBColor(60, 65, 75)  # Very dark gray, subtle
+DOC_PROC_TEXT_LINE_ALPHA = 0.3        # Low opacity (for reference)
+
+# ROW 1 RIGHT: Vector Chunks (vertically centered with PDFs)
 DOC_PROC_VECTOR_X = DOC_PROC_COL_RIGHT_X
-DOC_PROC_VECTOR_Y = DOC_PROC_ROW_TOP_Y
+# Vectors: 4 rows * 0.35" + 3 gaps * 0.2" = 2.0" total height
+# Center at 4.2" → Start at 4.2 - 1.0 = 3.2"
+DOC_PROC_VECTOR_Y = Inches(3.2)  # Vertically centered with PDFs
 DOC_PROC_VECTOR_LABEL_WIDTH = Inches(0.9)
 DOC_PROC_VECTOR_CELL_WIDTH = Inches(0.65)
 DOC_PROC_VECTOR_CELL_HEIGHT = Inches(0.35)
 DOC_PROC_VECTOR_GAP = Pt(8)
-DOC_PROC_VECTOR_ROW_GAP = Pt(20)
+DOC_PROC_VECTOR_ROW_GAP = Inches(0.2)  # Gap between rows
 
 # ROW 2 LEFT: User Query Section
 DOC_PROC_QUERY_X_START = DOC_PROC_COL_LEFT_X
@@ -1059,15 +1075,17 @@ DOC_PROC_QUERY_Y = DOC_PROC_ROW_BOTTOM_Y
 DOC_PROC_USER_ICON_SIZE = Inches(1.0)
 DOC_PROC_QUERY_TEXT_WIDTH = Inches(3.5)
 
-# ROW 2 RIGHT: Search Vector - single row
+# ROW 2 RIGHT: Search Vector - single row (vertically centered with User Query)
 DOC_PROC_SEARCH_VECTOR_X = DOC_PROC_COL_RIGHT_X
-DOC_PROC_SEARCH_VECTOR_Y = DOC_PROC_ROW_BOTTOM_Y
+# Search Vector: 0.35" high, User Icon: 1.0" high
+# Center at 7.0" → Search starts at 7.0 - 0.175 = 6.825"
+DOC_PROC_SEARCH_VECTOR_Y = Inches(6.825)  # Vertically centered with User Icon
 
 # Fonts
 FONT_SIZE_DOC_PROC_LABEL = Pt(11)
 FONT_SIZE_DOC_PROC_VECTOR = Pt(9)
 FONT_SIZE_DOC_PROC_QUERY = Pt(13)
-FONT_SIZE_DOC_PROC_PDF_HEADER = Pt(11)
+FONT_SIZE_DOC_PROC_PDF_HEADER = Pt(9)  # Smaller PDF1/PDF2 text
 
 # =============================================================================
 # LAYOUT - SLIDE 23: WHY NOW

@@ -2572,33 +2572,27 @@ def create_slide_23(prs):
     pdf1.fill.fore_color.rgb = COLOR_BACKGROUND_LIGHT
     pdf1.line.color.rgb = RGBColor(64, 64, 64)
     pdf1.line.width = DOC_PROC_PDF_BORDER_WIDTH
-    pdf1.rotation = -5
+    pdf1.rotation = DOC_PROC_PDF_ROTATION_1
 
-    # Small Adobe PDF icon
-    pdf_icon_small = Inches(0.25)
-    pdf_icon1 = slide.shapes.add_picture(
-        DOC_PROC_PDF_ICON,
-        DOC_PROC_PDF_X + Inches(0.15), DOC_PROC_PDF_Y + Inches(0.15),
-        width=pdf_icon_small
-    )
-
-    # PDF1 Header
-    pdf1_header = slide.shapes.add_textbox(
-        DOC_PROC_PDF_X + Inches(0.45), DOC_PROC_PDF_Y + Inches(0.15),
-        DOC_PROC_PDF_WIDTH - Inches(0.5), Inches(0.3)
-    )
-    tf = pdf1_header.text_frame
-    tf.text = "PDF1"
-    p = tf.paragraphs[0]
-    p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
-    p.font.bold = True
-    p.font.color.rgb = COLOR_PDF1
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
-
-    # PDF1 Chunk lines (2 horizontal lines to divide into 3 chunks)
-    # Using thin rectangles instead of connectors for proper rotation
+    # PDF1 Text paragraph lines (subtle text simulation in each chunk)
     chunk_line_spacing = DOC_PROC_PDF_HEIGHT / 3  # Divide height into 3 parts
+    for chunk_idx in range(3):  # 3 chunks
+        chunk_start_y = DOC_PROC_PDF_Y + Inches(0.5) + (chunk_idx * chunk_line_spacing)
+        # Add 3-4 subtle text lines per chunk
+        for line_idx in range(4):
+            text_line = slide.shapes.add_shape(
+                MSO_SHAPE.RECTANGLE,
+                DOC_PROC_PDF_X + Inches(0.2),
+                chunk_start_y + (line_idx * DOC_PROC_TEXT_LINE_GAP),
+                DOC_PROC_PDF_WIDTH - Inches(0.4),
+                DOC_PROC_TEXT_LINE_HEIGHT
+            )
+            text_line.fill.solid()
+            text_line.fill.fore_color.rgb = DOC_PROC_TEXT_LINE_COLOR
+            text_line.line.fill.background()
+            text_line.rotation = DOC_PROC_PDF_ROTATION_1
+
+    # PDF1 Chunk divider lines (2 horizontal lines to divide into 3 chunks)
     line_height = Pt(1.5)
     for i in range(1, 3):  # 2 lines (at 1/3 and 2/3)
         line = slide.shapes.add_shape(
@@ -2611,7 +2605,31 @@ def create_slide_23(prs):
         line.fill.solid()
         line.fill.fore_color.rgb = RGBColor(100, 100, 100)  # Gray
         line.line.fill.background()  # No outline
-        line.rotation = -5  # Match PDF1 rotation
+        line.rotation = DOC_PROC_PDF_ROTATION_1
+
+    # PDF1 Icon and Header (added AFTER lines to be in foreground)
+    # Small Adobe PDF icon (rotated with PDF)
+    pdf_icon1 = slide.shapes.add_picture(
+        DOC_PROC_PDF_ICON,
+        DOC_PROC_PDF_X + Inches(0.15), DOC_PROC_PDF_Y + Inches(0.15),
+        width=DOC_PROC_PDF_ICON_SIZE
+    )
+    pdf_icon1.rotation = DOC_PROC_PDF_ROTATION_1
+
+    # PDF1 Header (rotated with PDF)
+    pdf1_header = slide.shapes.add_textbox(
+        DOC_PROC_PDF_X + Inches(0.35), DOC_PROC_PDF_Y + Inches(0.15),
+        DOC_PROC_PDF_WIDTH - Inches(0.4), Inches(0.3)
+    )
+    tf = pdf1_header.text_frame
+    tf.text = "PDF1"
+    p = tf.paragraphs[0]
+    p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
+    p.font.bold = True
+    p.font.color.rgb = COLOR_PDF1
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+    pdf1_header.rotation = DOC_PROC_PDF_ROTATION_1
 
     # PDF2 (cyan) - top layer, offset (smaller)
     pdf2_x = DOC_PROC_PDF_X + Inches(0.4)
@@ -2625,31 +2643,26 @@ def create_slide_23(prs):
     pdf2.fill.fore_color.rgb = COLOR_BACKGROUND_LIGHT
     pdf2.line.color.rgb = RGBColor(64, 64, 64)
     pdf2.line.width = DOC_PROC_PDF_BORDER_WIDTH
-    pdf2.rotation = 3
+    pdf2.rotation = DOC_PROC_PDF_ROTATION_2
 
-    # Small Adobe PDF icon
-    pdf_icon2 = slide.shapes.add_picture(
-        DOC_PROC_PDF_ICON,
-        pdf2_x + Inches(0.15), pdf2_y + Inches(0.15),
-        width=pdf_icon_small
-    )
+    # PDF2 Text paragraph lines (subtle text simulation in each chunk)
+    for chunk_idx in range(3):  # 3 chunks
+        chunk_start_y = pdf2_y + Inches(0.5) + (chunk_idx * chunk_line_spacing)
+        # Add 3-4 subtle text lines per chunk
+        for line_idx in range(4):
+            text_line = slide.shapes.add_shape(
+                MSO_SHAPE.RECTANGLE,
+                pdf2_x + Inches(0.2),
+                chunk_start_y + (line_idx * DOC_PROC_TEXT_LINE_GAP),
+                DOC_PROC_PDF_WIDTH - Inches(0.4),
+                DOC_PROC_TEXT_LINE_HEIGHT
+            )
+            text_line.fill.solid()
+            text_line.fill.fore_color.rgb = DOC_PROC_TEXT_LINE_COLOR
+            text_line.line.fill.background()
+            text_line.rotation = DOC_PROC_PDF_ROTATION_2
 
-    # PDF2 Header
-    pdf2_header = slide.shapes.add_textbox(
-        pdf2_x + Inches(0.45), pdf2_y + Inches(0.15),
-        DOC_PROC_PDF_WIDTH - Inches(0.5), Inches(0.3)
-    )
-    tf = pdf2_header.text_frame
-    tf.text = "PDF2"
-    p = tf.paragraphs[0]
-    p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
-    p.font.bold = True
-    p.font.color.rgb = COLOR_PDF2
-    for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
-
-    # PDF2 Chunk lines (2 horizontal lines to divide into 3 chunks)
-    # Using thin rectangles instead of connectors for proper rotation
+    # PDF2 Chunk divider lines (2 horizontal lines to divide into 3 chunks)
     for i in range(1, 3):  # 2 lines (at 1/3 and 2/3)
         line = slide.shapes.add_shape(
             MSO_SHAPE.RECTANGLE,
@@ -2661,7 +2674,31 @@ def create_slide_23(prs):
         line.fill.solid()
         line.fill.fore_color.rgb = RGBColor(100, 100, 100)  # Gray
         line.line.fill.background()  # No outline
-        line.rotation = 3  # Match PDF2 rotation
+        line.rotation = DOC_PROC_PDF_ROTATION_2
+
+    # PDF2 Icon and Header (added AFTER lines to be in foreground)
+    # Small Adobe PDF icon (rotated with PDF)
+    pdf_icon2 = slide.shapes.add_picture(
+        DOC_PROC_PDF_ICON,
+        pdf2_x + Inches(0.15), pdf2_y + Inches(0.15),
+        width=DOC_PROC_PDF_ICON_SIZE
+    )
+    pdf_icon2.rotation = DOC_PROC_PDF_ROTATION_2
+
+    # PDF2 Header (rotated with PDF)
+    pdf2_header = slide.shapes.add_textbox(
+        pdf2_x + Inches(0.35), pdf2_y + Inches(0.15),
+        DOC_PROC_PDF_WIDTH - Inches(0.4), Inches(0.3)
+    )
+    tf = pdf2_header.text_frame
+    tf.text = "PDF2"
+    p = tf.paragraphs[0]
+    p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
+    p.font.bold = True
+    p.font.color.rgb = COLOR_PDF2
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+    pdf2_header.rotation = DOC_PROC_PDF_ROTATION_2
 
     # === ROW 1 CENTER: Arrow ===
     arrow_box_top = slide.shapes.add_textbox(
@@ -2768,25 +2805,26 @@ def create_slide_23(prs):
     p.font.size = DOC_PROC_ARROW_SIZE
     p.font.color.rgb = COLOR_ACCENT_BLUE
 
-    # === ROW 2 RIGHT: Search Vector (single row) ===
-    # Label
+    # === ROW 2 RIGHT: Search Vector (single row, aligned with Chunks above) ===
+    # Label (same style as Chunk labels)
     search_label = slide.shapes.add_textbox(
-        DOC_PROC_SEARCH_VECTOR_X, DOC_PROC_SEARCH_VECTOR_Y - Inches(0.4),
-        Inches(3), Inches(0.3)
+        DOC_PROC_SEARCH_VECTOR_X, DOC_PROC_SEARCH_VECTOR_Y,
+        DOC_PROC_VECTOR_LABEL_WIDTH, DOC_PROC_VECTOR_CELL_HEIGHT
     )
     tf = search_label.text_frame
-    tf.text = "Search term vector"
+    tf.text = "Search"
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
+    p.alignment = PP_ALIGN.RIGHT  # Right-aligned like Chunk labels
     p.font.size = FONT_SIZE_DOC_PROC_LABEL
     p.font.bold = True
     p.font.color.rgb = COLOR_ACCENT_BLUE
     for run in p.runs:
         run.font.name = FONT_FAMILY_INTER_SEMIBOLD
 
-    # Vector cells (single row, highlighted)
+    # Vector cells (single row, highlighted, aligned with Chunk cells)
     search_values = ["0.19", "-0.73", "0.44", "0.88", "-0.31", "..."]
-    cell_x = DOC_PROC_SEARCH_VECTOR_X
+    cell_x = DOC_PROC_SEARCH_VECTOR_X + DOC_PROC_VECTOR_LABEL_WIDTH + Inches(0.2)  # Same gap as Chunks
     for i, value in enumerate(search_values):
         cell = slide.shapes.add_shape(
             MSO_SHAPE.ROUNDED_RECTANGLE,
