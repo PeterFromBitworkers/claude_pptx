@@ -114,7 +114,7 @@ def apply_master_elements(slide, slide_num, total_slides=17):
 def create_slide_1(prs):
     """Slide 1: THE AI PARADOX"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 1, 25)
+    apply_master_elements(slide, 1, 26)
 
     # The three keywords - using KEYWORD_THEME_PROBLEM
     keywords = [
@@ -148,7 +148,7 @@ def create_slide_1(prs):
 def create_slide_2(prs):
     """Slide 2: Organisations want AI"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 2, 25)
+    apply_master_elements(slide, 2, 26)
 
     # Fixed header
     title_box = slide.shapes.add_textbox(
@@ -305,7 +305,7 @@ def create_slide_2(prs):
 def create_slide_3(prs):
     """Slide 3: Market Reality"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 3, 25)
+    apply_master_elements(slide, 3, 26)
 
     # Fixed header
     title_box = slide.shapes.add_textbox(
@@ -475,7 +475,7 @@ def create_slide_3(prs):
 def create_slide_4(prs):
     """Slide 4: SOVEREIGN AI SOLUTION"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 4, 25)
+    apply_master_elements(slide, 4, 26)
 
     # The three keywords - using KEYWORD_THEME_SOLUTION
     keywords = [
@@ -509,7 +509,7 @@ def create_slide_4(prs):
 def create_slide_5(prs):
     """Slide 5: BRAIN-BRIDGES Introduction (like Slide 6 but with text instead of features)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 5, 25)
+    apply_master_elements(slide, 5, 26)
 
     # =========================================================================
     # LEFT SIDE: Title, Subtitle, Description Text
@@ -652,7 +652,7 @@ def create_slide_5(prs):
 def create_slide_6(prs):
     """Slide 6: BRAIN-BRIDGES Hero Slide"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 6, 25)
+    apply_master_elements(slide, 6, 26)
 
     # =========================================================================
     # LEFT SIDE: Title, Subtitle, Features
@@ -941,7 +941,7 @@ def create_slide_6(prs):
 def create_slide_7(prs):
     """Slide 7: UNDERSTANDING INFERENCE MECHANICS"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 7, 25)
+    apply_master_elements(slide, 7, 26)
 
     # The three keywords - using KEYWORD_THEME_TECH
     keywords = [
@@ -975,7 +975,7 @@ def create_slide_7(prs):
 def create_slide_8(prs):
     """Slide 8: Tokenization Intro - A Sample from legal domain"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 8, 25)
+    apply_master_elements(slide, 8, 26)
 
     # Title: "A Sample from legal domain:"
     title_box = slide.shapes.add_textbox(
@@ -1036,7 +1036,7 @@ def create_slide_8(prs):
 def create_slide_9(prs):
     """Slide 9: Vector Embeddings (Token → Vector Lookup)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 9, 25)
+    apply_master_elements(slide, 9, 26)
 
     # Create each token row (Wit, nesses, must, tell, nothing)
     for i, token_info in enumerate(TOKEN_DATA):
@@ -1113,7 +1113,7 @@ def create_slide_9(prs):
 def create_slide_10(prs):
     """Slide 10: Attention is all you need - Attention Matrix"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 10, 25)
+    apply_master_elements(slide, 10, 26)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1242,9 +1242,153 @@ def create_slide_10(prs):
     return prs
 
 def create_slide_11(prs):
-    """Slide 11: Next word prediction"""
+    """Slide 11: Attention Heatmap - 25x25 Large Matrix with Hotspots"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 11, 25)
+    apply_master_elements(slide, 11, 26)
+
+    # Title
+    title_box = slide.shapes.add_textbox(
+        HEATMAP_TITLE_X, HEATMAP_TITLE_Y,
+        HEATMAP_TITLE_WIDTH, HEATMAP_TITLE_HEIGHT
+    )
+    tf = title_box.text_frame
+    tf.text = "Attention Flow at Scale"
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.font.size = FONT_SIZE_HEATMAP_TITLE
+    p.font.color.rgb = FONT_COLOR_HEATMAP_TITLE
+    for run in p.runs:
+        run.font.name = FONT_FAMILY_HEATMAP_TITLE
+
+    # Helper function to generate heatmap intensity (0.0 to 1.0)
+    # Creates meandering hotspots with diagonal patterns
+    def get_attention_intensity(row, col, size=25):
+        # Normalize coordinates to 0-1
+        x = col / size
+        y = row / size
+
+        # Create multiple diagonal hotspots with different intensities
+        # Hotspot 1: Main diagonal (top-left to bottom-right)
+        dist1 = abs(x - y)
+        hotspot1 = max(0, 1.0 - dist1 * 3.0) * 0.9
+
+        # Hotspot 2: Near diagonal offset
+        dist2 = abs((x + 0.1) - y)
+        hotspot2 = max(0, 1.0 - dist2 * 4.0) * 0.7
+
+        # Hotspot 3: Lower left - LARGE, close to diagonal
+        # Position: lower-left, closer to diagonal (around 0.25, 0.65)
+        dist3 = ((x - 0.25)**2 + (y - 0.65)**2)**0.5
+        hotspot3 = max(0, 1.0 - dist3 * 1.8) * 0.85  # Larger radius (1.8 instead of 2.5), higher intensity
+
+        # Hotspot 4: Upper right - SMALL, far from diagonal
+        # Position: upper-right, farther from diagonal (around 0.75, 0.15)
+        dist4 = ((x - 0.75)**2 + (y - 0.15)**2)**0.5
+        hotspot4 = max(0, 1.0 - dist4 * 4.0) * 0.65  # Smaller radius (4.0), lower intensity
+
+        # Hotspot 5: Center area
+        dist5 = ((x - 0.5)**2 + (y - 0.5)**2)**0.5
+        hotspot5 = max(0, 1.0 - dist5 * 1.5) * 0.6
+
+        # Add some scattered medium-intensity areas
+        import math
+        noise = (math.sin(x * 12.3 + y * 8.7) + 1) / 2 * 0.15
+
+        # Combine all hotspots
+        intensity = max(hotspot1, hotspot2, hotspot3, hotspot4, hotspot5) + noise
+
+        # Add base level (background attention)
+        intensity = max(0.05, min(1.0, intensity + 0.05))
+
+        return intensity
+
+    # Helper function to map intensity to color
+    def intensity_to_color(intensity):
+        if intensity < 0.15:
+            return HEATMAP_COLOR_LOWEST
+        elif intensity < 0.25:
+            return HEATMAP_COLOR_VERY_LOW
+        elif intensity < 0.35:
+            return HEATMAP_COLOR_LOW
+        elif intensity < 0.45:
+            return HEATMAP_COLOR_MEDIUM_LOW
+        elif intensity < 0.55:
+            return HEATMAP_COLOR_MEDIUM
+        elif intensity < 0.65:
+            return HEATMAP_COLOR_MEDIUM_HIGH
+        elif intensity < 0.75:
+            return HEATMAP_COLOR_HIGH
+        elif intensity < 0.85:
+            return HEATMAP_COLOR_VERY_HIGH
+        else:
+            return HEATMAP_COLOR_HIGHEST
+
+    # Create 26x26 grid (25x25 data + 1 header row/col)
+    matrix_size = HEATMAP_MATRIX_SIZE
+    total_size = matrix_size + 1  # Including header
+
+    for row in range(total_size):
+        for col in range(total_size):
+            # Calculate position
+            x = HEATMAP_MATRIX_X + col * (HEATMAP_CELL_WIDTH + HEATMAP_CELL_GAP)
+            y = HEATMAP_MATRIX_Y + row * (HEATMAP_CELL_HEIGHT + HEATMAP_CELL_GAP)
+
+            # Determine if this is a header cell
+            is_header = (row == 0 or col == 0)
+
+            if is_header:
+                # Header cell with "--" text (or empty for corner)
+                cell = slide.shapes.add_shape(
+                    MSO_SHAPE.RECTANGLE if HEATMAP_CELL_CORNER_RADIUS == 0 else MSO_SHAPE.ROUNDED_RECTANGLE,
+                    x, y,
+                    HEATMAP_CELL_WIDTH, HEATMAP_CELL_HEIGHT
+                )
+                cell.fill.solid()
+                cell.fill.fore_color.rgb = HEATMAP_HEADER_FILL_COLOR
+                cell.line.color.rgb = HEATMAP_CELL_BORDER_COLOR
+                cell.line.width = HEATMAP_CELL_BORDER_WIDTH
+                if HEATMAP_CELL_CORNER_RADIUS > 0:
+                    cell.adjustments[0] = HEATMAP_CELL_CORNER_RADIUS
+
+                # Add "--" text (skip corner cell at 0,0)
+                if not (row == 0 and col == 0):
+                    tf = cell.text_frame
+                    tf.text = HEATMAP_HEADER_TEXT
+                    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+                    p = tf.paragraphs[0]
+                    p.alignment = PP_ALIGN.CENTER
+                    p.font.size = FONT_SIZE_HEATMAP_HEADER
+                    p.font.color.rgb = FONT_COLOR_HEATMAP_HEADER
+            else:
+                # Data cell with heatmap color
+                data_row = row - 1
+                data_col = col - 1
+
+                # Get attention intensity for this position
+                intensity = get_attention_intensity(data_row, data_col, matrix_size)
+                color = intensity_to_color(intensity)
+
+                # Create colored cell
+                cell = slide.shapes.add_shape(
+                    MSO_SHAPE.RECTANGLE if HEATMAP_CELL_CORNER_RADIUS == 0 else MSO_SHAPE.ROUNDED_RECTANGLE,
+                    x, y,
+                    HEATMAP_CELL_WIDTH, HEATMAP_CELL_HEIGHT
+                )
+                cell.fill.solid()
+                cell.fill.fore_color.rgb = color
+                cell.line.color.rgb = HEATMAP_CELL_BORDER_COLOR
+                cell.line.width = HEATMAP_CELL_BORDER_WIDTH
+                if HEATMAP_CELL_CORNER_RADIUS > 0:
+                    cell.adjustments[0] = HEATMAP_CELL_CORNER_RADIUS
+
+    # No caption text for this slide (user requested removal)
+
+    return prs
+
+def create_slide_12(prs):
+    """Slide 12: Next word prediction (formerly Slide 11)"""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    apply_master_elements(slide, 12, 26)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1534,26 +1678,26 @@ def create_autoregression_slide(prs, slide_num, step_data):
 
     return prs
 
-def create_slide_12(prs):
-    """Slide 12: Autoregression - Step 1"""
-    return create_autoregression_slide(prs, 12, AUTOREGRESS_STEP_1)
-
 def create_slide_13(prs):
-    """Slide 13: Autoregression - Step 2"""
-    return create_autoregression_slide(prs, 13, AUTOREGRESS_STEP_2)
+    """Slide 13: Autoregression - Step 1 (formerly Slide 12)"""
+    return create_autoregression_slide(prs, 13, AUTOREGRESS_STEP_1)
 
 def create_slide_14(prs):
-    """Slide 14: Autoregression - Step 3"""
-    return create_autoregression_slide(prs, 14, AUTOREGRESS_STEP_3)
+    """Slide 14: Autoregression - Step 2 (formerly Slide 13)"""
+    return create_autoregression_slide(prs, 14, AUTOREGRESS_STEP_2)
 
 def create_slide_15(prs):
-    """Slide 15: Autoregression - Final"""
-    return create_autoregression_slide(prs, 15, AUTOREGRESS_STEP_FINAL)
+    """Slide 15: Autoregression - Step 3 (formerly Slide 14)"""
+    return create_autoregression_slide(prs, 15, AUTOREGRESS_STEP_3)
 
 def create_slide_16(prs):
-    """Slide 16: ON PREMISE MATTERS"""
+    """Slide 16: Autoregression - Final (formerly Slide 15)"""
+    return create_autoregression_slide(prs, 16, AUTOREGRESS_STEP_FINAL)
+
+def create_slide_17(prs):
+    """Slide 17: ON PREMISE MATTERS (formerly Slide 16)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 16, 25)
+    apply_master_elements(slide, 17, 26)
 
     # The three keywords - using KEYWORD_THEME_SOLUTION
     keywords = [
@@ -1584,10 +1728,10 @@ def create_slide_16(prs):
 
     return prs
 
-def create_slide_17(prs):
-    """Slide 17: The Fundamental Security Conflict"""
+def create_slide_18(prs):
+    """Slide 18: The Fundamental Security Conflict (formerly Slide 17)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 17, 25)
+    apply_master_elements(slide, 18, 26)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -1767,10 +1911,10 @@ def create_slide_17(prs):
 
     return prs
 
-def create_slide_18(prs):
-    """Slide 18: The Encryption Dilemma - Redesigned Layout"""
+def create_slide_19(prs):
+    """Slide 19: The Encryption Dilemma - Redesigned Layout (formerly Slide 18)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 18, 25)
+    apply_master_elements(slide, 19, 26)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -2120,10 +2264,10 @@ def create_placeholder_slide(prs, slide_num):
 
     return prs
 
-def create_slide_19(prs):
+def create_slide_20(prs):
     """Slide 20: Chat API Architecture (was 19)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 20, 25)
+    apply_master_elements(slide, 20, 26)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -2243,10 +2387,10 @@ def create_slide_19(prs):
 
     return prs
 
-def create_slide_20(prs):
-    """Slide 21: Chat API Architecture (copy of slide 19) (was 20)"""
+def create_slide_22(prs):
+    """Slide 22: Chat API Architecture (copy, formerly Slide 20, then 21)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 21, 25)
+    apply_master_elements(slide, 22, 26)
 
     # Title
     title_box = slide.shapes.add_textbox(
@@ -2361,9 +2505,9 @@ def create_slide_20(prs):
     return prs
 
 def create_slide_21(prs):
-    """Slide 19: RETRIEVAL AUGMENTED GENERATION (moved from 21)"""
+    """Slide 21: RETRIEVAL AUGMENTED GENERATION (was 19, now 21)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 19, 25)
+    apply_master_elements(slide, 21, 26)
 
     # The three keywords - using KEYWORD_THEME_TECH (like slides 4, 7, 16)
     keywords = [
@@ -2394,28 +2538,31 @@ def create_slide_21(prs):
 
     return prs
 
-def create_slide_22(prs):
-    """Slide 22: Document Processing (RAG)"""
+def create_slide_23(prs):
+    """Slide 23: Document Processing (RAG) (formerly Slide 22)"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, 22, 25)
+    apply_master_elements(slide, 23, 26)
 
-    # Title - Fixed header
+    # Title - Match Slide 22 style (48pt, EXTRALIGHT)
     title_box = slide.shapes.add_textbox(
-        CONTENT_HEADER_X, CONTENT_HEADER_Y,
-        CONTENT_HEADER_WIDTH, CONTENT_HEADER_HEIGHT
+        Inches(1), DOC_PROC_TITLE_Y,
+        Inches(14), Inches(0.6)
     )
     tf = title_box.text_frame
     tf.text = DOC_PROC_TITLE
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
-    p.font.size = FONT_SIZE_CONTENT_TITLE
-    p.font.bold = FONT_BOLD_CONTENT_TITLE
-    p.font.color.rgb = FONT_COLOR_CONTENT_TITLE
+    p.font.size = FONT_SIZE_DOC_PROC_TITLE
+    p.font.color.rgb = COLOR_ACCENT_BLUE
     for run in p.runs:
-        run.font.name = FONT_FAMILY_INTER_SEMIBOLD
+        run.font.name = FONT_FAMILY_DOC_PROC_TITLE
 
-    # === LEFT: PDF Documents ===
-    # PDF1 (red) - bottom layer
+    # ========================================
+    # ROW 1: PDFs (left) → Arrow → Vectors (right)
+    # ========================================
+
+    # === ROW 1 LEFT: PDF Documents ===
+    # PDF1 (red) - bottom layer (smaller)
     pdf1 = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
         DOC_PROC_PDF_X, DOC_PROC_PDF_Y,
@@ -2425,15 +2572,23 @@ def create_slide_22(prs):
     pdf1.fill.fore_color.rgb = COLOR_BACKGROUND_LIGHT
     pdf1.line.color.rgb = RGBColor(64, 64, 64)
     pdf1.line.width = DOC_PROC_PDF_BORDER_WIDTH
-    pdf1.rotation = -5  # Slight rotation
+    pdf1.rotation = -5
+
+    # Small Adobe PDF icon
+    pdf_icon_small = Inches(0.25)
+    pdf_icon1 = slide.shapes.add_picture(
+        DOC_PROC_PDF_ICON,
+        DOC_PROC_PDF_X + Inches(0.15), DOC_PROC_PDF_Y + Inches(0.15),
+        width=pdf_icon_small
+    )
 
     # PDF1 Header
     pdf1_header = slide.shapes.add_textbox(
-        DOC_PROC_PDF_X + Inches(0.15), DOC_PROC_PDF_Y + Inches(0.15),
-        DOC_PROC_PDF_WIDTH - Inches(0.3), Inches(0.4)
+        DOC_PROC_PDF_X + Inches(0.45), DOC_PROC_PDF_Y + Inches(0.15),
+        DOC_PROC_PDF_WIDTH - Inches(0.5), Inches(0.3)
     )
     tf = pdf1_header.text_frame
-    tf.text = "📄 PDF1"
+    tf.text = "PDF1"
     p = tf.paragraphs[0]
     p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
     p.font.bold = True
@@ -2441,7 +2596,24 @@ def create_slide_22(prs):
     for run in p.runs:
         run.font.name = FONT_FAMILY_INTER_SEMIBOLD
 
-    # PDF2 (cyan) - top layer, offset
+    # PDF1 Chunk lines (2 horizontal lines to divide into 3 chunks)
+    # Using thin rectangles instead of connectors for proper rotation
+    chunk_line_spacing = DOC_PROC_PDF_HEIGHT / 3  # Divide height into 3 parts
+    line_height = Pt(1.5)
+    for i in range(1, 3):  # 2 lines (at 1/3 and 2/3)
+        line = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE,
+            DOC_PROC_PDF_X + Inches(0.15),
+            DOC_PROC_PDF_Y + (i * chunk_line_spacing) - (line_height / 2),
+            DOC_PROC_PDF_WIDTH - Inches(0.3),
+            line_height
+        )
+        line.fill.solid()
+        line.fill.fore_color.rgb = RGBColor(100, 100, 100)  # Gray
+        line.line.fill.background()  # No outline
+        line.rotation = -5  # Match PDF1 rotation
+
+    # PDF2 (cyan) - top layer, offset (smaller)
     pdf2_x = DOC_PROC_PDF_X + Inches(0.4)
     pdf2_y = DOC_PROC_PDF_Y + Inches(0.3)
     pdf2 = slide.shapes.add_shape(
@@ -2453,15 +2625,22 @@ def create_slide_22(prs):
     pdf2.fill.fore_color.rgb = COLOR_BACKGROUND_LIGHT
     pdf2.line.color.rgb = RGBColor(64, 64, 64)
     pdf2.line.width = DOC_PROC_PDF_BORDER_WIDTH
-    pdf2.rotation = 3  # Slight rotation opposite direction
+    pdf2.rotation = 3
+
+    # Small Adobe PDF icon
+    pdf_icon2 = slide.shapes.add_picture(
+        DOC_PROC_PDF_ICON,
+        pdf2_x + Inches(0.15), pdf2_y + Inches(0.15),
+        width=pdf_icon_small
+    )
 
     # PDF2 Header
     pdf2_header = slide.shapes.add_textbox(
-        pdf2_x + Inches(0.15), pdf2_y + Inches(0.15),
-        DOC_PROC_PDF_WIDTH - Inches(0.3), Inches(0.4)
+        pdf2_x + Inches(0.45), pdf2_y + Inches(0.15),
+        DOC_PROC_PDF_WIDTH - Inches(0.5), Inches(0.3)
     )
     tf = pdf2_header.text_frame
-    tf.text = "📄 PDF2"
+    tf.text = "PDF2"
     p = tf.paragraphs[0]
     p.font.size = FONT_SIZE_DOC_PROC_PDF_HEADER
     p.font.bold = True
@@ -2469,19 +2648,34 @@ def create_slide_22(prs):
     for run in p.runs:
         run.font.name = FONT_FAMILY_INTER_SEMIBOLD
 
-    # === CENTER: Arrow ===
-    arrow_box = slide.shapes.add_textbox(
-        DOC_PROC_ARROW_X, DOC_PROC_ARROW_Y,
-        Inches(1), Inches(1)
+    # PDF2 Chunk lines (2 horizontal lines to divide into 3 chunks)
+    # Using thin rectangles instead of connectors for proper rotation
+    for i in range(1, 3):  # 2 lines (at 1/3 and 2/3)
+        line = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE,
+            pdf2_x + Inches(0.15),
+            pdf2_y + (i * chunk_line_spacing) - (line_height / 2),
+            DOC_PROC_PDF_WIDTH - Inches(0.3),
+            line_height
+        )
+        line.fill.solid()
+        line.fill.fore_color.rgb = RGBColor(100, 100, 100)  # Gray
+        line.line.fill.background()  # No outline
+        line.rotation = 3  # Match PDF2 rotation
+
+    # === ROW 1 CENTER: Arrow ===
+    arrow_box_top = slide.shapes.add_textbox(
+        DOC_PROC_ARROW_X, DOC_PROC_ARROW_TOP_Y,
+        DOC_PROC_ARROW_WIDTH, Inches(1)
     )
-    tf = arrow_box.text_frame
+    tf = arrow_box_top.text_frame
     tf.text = "→"
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
     p.font.size = DOC_PROC_ARROW_SIZE
     p.font.color.rgb = COLOR_ACCENT_BLUE
 
-    # === RIGHT: Vector Matrix ===
+    # === ROW 1 RIGHT: Vector Matrix ===
     chunks = [
         ("Chunk 1", ["0.23", "-0.15", "0.87", "-0.42", "0.66", "..."]),
         ("Chunk 2", ["0.45", "-0.67", "0.12", "0.89", "-0.34", "..."]),
@@ -2533,35 +2727,26 @@ def create_slide_22(prs):
 
         current_y += DOC_PROC_VECTOR_CELL_HEIGHT + Inches(0.2)
 
-    # === BOTTOM: User Query Section ===
-    # User icon (simple circle with "U")
-    user_circle = slide.shapes.add_shape(
-        MSO_SHAPE.OVAL,
-        Inches(2), DOC_PROC_QUERY_Y,
-        DOC_PROC_USER_ICON_SIZE, DOC_PROC_USER_ICON_SIZE
-    )
-    user_circle.fill.background()
-    user_circle.line.color.rgb = COLOR_ACCENT_BLUE
-    user_circle.line.width = Pt(2)
+    # ========================================
+    # ROW 2: User Query (left) → Arrow → Search Vector (right)
+    # ========================================
 
-    user_icon_text = slide.shapes.add_textbox(
-        Inches(2), DOC_PROC_QUERY_Y,
-        DOC_PROC_USER_ICON_SIZE, DOC_PROC_USER_ICON_SIZE
+    # === ROW 2 LEFT: User Query ===
+    # User icon
+    user_icon = slide.shapes.add_picture(
+        DOC_PROC_USER_ICON,
+        DOC_PROC_QUERY_X_START, DOC_PROC_QUERY_Y,
+        width=DOC_PROC_USER_ICON_SIZE
     )
-    tf = user_icon_text.text_frame
-    tf.text = "👤"
-    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    p.font.size = Pt(20)
 
     # Query text
     query_box = slide.shapes.add_textbox(
-        Inches(2.8), DOC_PROC_QUERY_Y,
-        DOC_PROC_QUERY_TEXT_WIDTH, Inches(0.5)
+        DOC_PROC_QUERY_X_START + DOC_PROC_USER_ICON_SIZE + Inches(0.3), DOC_PROC_QUERY_Y,
+        DOC_PROC_QUERY_TEXT_WIDTH, Inches(1.0)
     )
     tf = query_box.text_frame
     tf.text = '"What are the compliance requirements?"'
+    tf.word_wrap = True
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.LEFT
@@ -2571,26 +2756,26 @@ def create_slide_22(prs):
     for run in p.runs:
         run.font.name = FONT_FAMILY_INTER_REGULAR
 
-    # Arrow
-    arrow_box2 = slide.shapes.add_textbox(
-        DOC_PROC_QUERY_ARROW_X, DOC_PROC_QUERY_Y,
-        Inches(0.5), Inches(0.5)
+    # === ROW 2 CENTER: Arrow ===
+    arrow_box_bottom = slide.shapes.add_textbox(
+        DOC_PROC_ARROW_X, DOC_PROC_ARROW_BOTTOM_Y,
+        DOC_PROC_ARROW_WIDTH, Inches(1)
     )
-    tf = arrow_box2.text_frame
+    tf = arrow_box_bottom.text_frame
     tf.text = "→"
-    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
-    p.font.size = Pt(36)
+    p.font.size = DOC_PROC_ARROW_SIZE
     p.font.color.rgb = COLOR_ACCENT_BLUE
 
-    # Search term vector
+    # === ROW 2 RIGHT: Search Vector (single row) ===
+    # Label
     search_label = slide.shapes.add_textbox(
-        DOC_PROC_SEARCH_X, DOC_PROC_QUERY_Y - Inches(0.3),
-        Inches(2), Inches(0.25)
+        DOC_PROC_SEARCH_VECTOR_X, DOC_PROC_SEARCH_VECTOR_Y - Inches(0.4),
+        Inches(3), Inches(0.3)
     )
     tf = search_label.text_frame
-    tf.text = "Search term"
+    tf.text = "Search term vector"
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.LEFT
     p.font.size = FONT_SIZE_DOC_PROC_LABEL
@@ -2599,18 +2784,17 @@ def create_slide_22(prs):
     for run in p.runs:
         run.font.name = FONT_FAMILY_INTER_SEMIBOLD
 
-    # Search vector cells (highlighted in blue)
+    # Vector cells (single row, highlighted)
     search_values = ["0.19", "-0.73", "0.44", "0.88", "-0.31", "..."]
-    cell_x = DOC_PROC_SEARCH_X
-    cell_y = DOC_PROC_QUERY_Y + Inches(0.05)
+    cell_x = DOC_PROC_SEARCH_VECTOR_X
     for i, value in enumerate(search_values):
         cell = slide.shapes.add_shape(
             MSO_SHAPE.ROUNDED_RECTANGLE,
-            cell_x + (i * (DOC_PROC_VECTOR_CELL_WIDTH + Inches(0.08))), cell_y,
+            cell_x + (i * (DOC_PROC_VECTOR_CELL_WIDTH + Inches(0.08))), DOC_PROC_SEARCH_VECTOR_Y,
             DOC_PROC_VECTOR_CELL_WIDTH, DOC_PROC_VECTOR_CELL_HEIGHT
         )
         cell.fill.solid()
-        cell.fill.fore_color.rgb = RGBColor(30, 60, 90)  # Dark blue background
+        cell.fill.fore_color.rgb = RGBColor(30, 60, 90)  # Dark blue
         cell.line.color.rgb = COLOR_ACCENT_BLUE
         cell.line.width = Pt(2)
 
@@ -2631,7 +2815,7 @@ def create_slide_22(prs):
 def create_why_now_slide(prs, slide_num, step_data):
     """Helper function to create a single Why Now slide with one card"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    apply_master_elements(slide, slide_num, 25)
+    apply_master_elements(slide, slide_num, 26)
 
     # Title - prominent at top
     title_box = slide.shapes.add_textbox(
@@ -2780,8 +2964,8 @@ def create_why_now_slide(prs, slide_num, step_data):
 
     return prs
 
-def create_slide_23(prs):
-    """Slide 23: Why Now? - Card 1: AI Infrastructure Maturity"""
+def create_slide_24(prs):
+    """Slide 24: Why Now? - Card 1: AI Infrastructure Maturity (formerly Slide 23)"""
     step_data = {
         "number": "1",
         "title": "AI Infrastructure Maturity",
@@ -2794,10 +2978,10 @@ def create_slide_23(prs):
         "indicator": "⚡ TECHNICAL READINESS",
         "indicator_color": COLOR_WHY_NOW_TECH
     }
-    return create_why_now_slide(prs, 23, step_data)
+    return create_why_now_slide(prs, 24, step_data)
 
-def create_slide_24(prs):
-    """Slide 24: Why Now? - Card 2: Knowledge Worker Evolution"""
+def create_slide_25(prs):
+    """Slide 25: Why Now? - Card 2: Knowledge Worker Evolution (formerly Slide 24)"""
     step_data = {
         "number": "2",
         "title": "Knowledge Worker Evolution",
@@ -2810,10 +2994,10 @@ def create_slide_24(prs):
         "indicator": "📈 MARKET DEMAND",
         "indicator_color": COLOR_WHY_NOW_MARKET
     }
-    return create_why_now_slide(prs, 24, step_data)
+    return create_why_now_slide(prs, 25, step_data)
 
-def create_slide_25(prs):
-    """Slide 25: Why Now? - Card 3: Data Sovereignty Crisis"""
+def create_slide_26(prs):
+    """Slide 26: Why Now? - Card 3: Data Sovereignty Crisis (formerly Slide 25)"""
     step_data = {
         "number": "3",
         "title": "Data Sovereignty Crisis",
@@ -2826,7 +3010,7 @@ def create_slide_25(prs):
         "indicator": "🏛️ REGULATORY FORCE",
         "indicator_color": COLOR_WHY_NOW_REGULATORY
     }
-    return create_why_now_slide(prs, 25, step_data)
+    return create_why_now_slide(prs, 26, step_data)
 
 def create_presentation():
     """Creates the complete presentation with consistent master elements"""
@@ -2864,44 +3048,47 @@ def create_presentation():
     # Slide 10: Attention is all you need
     create_slide_10(prs)
 
-    # Slide 11: Next word prediction
+    # Slide 11: Attention Heatmap - 25x25 Large Matrix (NEW)
     create_slide_11(prs)
 
-    # Slides 12-15: Autoregression (4 separate slides)
-    create_slide_12(prs)  # Step 1
-    create_slide_13(prs)  # Step 2
-    create_slide_14(prs)  # Step 3
-    create_slide_15(prs)  # Final
+    # Slide 12: Next word prediction (formerly Slide 11)
+    create_slide_12(prs)
 
-    # Slide 16: ON PREMISE MATTERS
-    create_slide_16(prs)
+    # Slides 13-16: Autoregression (4 separate slides, formerly 12-15)
+    create_slide_13(prs)  # Step 1
+    create_slide_14(prs)  # Step 2
+    create_slide_15(prs)  # Step 3
+    create_slide_16(prs)  # Final
 
-    # Slide 17: The Fundamental Security Conflict
+    # Slide 17: ON PREMISE MATTERS (formerly Slide 16)
     create_slide_17(prs)
 
-    # Slide 18: The Encryption Dilemma
+    # Slide 18: The Fundamental Security Conflict (formerly Slide 17)
     create_slide_18(prs)
 
-    # Slide 19: RAG (moved from 21)
-    create_slide_21(prs)
-
-    # Slide 20: Chat API Architecture (was 19)
+    # Slide 19: The Encryption Dilemma (formerly Slide 18)
     create_slide_19(prs)
 
-    # Slide 21: Chat API Architecture (copy) (was 20)
+    # Slide 20: Chat API Architecture (formerly Slide 19)
     create_slide_20(prs)
 
-    # Slide 22: Document Processing
+    # Slide 21: RAG (RETRIEVAL AUGMENTED GENERATION)
+    create_slide_21(prs)
+
+    # Slide 22: Chat API Architecture (copy) (formerly Slide 20)
     create_slide_22(prs)
 
-    # Slide 23: Why Now? - Card 1: AI Infrastructure Maturity
+    # Slide 23: Document Processing (formerly Slide 22)
     create_slide_23(prs)
 
-    # Slide 24: Why Now? - Card 2: Knowledge Worker Evolution
+    # Slide 24: Why Now? - Card 1: Silicon Gets Smarter (formerly Slide 23)
     create_slide_24(prs)
 
-    # Slide 25: Why Now? - Card 3: Data Sovereignty Crisis
+    # Slide 25: Why Now? - Card 2: Knowledge Worker Evolution (formerly Slide 24)
     create_slide_25(prs)
+
+    # Slide 26: Why Now? - Card 3: Global Compliance (formerly Slide 25)
+    create_slide_26(prs)
 
     return prs
 

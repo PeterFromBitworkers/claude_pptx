@@ -8,7 +8,7 @@ import subprocess
 import os
 
 # Icon files to convert
-icons = ["legal", "medical", "financial", "engineering", "thermometer", "encryption_lock", "encryption_unlock", "cloud_server"]
+icons = ["legal", "medical", "financial", "engineering", "thermometer", "encryption_lock", "encryption_unlock", "cloud_server", "pdf_document", "user_face"]
 
 # Output size: High resolution for sharp icons
 # Standard icons: 144px, Thermometer: 400px, Lock icons: 300px, Cloud: 300px
@@ -20,7 +20,9 @@ output_sizes = {
     "thermometer": 400,  # Higher resolution for large display on slide
     "encryption_lock": 300,  # High resolution for encryption slide
     "encryption_unlock": 300,  # High resolution for encryption slide
-    "cloud_server": 300  # High resolution for encryption slide
+    "cloud_server": 300,  # High resolution for encryption slide
+    "pdf_document": 200,  # PDF icon for document processing slide
+    "user_face": 200  # User face icon for document processing slide
 }
 
 # Icons that need tight cropping (export only the drawn area, no extra space)

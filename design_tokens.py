@@ -533,7 +533,59 @@ ATTENTION_MATRIX_DATA = [
 ]
 
 # =============================================================================
-# LAYOUT - NEXT WORD PREDICTION SLIDE (Slide 11)
+# LAYOUT - ATTENTION HEATMAP SLIDE (Slide 11) - 25x25 Large Matrix
+# =============================================================================
+
+# Title (match Slide 10 layout)
+HEATMAP_TITLE_X = ATTENTION_TITLE_X  # Inches(1)
+HEATMAP_TITLE_Y = ATTENTION_TITLE_Y  # Inches(1)
+HEATMAP_TITLE_WIDTH = ATTENTION_TITLE_WIDTH  # Inches(14)
+HEATMAP_TITLE_HEIGHT = ATTENTION_TITLE_HEIGHT  # Inches(0.8)
+FONT_SIZE_HEATMAP_TITLE = FONT_SIZE_ATTENTION_TITLE  # Pt(44)
+FONT_FAMILY_HEATMAP_TITLE = FONT_FAMILY_ATTENTION_TITLE
+FONT_COLOR_HEATMAP_TITLE = FONT_COLOR_ATTENTION_TITLE
+
+# Heatmap Matrix (25x25 grid = 26 rows/cols including headers)
+# ALIGNED WITH SLIDES 8, 9, 10: Total width = 12", Start X = 2"
+HEATMAP_MATRIX_X = ATTENTION_MATRIX_X  # Inches(2) - match Slide 10
+HEATMAP_MATRIX_Y = ATTENTION_MATRIX_Y  # Inches(2.6) - match Slide 10
+HEATMAP_MATRIX_SIZE = 25  # 25x25 tokens (excluding headers)
+HEATMAP_CELL_WIDTH = Inches(0.44)  # Cell width: fits 26 cells in 12" with gaps
+HEATMAP_CELL_HEIGHT = Inches(0.22)  # Cell height: fits 26 cells in same vertical space as Slide 10
+HEATMAP_CELL_GAP = Inches(0.02)  # Very small gap between cells
+
+# Header styling (top row and left column with "--")
+HEATMAP_HEADER_FILL_COLOR = RGBColor(31, 41, 55)  # Darker background
+HEATMAP_HEADER_TEXT = "–"  # En dash for token placeholders
+FONT_SIZE_HEATMAP_HEADER = Pt(10)
+FONT_COLOR_HEATMAP_HEADER = COLOR_TEXT_GRAY
+
+# Cell styling
+HEATMAP_CELL_BORDER_WIDTH = Pt(0.5)  # Thin border
+HEATMAP_CELL_BORDER_COLOR = RGBColor(40, 40, 40)  # Very subtle
+HEATMAP_CELL_CORNER_RADIUS = 0.02  # Minimal rounding (can be adjusted to 0 for sharp edges)
+
+# Heatmap colors (gradient from low to high attention)
+# Using a gradient from dark blue → cyan → green → yellow → orange
+HEATMAP_COLOR_LOWEST = RGBColor(17, 24, 39)     # Almost background (very low attention)
+HEATMAP_COLOR_VERY_LOW = RGBColor(30, 58, 90)   # Dark blue
+HEATMAP_COLOR_LOW = RGBColor(45, 85, 130)       # Blue
+HEATMAP_COLOR_MEDIUM_LOW = RGBColor(6, 120, 160)  # Cyan-ish
+HEATMAP_COLOR_MEDIUM = RGBColor(6, 150, 180)    # Cyan
+HEATMAP_COLOR_MEDIUM_HIGH = RGBColor(16, 160, 145)  # Teal
+HEATMAP_COLOR_HIGH = RGBColor(16, 185, 129)     # Green
+HEATMAP_COLOR_VERY_HIGH = RGBColor(245, 158, 11)  # Orange
+HEATMAP_COLOR_HIGHEST = RGBColor(255, 100, 100)  # Red-orange (hotspot)
+
+# Caption below matrix
+HEATMAP_CAPTION_Y = Inches(8.1)
+HEATMAP_CAPTION_WIDTH = Inches(12)
+FONT_SIZE_HEATMAP_CAPTION = Pt(14)
+FONT_COLOR_HEATMAP_CAPTION = COLOR_TEXT_GRAY
+HEATMAP_CAPTION_TEXT = "Attention weights visualization: Hotspots show where cognitive processing focuses"
+
+# =============================================================================
+# LAYOUT - NEXT WORD PREDICTION SLIDE (Slide 12 - formerly Slide 11)
 # =============================================================================
 
 # Title (using content header style)
@@ -641,7 +693,7 @@ PREDICTION_DATA = [
 ]
 
 # =============================================================================
-# LAYOUT - AUTOREGRESSION SLIDES (Slides 12-15, one per step)
+# LAYOUT - AUTOREGRESSION SLIDES (Slides 13-16, one per step - formerly 12-15)
 # =============================================================================
 
 # Title
@@ -948,47 +1000,68 @@ CHAT_API_USER_TEXT = "Erstelle einen Geschäftsführervertrag für ein Maschinen
 CHAT_API_ASSISTANT_TEXT = "Ich erstelle einen maßgeschneiderten Geschäftsführervertrag basierend auf aktueller deutscher Rechtsprechung und Ihren Kanzlei-Standards..."
 
 # =============================================================================
-# LAYOUT - SLIDE 22: DOCUMENT PROCESSING (RAG)
+# LAYOUT - SLIDE 23: DOCUMENT PROCESSING (RAG) - formerly Slide 22
 # =============================================================================
 
-# Title
+# Title (match Slide 22 Chat API style)
 DOC_PROC_TITLE = "Document Processing"
+DOC_PROC_TITLE_Y = CHAT_API_TITLE_Y  # Inches(1.2) - match Slide 22
+FONT_SIZE_DOC_PROC_TITLE = FONT_SIZE_CHAT_API_TITLE  # Pt(48)
+FONT_FAMILY_DOC_PROC_TITLE = FONT_FAMILY_INTER_EXTRALIGHT  # Match Slide 22
 
-# PDF Documents (left side)
-DOC_PROC_PDF_X = Inches(1.5)
-DOC_PROC_PDF_Y = Inches(2.0)
+# SYMMETRICAL 2x2 MATRIX LAYOUT
+# Total slide width: 16"
+# Layout: [Left Col: 4.5"] [Gap: 1.5"] [Arrow: 1"] [Gap: 1.5"] [Right Col: 4.5"] = 13" + 1.5" margins each side
+
+# Column positions (symmetrical)
+DOC_PROC_COL_LEFT_X = Inches(1.5)    # Left column start
+DOC_PROC_COL_RIGHT_X = Inches(9.5)   # Right column start (1.5 + 4.5 + 1.5 + 1 + 1.5 = 10)
+DOC_PROC_ARROW_CENTER_X = Inches(7.25)  # Arrow center (1.5 + 4.5 + 1.5 + 0.5 = 7.75, adjusted to 7.25)
+
+# Row positions (symmetrical)
+DOC_PROC_ROW_TOP_Y = Inches(2.8)     # Top row (PDFs, Vectors)
+DOC_PROC_ROW_BOTTOM_Y = Inches(6.3)  # Bottom row (User Query, Search Vector) - deeper for better arrow flow
+
+# ROW 1 LEFT: PDF Documents - 2 rows layout
+DOC_PROC_PDF_X = DOC_PROC_COL_LEFT_X
+DOC_PROC_PDF_Y = DOC_PROC_ROW_TOP_Y
 DOC_PROC_PDF_WIDTH = Inches(2.5)
-DOC_PROC_PDF_HEIGHT = Inches(3.2)
+DOC_PROC_PDF_HEIGHT = Inches(2.0)
 DOC_PROC_PDF_BORDER_WIDTH = Pt(2)
 
 # PDF Colors
 COLOR_PDF1 = RGBColor(239, 68, 68)  # #ef4444 red
 COLOR_PDF2 = RGBColor(6, 182, 212)  # #06b6d4 cyan
 
-# Text lines in PDF
-DOC_PROC_TEXT_LINE_HEIGHT = Pt(2.5)
-DOC_PROC_TEXT_LINE_GAP = Pt(6)
+# Icons
+DOC_PROC_PDF_ICON = "assets/icons/pdf_document.png"
+DOC_PROC_USER_ICON = "assets/icons/user_face.png"
 
-# Arrow (center)
-DOC_PROC_ARROW_X = Inches(5.5)
-DOC_PROC_ARROW_Y = Inches(3.3)
-DOC_PROC_ARROW_SIZE = Pt(48)
+# ARROWS (unified size and position)
+DOC_PROC_ARROW_X = DOC_PROC_ARROW_CENTER_X  # Same X for both arrows
+DOC_PROC_ARROW_TOP_Y = Inches(3.5)  # Top arrow Y (centered in top row)
+DOC_PROC_ARROW_BOTTOM_Y = Inches(7.0)  # Bottom arrow Y (centered in bottom row) - adjusted for deeper bottom row
+DOC_PROC_ARROW_SIZE = Pt(48)  # Unified arrow size
+DOC_PROC_ARROW_WIDTH = Inches(1.0)  # Arrow textbox width
 
-# Vectors (right side)
-DOC_PROC_VECTOR_X = Inches(8.5)
-DOC_PROC_VECTOR_Y = Inches(2.0)
+# ROW 1 RIGHT: Vector Chunks
+DOC_PROC_VECTOR_X = DOC_PROC_COL_RIGHT_X
+DOC_PROC_VECTOR_Y = DOC_PROC_ROW_TOP_Y
 DOC_PROC_VECTOR_LABEL_WIDTH = Inches(0.9)
 DOC_PROC_VECTOR_CELL_WIDTH = Inches(0.65)
 DOC_PROC_VECTOR_CELL_HEIGHT = Inches(0.35)
 DOC_PROC_VECTOR_GAP = Pt(8)
 DOC_PROC_VECTOR_ROW_GAP = Pt(20)
 
-# User Query Section (bottom)
-DOC_PROC_QUERY_Y = Inches(5.8)
-DOC_PROC_USER_ICON_SIZE = Inches(0.5)
-DOC_PROC_QUERY_TEXT_WIDTH = Inches(4.5)
-DOC_PROC_QUERY_ARROW_X = Inches(7.75)
-DOC_PROC_SEARCH_X = Inches(9.5)
+# ROW 2 LEFT: User Query Section
+DOC_PROC_QUERY_X_START = DOC_PROC_COL_LEFT_X
+DOC_PROC_QUERY_Y = DOC_PROC_ROW_BOTTOM_Y
+DOC_PROC_USER_ICON_SIZE = Inches(1.0)
+DOC_PROC_QUERY_TEXT_WIDTH = Inches(3.5)
+
+# ROW 2 RIGHT: Search Vector - single row
+DOC_PROC_SEARCH_VECTOR_X = DOC_PROC_COL_RIGHT_X
+DOC_PROC_SEARCH_VECTOR_Y = DOC_PROC_ROW_BOTTOM_Y
 
 # Fonts
 FONT_SIZE_DOC_PROC_LABEL = Pt(11)
