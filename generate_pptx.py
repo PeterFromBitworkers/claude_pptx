@@ -2971,29 +2971,48 @@ def create_why_now_slide(prs, slide_num, step_data):
         run2.font.color.rgb = COLOR_TEXT_GRAY
         run2.font.name = FONT_FAMILY_INTER_REGULAR
 
-    # Indicator badge (more rounded like Chat API badges)
+    # Indicator badge (rounded, with colored background and icon from Slide 2)
     indicator = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
         WHY_NOW_CARD_X + WHY_NOW_INDICATOR_X_OFFSET,
         WHY_NOW_CARD_Y + WHY_NOW_INDICATOR_Y_OFFSET,
         WHY_NOW_INDICATOR_WIDTH, WHY_NOW_INDICATOR_HEIGHT
     )
-    indicator.fill.background()
+    indicator.fill.solid()
+    indicator.fill.fore_color.rgb = step_data["indicator_bg_color"]  # Darker background color
     indicator.line.color.rgb = step_data["indicator_color"]
-    indicator.line.width = Pt(1)
-    indicator.adjustments[0] = WHY_NOW_INDICATOR_BORDER_RADIUS  # More rounded (was 0.25)
+    indicator.line.width = Pt(2)
+    indicator.adjustments[0] = WHY_NOW_INDICATOR_BORDER_RADIUS
 
-    # Indicator text
+    # Calculate centered position for icon+text group
+    # Estimated text width based on longest label "Technology" ≈ 1.2"
+    icon_text_gap = Inches(0.1)  # Gap between icon and text
+    estimated_text_width = Inches(1.2)
+    total_content_width = WHY_NOW_INDICATOR_ICON_SIZE + icon_text_gap + estimated_text_width
+    center_offset = (WHY_NOW_INDICATOR_WIDTH - total_content_width) / 2
+
+    # Indicator icon (original PNG from Slide 2 - centered with text)
+    if "indicator_icon" in step_data and step_data["indicator_icon"]:
+        icon_x = WHY_NOW_CARD_X + WHY_NOW_INDICATOR_X_OFFSET + center_offset
+        icon_y = WHY_NOW_CARD_Y + WHY_NOW_INDICATOR_Y_OFFSET + (WHY_NOW_INDICATOR_HEIGHT - WHY_NOW_INDICATOR_ICON_SIZE) / 2
+        ind_icon = slide.shapes.add_picture(
+            step_data["indicator_icon"],
+            icon_x, icon_y,
+            width=WHY_NOW_INDICATOR_ICON_SIZE
+        )
+
+    # Indicator text (positioned to the right of icon, centered as a group)
+    text_x = WHY_NOW_CARD_X + WHY_NOW_INDICATOR_X_OFFSET + center_offset + WHY_NOW_INDICATOR_ICON_SIZE + icon_text_gap
     ind_text_box = slide.shapes.add_textbox(
-        WHY_NOW_CARD_X + WHY_NOW_INDICATOR_X_OFFSET,
+        text_x,
         WHY_NOW_CARD_Y + WHY_NOW_INDICATOR_Y_OFFSET,
-        WHY_NOW_INDICATOR_WIDTH, WHY_NOW_INDICATOR_HEIGHT
+        estimated_text_width, WHY_NOW_INDICATOR_HEIGHT
     )
     tf = ind_text_box.text_frame
     tf.text = step_data["indicator"]
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
+    p.alignment = PP_ALIGN.LEFT  # Left-aligned within textbox
     p.font.size = FONT_SIZE_WHY_NOW_INDICATOR
     p.font.bold = True
     p.font.color.rgb = step_data["indicator_color"]
@@ -3013,8 +3032,10 @@ def create_slide_24(prs):
             ("Performance & Memory:", "Remarkable computational performance gains with extensive shared memory capabilities"),
             ("Form & Operation:", "Ultra-compact form factors enabling whisper-quiet, enterprise-grade operation")
         ],
-        "indicator": "⚡ TECHNICAL READINESS",
-        "indicator_color": COLOR_WHY_NOW_TECH
+        "indicator": "Technology",
+        "indicator_icon": "assets/icons/engineering.png",
+        "indicator_color": COLOR_WHY_NOW_TECH,
+        "indicator_bg_color": COLOR_WHY_NOW_TECH_BG
     }
     return create_why_now_slide(prs, 24, step_data)
 
@@ -3029,8 +3050,10 @@ def create_slide_25(prs):
             ("Phase 3 - Workforce:", "Autonomous AI agents managing organizational knowledge"),
             ("Current Reality:", "73% of enterprises remain stuck between Phase 1-2")
         ],
-        "indicator": "📈 MARKET DEMAND",
-        "indicator_color": COLOR_WHY_NOW_MARKET
+        "indicator": "Market",
+        "indicator_icon": "assets/icons/financial.png",
+        "indicator_color": COLOR_WHY_NOW_MARKET,
+        "indicator_bg_color": COLOR_WHY_NOW_MARKET_BG
     }
     return create_why_now_slide(prs, 25, step_data)
 
@@ -3045,8 +3068,10 @@ def create_slide_26(prs):
             ("Market Solution:", "Local plug-and-play AI becoming the gold standard for enterprises"),
             ("Value Proposition:", "Complete control, zero compliance risk, instant deployment capabilities")
         ],
-        "indicator": "🏛️ REGULATORY FORCE",
-        "indicator_color": COLOR_WHY_NOW_REGULATORY
+        "indicator": "Regulation",
+        "indicator_icon": "assets/icons/legal.png",
+        "indicator_color": COLOR_WHY_NOW_REGULATORY,
+        "indicator_bg_color": COLOR_WHY_NOW_REGULATORY_BG
     }
     return create_why_now_slide(prs, 26, step_data)
 

@@ -1095,49 +1095,58 @@ FONT_SIZE_DOC_PROC_PDF_HEADER = Pt(9)  # Smaller PDF1/PDF2 text
 WHY_NOW_TITLE = "WHY NOW?"
 WHY_NOW_SUBTITLE = "The perfect storm for local AI"
 WHY_NOW_TITLE_Y = Inches(0.8)
-WHY_NOW_SUBTITLE_Y = Inches(1.5)
+WHY_NOW_SUBTITLE_Y = Inches(1.65)  # More space below title
 
 # Single card layout (one card per slide)
 WHY_NOW_CARD_X = Inches(1.5)
-WHY_NOW_CARD_Y = Inches(2.2)  # Single card position
+WHY_NOW_CARD_Y = Inches(2.8)  # Card position - more centered/lower on slide
 WHY_NOW_CARD_WIDTH = Inches(13)
-WHY_NOW_CARD_HEIGHT = Inches(4.0)  # Much taller for single card
+WHY_NOW_CARD_HEIGHT = Inches(4.8)  # Taller to fit badge below text
 WHY_NOW_CARD_BORDER_WIDTH = Pt(2)
 
 # Step number circle
 WHY_NOW_CIRCLE_SIZE = Inches(0.6)
 WHY_NOW_CIRCLE_X_OFFSET = Inches(0.3)
-WHY_NOW_CIRCLE_Y_OFFSET = Inches(0.05)
+WHY_NOW_CIRCLE_Y_OFFSET = Inches(0.25)  # Circle positioned lower in card for better look
 
-# Content positioning
+# Content positioning (adjusted for lower circle)
 WHY_NOW_CONTENT_X_OFFSET = Inches(1.2)
-WHY_NOW_TITLE_Y_OFFSET = Inches(0.2)
-WHY_NOW_BULLETS_Y_OFFSET = Inches(0.7)
-WHY_NOW_BULLET_HEIGHT = Inches(0.45)  # More space per bullet
-WHY_NOW_BULLET_GAP = Inches(0.15)
+WHY_NOW_TITLE_Y_OFFSET = Inches(0.35)  # Aligned with lower circle
+WHY_NOW_BULLETS_Y_OFFSET = Inches(0.95)  # Adjusted for lower title
+WHY_NOW_BULLET_HEIGHT = Inches(0.5)  # More space per bullet for larger text
+WHY_NOW_BULLET_GAP = Inches(0.18)  # Slightly more gap
 
-# Indicator badges (positioned below bullets, bottom left)
+# Indicator badges (positioned below bullets, bottom left, with icon)
 WHY_NOW_INDICATOR_X_OFFSET = Inches(1.2)
-WHY_NOW_INDICATOR_Y_OFFSET = Inches(3.5)
-WHY_NOW_INDICATOR_WIDTH = Inches(2.3)
-WHY_NOW_INDICATOR_HEIGHT = Inches(0.35)  # Slightly taller for larger text
-WHY_NOW_INDICATOR_BORDER_RADIUS = 0.5  # More rounded like Chat API badges (was implicitly less rounded)
+WHY_NOW_INDICATOR_Y_OFFSET = Inches(3.9)  # Further down to not overlap with text
+WHY_NOW_INDICATOR_WIDTH = Inches(2.5)  # Slightly wider for icon + text
+WHY_NOW_INDICATOR_HEIGHT = Inches(0.6)  # Taller (Nord-Süd Ausdehnung)
+WHY_NOW_INDICATOR_BORDER_RADIUS = 0.5  # More rounded like Chat API badges
+WHY_NOW_INDICATOR_ICON_SIZE = Inches(0.3)  # Icon size (PNG)
+WHY_NOW_INDICATOR_ICON_MARGIN = Inches(0.15)  # Margin around icon
 
 # Card corner radius
 WHY_NOW_CARD_CORNER_RADIUS = Inches(0.15)
 
-# Colors for indicators
+# Colors for indicators (borders and text)
 COLOR_WHY_NOW_TECH = RGBColor(16, 185, 129)      # #10b981 green
 COLOR_WHY_NOW_MARKET = RGBColor(245, 158, 11)   # #f59e0b orange
 COLOR_WHY_NOW_REGULATORY = RGBColor(239, 68, 68) # #ef4444 red
 
-# Fonts - increased sizes for better readability
+# Badge background colors (darker, subtle versions)
+COLOR_WHY_NOW_TECH_BG = RGBColor(8, 92, 64)         # Darker green
+COLOR_WHY_NOW_MARKET_BG = RGBColor(122, 79, 5)      # Darker orange
+COLOR_WHY_NOW_REGULATORY_BG = RGBColor(119, 34, 34) # Darker red
+
+# Fonts - slide title and subtitle (top)
 FONT_SIZE_WHY_NOW_TITLE = Pt(48)
-FONT_SIZE_WHY_NOW_SUBTITLE = Pt(18)  # Increased from 16
-FONT_SIZE_WHY_NOW_STEP_TITLE = Pt(18)  # Increased from 14
-FONT_SIZE_WHY_NOW_BULLET = Pt(14)  # Increased from 9
-FONT_SIZE_WHY_NOW_INDICATOR = Pt(12)  # Increased from 9
-FONT_SIZE_WHY_NOW_STEP_NUMBER = Pt(28)  # Increased from 24
+FONT_SIZE_WHY_NOW_SUBTITLE = Pt(18)
+
+# Fonts IN CARD - larger to use available space
+FONT_SIZE_WHY_NOW_STEP_TITLE = Pt(24)  # Card title - larger
+FONT_SIZE_WHY_NOW_BULLET = Pt(17)  # Bullet text - larger
+FONT_SIZE_WHY_NOW_INDICATOR = Pt(14)  # Badge text - larger
+FONT_SIZE_WHY_NOW_STEP_NUMBER = Pt(34)  # Number in circle - larger
 
 # =============================================================================
 # LAYOUT - PLACEHOLDER SLIDES
