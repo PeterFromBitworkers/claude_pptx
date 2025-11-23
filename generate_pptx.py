@@ -2648,7 +2648,7 @@ def create_why_now_slide(prs, slide_num, step_data):
     for run in p.runs:
         run.font.name = FONT_FAMILY_INTER_BOLD
 
-    # Subtitle
+    # Subtitle (mono red font like Slide 2)
     subtitle_box = slide.shapes.add_textbox(
         Inches(1), WHY_NOW_SUBTITLE_Y,
         Inches(14), Inches(0.3)
@@ -2659,9 +2659,9 @@ def create_why_now_slide(prs, slide_num, step_data):
     p.alignment = PP_ALIGN.CENTER
     p.font.size = FONT_SIZE_WHY_NOW_SUBTITLE
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT_BLUE
+    p.font.color.rgb = FONT_COLOR_CONTENT_SUBTITLE_ALERT  # Red like Slide 2 (was blue)
     for run in p.runs:
-        run.font.name = FONT_FAMILY_MONOSPACE
+        run.font.name = FONT_FAMILY_SUBTITLE  # Menlo mono (was generic monospace)
 
     # Card background
     card = slide.shapes.add_shape(
@@ -2749,7 +2749,7 @@ def create_why_now_slide(prs, slide_num, step_data):
         run2.font.color.rgb = COLOR_TEXT_GRAY
         run2.font.name = FONT_FAMILY_INTER_REGULAR
 
-    # Indicator badge
+    # Indicator badge (more rounded like Chat API badges)
     indicator = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
         WHY_NOW_CARD_X + WHY_NOW_INDICATOR_X_OFFSET,
@@ -2759,7 +2759,7 @@ def create_why_now_slide(prs, slide_num, step_data):
     indicator.fill.background()
     indicator.line.color.rgb = step_data["indicator_color"]
     indicator.line.width = Pt(1)
-    indicator.adjustments[0] = 0.25
+    indicator.adjustments[0] = WHY_NOW_INDICATOR_BORDER_RADIUS  # More rounded (was 0.25)
 
     # Indicator text
     ind_text_box = slide.shapes.add_textbox(

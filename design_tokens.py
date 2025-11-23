@@ -742,7 +742,7 @@ FONT_COLOR_SECURITY_TITLE = COLOR_ACCENT_BLUE
 SECURITY_CARD_WIDTH = Inches(4.5)  # Match Slide 18 (was 6.5)
 SECURITY_CARD_HEIGHT = Inches(5.0)  # Reduced but enough for content (was 5.5)
 SECURITY_CARD_GAP = Inches(1.2)  # Gap between cards (calculated from positions)
-SECURITY_CARD_Y = Inches(2.5)
+SECURITY_CARD_Y = Inches(3.35)  # Adjusted for matching bottom margin with Slide 18 (was 2.5)
 SECURITY_CARD_LEFT_X = Inches(2.9)  # Match Slide 18 ENCRYPTION_LEFT_X
 SECURITY_CARD_RIGHT_X = Inches(8.6)  # Match Slide 18 ENCRYPTION_RIGHT_X
 
@@ -804,7 +804,7 @@ ENCRYPTION_TITLE_X = Inches(1)
 ENCRYPTION_TITLE_Y = Inches(1.2)  # Match Slide 17 (was 0.8)
 ENCRYPTION_TITLE_WIDTH = Inches(14)
 ENCRYPTION_TITLE_HEIGHT = Inches(0.6)
-FONT_SIZE_ENCRYPTION_TITLE = Pt(48)
+FONT_SIZE_ENCRYPTION_TITLE = Pt(44)  # Match Slide 17 and content slides (was 48)
 FONT_FAMILY_ENCRYPTION_TITLE = FONT_FAMILY_INTER_EXTRALIGHT
 FONT_COLOR_ENCRYPTION_TITLE = COLOR_ACCENT_BLUE
 
@@ -820,7 +820,7 @@ ENCRYPTION_CARD_BORDER_WIDTH = Pt(1.5)
 ENCRYPTION_CARD_FILL_COLOR = RGBColor(31, 41, 55)
 
 # Bottom row (Steps 1 & 2) - symmetric positioning
-ENCRYPTION_BOTTOM_Y = Inches(5.9)  # Adjusted for lower title position (was 5.7)
+ENCRYPTION_BOTTOM_Y = Inches(5.55)  # Adjusted for matching bottom margin with Slide 17 (was 5.9)
 ENCRYPTION_LEFT_X = Inches(2.9)  # Centered: (16 - (4.5*2 + 1.2)) / 2 = 2.9
 ENCRYPTION_RIGHT_X = Inches(8.6)  # 2.9 + 4.5 + 1.2 = 8.6
 
@@ -1029,7 +1029,8 @@ WHY_NOW_BULLET_GAP = Inches(0.15)
 WHY_NOW_INDICATOR_X_OFFSET = Inches(1.2)
 WHY_NOW_INDICATOR_Y_OFFSET = Inches(3.5)
 WHY_NOW_INDICATOR_WIDTH = Inches(2.3)
-WHY_NOW_INDICATOR_HEIGHT = Inches(0.3)
+WHY_NOW_INDICATOR_HEIGHT = Inches(0.35)  # Slightly taller for larger text
+WHY_NOW_INDICATOR_BORDER_RADIUS = 0.5  # More rounded like Chat API badges (was implicitly less rounded)
 
 # Card corner radius
 WHY_NOW_CARD_CORNER_RADIUS = Inches(0.15)
@@ -1039,13 +1040,13 @@ COLOR_WHY_NOW_TECH = RGBColor(16, 185, 129)      # #10b981 green
 COLOR_WHY_NOW_MARKET = RGBColor(245, 158, 11)   # #f59e0b orange
 COLOR_WHY_NOW_REGULATORY = RGBColor(239, 68, 68) # #ef4444 red
 
-# Fonts
+# Fonts - increased sizes for better readability
 FONT_SIZE_WHY_NOW_TITLE = Pt(48)
-FONT_SIZE_WHY_NOW_SUBTITLE = Pt(16)
-FONT_SIZE_WHY_NOW_STEP_TITLE = Pt(14)
-FONT_SIZE_WHY_NOW_BULLET = Pt(9)
-FONT_SIZE_WHY_NOW_INDICATOR = Pt(9)
-FONT_SIZE_WHY_NOW_STEP_NUMBER = Pt(24)
+FONT_SIZE_WHY_NOW_SUBTITLE = Pt(18)  # Increased from 16
+FONT_SIZE_WHY_NOW_STEP_TITLE = Pt(18)  # Increased from 14
+FONT_SIZE_WHY_NOW_BULLET = Pt(14)  # Increased from 9
+FONT_SIZE_WHY_NOW_INDICATOR = Pt(12)  # Increased from 9
+FONT_SIZE_WHY_NOW_STEP_NUMBER = Pt(28)  # Increased from 24
 
 # =============================================================================
 # LAYOUT - PLACEHOLDER SLIDES
